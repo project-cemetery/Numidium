@@ -1,0 +1,3 @@
+hello:
+    path: /
+    controller: App\Controller\HelloController::say
