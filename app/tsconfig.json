@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "strict": true,
+      "noImplicitReturns": true,
+      "module": "es2015",
+      "target": "es5",
+      "noImplicitAny": true,
+      "jsx": "react",
+      "moduleResolution": "node",
+      "experimentalDecorators": true,
+      "sourceMap": true,
+      "baseUrl": "./front",
+    },
+    "include": [
+      "front/**/*.ts",
+      "front/**/*.tsx"
+    ]
+  }

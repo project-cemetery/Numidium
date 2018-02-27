@@ -1,0 +1,22 @@
+{
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production"
+    },
+    "dependencies": {
+        "prop-types": "^15.6.0",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0"
+    },
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.17.0",
+        "babel-preset-react": "^6.24.1",
+        "ts-loader": "^3.5.0",
+        "tslint": "^5.9.1",
+        "tslint-eslint-rules": "^5.1.0",
+        "typescript": "^2.7.2"
+    }
+}
