@@ -270,6 +270,10 @@ ADD errors/ /var/www/errors
 WORKDIR /var/www/html
 RUN composer global require hirak/prestissimo && composer install --no-dev
 
+RUN echo -e 'http://dl-cdn.alpinelinux.org/alpine/edge/main\nhttp://dl-cdn.alpinelinux.org/alpine/edge/community\nhttp://dl-cdn.alpinelinux.org/alpine/edge/testing' > /etc/apk/repositories
+RUN apk add --no-cache yarn
+RUN yarn install && yarn build
+
 WORKDIR /
 
 
