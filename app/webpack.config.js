@@ -10,7 +10,6 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     .addEntry('app', './front/index.tsx')
-
     .enableReactPreset()
     .enableTypeScriptLoader()
 
