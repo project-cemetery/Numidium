@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { AppState } from 'reducers'
 import User from 'model/User'
 import usersAction, { UsersActions } from 'business/users/actions'
+import Loader from 'components/common/Loader'
 
 import { Props as ComponentProps } from './User'
 
@@ -24,7 +25,11 @@ export default function (User: React.ComponentClass<ComponentProps>) {
         render() {
             const { loading, error, user } = this.props
 
-            return <User error={error} loading={loading} user={user} />
+            return (
+                <Loader loading={loading || !user} error={error}>
+                    <User user={user} />
+                </Loader>
+            )
         }
 
         componentDidMount() {
