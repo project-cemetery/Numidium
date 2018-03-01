@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 import { handleActions, Action } from 'redux-actions'
 
-import EntityLoadState, { initialState } from 'business/EntityLoadState'
+import EntityLoadState, { initialState } from 'store/EntityLoadState'
 import Collection from 'model/Collection'
 import User from 'model/User'
 

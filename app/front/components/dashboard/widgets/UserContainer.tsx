@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { AppState } from 'reducers'
 import User from 'model/User'
-import usersAction, { UsersActions } from 'business/users/actions'
+import usersAction, { UsersActions } from 'store/users/actions'
 import Loader from 'components/common/Loader'
 
 import { Props as ComponentProps } from './User'
