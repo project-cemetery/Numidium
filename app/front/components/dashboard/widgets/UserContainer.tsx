@@ -10,7 +10,7 @@ import { Props as ComponentProps } from './User'
 
 interface Props {
     loading?: boolean
-    user?: User
+    users?: User[]
 }
 
 export default function (User: React.ComponentClass<ComponentProps>) {
@@ -21,15 +21,15 @@ export default function (User: React.ComponentClass<ComponentProps>) {
     class Wrapped extends React.Component<ConatinerProps, {}> {
 
         render() {
-            const { loading } = this.props
+            const { loading, users } = this.props
 
-            return (
-                <User loading={loading} />
-            )
+            return <User loading={loading} users={users} />
         }
 
-        componentWillMount() {
-            console.log(this.props.requestList)
+        componentDidMount() {
+            const { fetchUsers } = this.props
+
+            if (fetchUsers) fetchUsers()
         }
     }
 
@@ -38,5 +38,5 @@ export default function (User: React.ComponentClass<ComponentProps>) {
 
 const mapStateToProps = (state: AppState) => ({
     loading: state.users.loading,
-    user: state.users.user,
+    users: state.users.users && state.users.users.member,
 })

@@ -6,21 +6,28 @@ import Collection from 'model/Collection'
 import User from 'model/User'
 
 import actions, {
-    REQUEST_LIST, RECEIVE_LIST,
-    RequestAction, ReceiveAction,
+    FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE,
+    RequestAction, SuccessAction, FailureAction,
 } from './actions'
 import { Rest } from 'util/rest'
 
 
-const handleRequestList = (state: UsersState, action: RequestAction) => ({
+const handleFetchListRequest = (state: UsersState, action: RequestAction) => ({
     ...state,
     loading: true,
 })
 
-const handleRecieveList = (state: UsersState, action: ReceiveAction) => ({
+const handleFetchListSuccess = (state: UsersState, action: SuccessAction) => ({
     ...state,
     loading: false,
+    error: false,
     users: action.payload,
+})
+
+const handleFetchListFailure = (state: UsersState, action: FailureAction) => ({
+    ...state,
+    loading: false,
+    error: !!action.error,
 })
 
 export interface UsersState extends EntityLoadState {
@@ -30,8 +37,9 @@ export interface UsersState extends EntityLoadState {
 
 export default handleActions(
     {
-        [REQUEST_LIST]: handleRequestList,
-        [RECEIVE_LIST]: handleRecieveList,
+        [FETCH_LIST_REQUEST]: handleFetchListRequest,
+        [FETCH_LIST_SUCCESS]: handleFetchListSuccess,
+        [FETCH_LIST_FAILURE]: handleFetchListFailure,
     },
     {
         ...initialState,

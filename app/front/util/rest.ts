@@ -8,7 +8,10 @@ import Collection from 'model/Collection'
 const API_URL = `${window.location.origin}/api`
 
 const getList = (entity: string, params?: Parameter[]) =>
-    axios.get(`${API_URL}/${entity}` + (!!params && encodeQuery(params)))
+    axios.get(!!params
+        ? `${API_URL}/${entity}${encodeQuery(params)}`
+        : `${API_URL}/${entity}`
+    )
 
 const get = (entity: string, id: number) =>
     axios.get(`${API_URL}/${entity}/${id}`)

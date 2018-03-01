@@ -8,12 +8,11 @@ import thunk from 'redux-thunk'
 
 import App from 'components/App'
 import reducers from 'reducers'
-import rest from 'util/rest'
 
 
 const store = createStore(
     reducers,
-    applyMiddleware(thunk.withExtraArgument(rest)),
+    applyMiddleware(thunk),
 )
 
 ReactDOM.render(

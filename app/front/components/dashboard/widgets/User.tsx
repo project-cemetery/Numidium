@@ -10,20 +10,18 @@ import Container from './UserContainer'
 
 export interface Props {
     loading?: boolean
-    user?: User
+    users?: User[]
 }
 
 class UserComponent extends React.PureComponent<Props, {}> {
     render() {
-        const { user, loading } = this.props
-
-        console.log(this.props)
+        const { users, loading } = this.props
 
         return (
             <React.Fragment>
                 <Card>
-                    <Loader predicate={!!user || loading}>
-                        <Card.Meta title={user && user.email} />
+                    <Loader predicate={!!users || loading}>
+                        {!!users && users.map((user, i) => <Card.Meta title={user && user.email} key={i} />)}
                     </Loader>
                 </Card>
             </React.Fragment>
