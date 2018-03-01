@@ -3,12 +3,34 @@
 namespace App\Entity;
 
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ApiResource(
+ *     attributes={"access_control"="is_granted('ROLE_USER')"},
+ *     collectionOperations={
+ *         "get"={
+ *              "normalization_context"={
+ *                  "groups"={"any"}
+ *              }
+ *          }
+ *     },
+ *     itemOperations={
+ *         "get"={
+ *              "access_control"="is_granted('ROLE_USER') and object == user",
+ *              "normalization_context"={
+ *                  "groups"={"me"}
+ *              }
+ *          }
+ *     }
+ * )
+ *
  * @ORM\Table(name="app_users")
- * @ORM\Entity()
+ * @ORM\Entity
  */
 class User implements UserInterface, \Serializable
 {
@@ -16,16 +38,28 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Assert\NotBlank
+     * @Groups({"any", "me"})
      */
     private $id;
 
     /** @ORM\Column(type="string", length=127) */
     private $password;
 
-    /** @ORM\Column(type="string", length=127, unique=true) */
+    /**
+     * @ORM\Column(type="string", length=127, unique=true)
+     *
+     * @Assert\Email
+     * @Groups({"any", "me"})
+     */
     private $email;
 
-    /** @ORM\Column(type="boolean") */
+    /**
+     * @ORM\Column(type="boolean")
+     *
+     * @Groups({"any", "me"})
+     */
     private $active = false;
 
     public function getId(): ?int
