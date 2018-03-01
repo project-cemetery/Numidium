@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import Icon from './Icon'
 
-import IconEnum from 'util/IconEnum'
+import IconEnum from 'util/enum/IconEnum'
 
 
 interface Props {

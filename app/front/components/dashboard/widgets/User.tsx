@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Card, Icon, Avatar } from 'antd'
+import { Card } from 'antd'
 
 import User from 'model/User'
 import Loader from 'components/common/Loader'
@@ -20,7 +20,9 @@ class UserComponent extends React.PureComponent<Props, {}> {
 
         return (
             <React.Fragment>
-                <Card>
+                <Card cover={
+                    <img alt='avatar' src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />
+                }>
                     <Loader loading={loading || !user} error={error}>
                         {!!user && <Card.Meta title={user && user.email} />}
                     </Loader>

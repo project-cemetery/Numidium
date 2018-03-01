@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 
 import ContentBlock from 'components/common/Content'
 import IconWithText from 'components/common/IconWithText'
-import IconEnum from 'util/IconEnum'
+import IconEnum from 'util/enum/IconEnum'
 import menu, { MenuItem, INDEX_PAGE } from 'menu'
 import User from 'model/User'
 

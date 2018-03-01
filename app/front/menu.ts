@@ -1,4 +1,4 @@
-import IconEnum from 'util/IconEnum'
+import IconEnum from 'util/enum/IconEnum'
 
 
 export const INDEX_PAGE = 'INDEX_PAGE'
