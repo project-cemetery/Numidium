@@ -1,3 +1,11 @@
 import { combineReducers } from 'redux'
 
-export default combineReducers({})
+import usersReducer, { UsersState } from 'business/users/reducers'
+
+export interface AppState {
+    users: UsersState
+}
+
+export default combineReducers({
+    users: usersReducer,
+})

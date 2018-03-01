@@ -7,6 +7,7 @@
         "build": "encore production"
     },
     "dependencies": {
+        "@types/redux-actions": "^2.2.4",
         "antd": "^3.2.2",
         "axios": "^0.18.0",
         "emotion": "^9.0.2",
@@ -16,6 +17,7 @@
         "react-redux": "^5.0.7",
         "react-router-dom": "^4.2.2",
         "redux": "^3.7.2",
+        "redux-actions": "^2.2.1",
         "redux-thunk": "^2.2.0"
     },
     "devDependencies": {

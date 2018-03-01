@@ -115,6 +115,12 @@ const createGetList = <T>(enity: string): (params?: Parameter[]) => Promise<Rest
 // const createGetPaginated = <T>(entity: string): (page: number) => Promise<RestResponse<T[]>> => (page: number) =>
 //         createGetFiltered<T>(entity)([{ field: 'page', value: page.toString() } as Filter])
 
+interface RestMethods<T> {
+    getList: (params?: Parameter[]) => Promise<RestResponse<Collection<T>>>
+}
+
+export type Rest = <T>(entity: string) => RestMethods<T>
+
 export default <T>(entity: string) => ({
     getList: createGetList<T>(entity),
 
