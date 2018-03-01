@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import usersReducer, { UsersState } from 'business/users/reducers'
+import usersReducer, { UsersState } from 'store/users/reducers'
 
 export interface AppState {
     users: UsersState
