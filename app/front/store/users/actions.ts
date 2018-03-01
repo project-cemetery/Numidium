@@ -3,8 +3,8 @@ import { MiddlewareAPI } from 'redux'
 
 import Collection from 'model/Collection'
 import User from 'model/User'
-import rest from 'util/rest'
-import { getMyId } from 'util/helperApi'
+import rest from 'util/api/rest'
+import { getMyId } from 'util/api/helper'
 
 import { UsersState } from './reducers'
 
