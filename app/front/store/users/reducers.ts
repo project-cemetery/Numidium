@@ -1,54 +1,67 @@
-import { Dispatch } from 'redux'
 import { handleActions, Action } from 'redux-actions'
 
-import EntityLoadState, { initialState } from 'store/common/EntityLoadState'
+import EntityLoadState, { initialState } from 'store/common/api/EntityLoadState'
 import Collection from 'model/Collection'
 import User from 'model/User'
 
 import actions, {
-    FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE,
-    ListRequestAction, ListSuccessAction, ListFailureAction,
-
-    FETCH_ITEM_REQUEST, FETCH_ITEM_SUCCESS, FETCH_ITEM_FAILURE,
-    ItemRequestAction, ItemSuccessAction, ItemFailureAction,
+    actionTypes,
 } from './actions'
 
 
-const handleFetchListRequest = (state: UsersState, action: ListRequestAction) => ({
+const handleFetchListRequest = (state: UsersState, action: Action<{}>) => ({
     ...state,
-    loadingList: true,
+    getList: {
+        ...state.getList,
+        loading: true,
+    },
 })
 
-const handleFetchListSuccess = (state: UsersState, action: ListSuccessAction) => ({
+const handleFetchListSuccess = (state: UsersState, action: Action<Collection<User>>) => ({
     ...state,
-    loadingList: false,
-    errorList: false,
+    getList: {
+        ...state.getList,
+        loading: false,
+        error: false,
+    },
     users: action.payload,
 })
 
-const handleFetchListFailure = (state: UsersState, action: ListFailureAction) => ({
+const handleFetchListFailure = (state: UsersState, action: Action<{}>) => ({
     ...state,
-    loadingList: false,
-    errorList: !!action.error,
+    getList: {
+        ...state.getList,
+        loading: false,
+        error: !!action.error,
+    },
 })
 
-const handleFetchItemRequest = (state: UsersState, action: ItemRequestAction) => ({
+const handleFetchItemRequest = (state: UsersState, action: Action<{}>) => ({
     ...state,
-    loadingItem: true,
+    get: {
+        ...state.get,
+        loading: true,
+    },
 })
 
 // TODO: type of action
 const handleFetchItemSuccess = (state: UsersState, action: any) => ({
     ...state,
-    loadingItem: false,
-    errorItem: false,
+    get: {
+        ...state.get,
+        loading: false,
+        error: false,
+    },
     user: action.payload,
 })
 
-const handleFetchItemFailure = (state: UsersState, action: ItemFailureAction) => ({
+const handleFetchItemFailure = (state: UsersState, action: Action<{}>) => ({
     ...state,
-    loadingItem: false,
-    errorItem: !!action.error,
+    get: {
+        ...state.get,
+        loading: false,
+        error: !!action.error,
+    },
 })
 
 export interface UsersState extends EntityLoadState {
@@ -58,13 +71,13 @@ export interface UsersState extends EntityLoadState {
 
 export default handleActions(
     {
-        [FETCH_LIST_REQUEST]: handleFetchListRequest,
-        [FETCH_LIST_SUCCESS]: handleFetchListSuccess,
-        [FETCH_LIST_FAILURE]: handleFetchListFailure,
+        [actionTypes.GET_LIST_REQUEST]: handleFetchListRequest,
+        [actionTypes.GET_LIST_SUCCESS]: handleFetchListSuccess,
+        [actionTypes.GET_LIST_FAILURE]: handleFetchListFailure,
 
-        [FETCH_ITEM_REQUEST]: handleFetchItemRequest,
-        [FETCH_ITEM_SUCCESS]: handleFetchItemSuccess,
-        [FETCH_ITEM_FAILURE]: handleFetchItemFailure,
+        [actionTypes.GET_REQUEST]: handleFetchItemRequest,
+        [actionTypes.GET_SUCCESS]: handleFetchItemSuccess,
+        [actionTypes.GET_FAILURE]: handleFetchItemFailure,
     },
     {
         ...initialState,

@@ -25,31 +25,21 @@ const put = (entity: string, id: number, data: any) =>
 const del = (entity: string, id: number) =>
     axios.delete(`${API_URL}/${entity}/${id}`)
 
-export interface RestResponse<T> {
-    code: number
-    data: T | null
-}
 
-const createGetList = <T>(enity: string): (params?: Parameter[]) => Promise<RestResponse<Collection<T>>> =>
+const createGetList = <T>(enity: string): (params?: Parameter[]) => Promise<Collection<T>> =>
     (params?: Parameter[]) =>
         getList(enity, params)
             .then(response => ({
-                code: response.status,
-                data: {
-                        '@id': response.data['@id'],
-                        '@type': response.data['@type'],
-                        '@context': response.data['@context'],
-                        member: response.data['hydra:member'],
-                        totalItems: parseInt(response.data['hydra:totalItems'], 10),
-                    },
+                '@id': response.data['@id'],
+                '@type': response.data['@type'],
+                '@context': response.data['@context'],
+                member: response.data['hydra:member'],
+                totalItems: parseInt(response.data['hydra:totalItems'], 10),
             }))
 
-const createGet = <T>(entity: string): (id: number) => Promise<RestResponse<T>> => (id: number) =>
+const createGet = <T>(entity: string): (id: number) => Promise<T> => (id: number) =>
     get(entity, id)
-        .then(response => ({
-            code: response.status,
-            data: response.data,
-        }))
+        .then(response => response.data)
 
 // const createPost = <T>(entity: string): (object: T) => Promise<RestResponse<T>> => (object: T) =>
 //     post(entity, object)
@@ -97,13 +87,6 @@ const createGet = <T>(entity: string): (id: number) => Promise<RestResponse<T>> 
 
 // const createGetPaginated = <T>(entity: string): (page: number) => Promise<RestResponse<T[]>> => (page: number) =>
 //         createGetFiltered<T>(entity)([{ field: 'page', value: page.toString() } as Filter])
-
-interface RestMethods<T> {
-    getList: (params?: Parameter[]) => Promise<RestResponse<Collection<T>>>
-    get: (id: number) => Promise<RestResponse<T>>
-}
-
-export type Rest = <T>(entity: string) => RestMethods<T>
 
 export default <T>(entity: string) => ({
     getList: createGetList<T>(entity),

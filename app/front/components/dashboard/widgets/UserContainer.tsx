@@ -33,9 +33,9 @@ export default function (User: React.ComponentClass<ComponentProps>) {
         }
 
         componentDidMount() {
-            const { fetchUser } = this.props
+            const { get } = this.props
 
-            if (fetchUser) fetchUser()
+            if (get) get()
         }
     }
 
@@ -43,7 +43,7 @@ export default function (User: React.ComponentClass<ComponentProps>) {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    loading: !!state.users.loadingItem,
-    error: !!state.users.errorItem,
+    loading: !!state.users.get.loading,
+    error: !!state.users.get.error,
     user: state.users.user,
 })
