@@ -7,7 +7,6 @@
         "build": "encore production"
     },
     "dependencies": {
-        "@types/redux-actions": "^2.2.4",
         "antd": "^3.2.2",
         "axios": "^0.18.0",
         "emotion": "^9.0.2",
@@ -26,6 +25,7 @@
         "@types/react-dom": "^16.0.4",
         "@types/react-redux": "^5.0.15",
         "@types/react-router-dom": "^4.2.4",
+        "@types/redux-actions": "^2.2.4",
         "babel-preset-react": "^6.24.1",
         "ts-loader": "^3.5.0",
         "tslint": "^5.9.1",
