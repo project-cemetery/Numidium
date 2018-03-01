@@ -1,9 +1,15 @@
 export const initialState = {
-    loading: false,
-    error: false,
+    loadingList: false,
+    loadingItem: false,
+
+    errorList: false,
+    errorItem: false,
 } as EntityLoadState
 
 export default interface EntityLoadState {
-    loading: boolean
-    error: boolean
+    loadingList: boolean
+    loadingItem: boolean
+
+    errorList: boolean
+    errorItem: boolean
 }

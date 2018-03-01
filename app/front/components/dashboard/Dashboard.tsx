@@ -10,9 +10,9 @@ import UserWidget from './widgets/User'
 export default () =>
     <Content>
         <Row gutter={16}>
-            <Col span={8}>
+            <Col md={8} xs={24}>
                 <UserWidget />
             </Col>
-            <Col span={16}>col-16</Col>
+            <Col md={16} xs={24}>col-16</Col>
         </Row>
     </Content>

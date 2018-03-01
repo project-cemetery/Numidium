@@ -3,7 +3,7 @@
       "strict": true,
       "noImplicitReturns": true,
       "module": "es2015",
-      "target": "es5",
+      "target": "es2015",
       "noImplicitAny": true,
       "jsx": "react",
       "moduleResolution": "node",

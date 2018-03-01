@@ -5,7 +5,7 @@ import encodeQuery, { Parameter } from 'util/encodeQuery'
 import Collection from 'model/Collection'
 
 
-const API_URL = `${window.location.origin}/api`
+export const API_URL = `${window.location.origin}/api`
 
 const getList = (entity: string, params?: Parameter[]) =>
     axios.get(!!params
@@ -27,49 +27,29 @@ const del = (entity: string, id: number) =>
 
 export interface RestResponse<T> {
     code: number
-    error?: string
-    data?: T | null
-}
-
-const axiosErrorToResponseError = (error: any) => {
-    console.log(error)
-    return ({
-        code: code.BAD_REQUEST,
-        error: error || 'shit!',
-        data: null,
-    })
+    data: T | null
 }
 
 const createGetList = <T>(enity: string): (params?: Parameter[]) => Promise<RestResponse<Collection<T>>> =>
     (params?: Parameter[]) =>
         getList(enity, params)
-            .then(
-                response => ({
-                    code: response.status,
-                    error: response.status !== code.OK ? response.data : null,
-                    data: response.status === code.OK
-                        ? {
-                            '@id': response.data['@id'],
-                            '@type': response.data['@type'],
-                            '@context': response.data['@context'],
-                            member: response.data['hydra:member'],
-                            totalItems: parseInt(response.data['hydra:totalItems'], 10),
-                        } as Collection<T>
-                        : null,
-                }),
-                error => axiosErrorToResponseError(error)
-            )
+            .then(response => ({
+                code: response.status,
+                data: {
+                        '@id': response.data['@id'],
+                        '@type': response.data['@type'],
+                        '@context': response.data['@context'],
+                        member: response.data['hydra:member'],
+                        totalItems: parseInt(response.data['hydra:totalItems'], 10),
+                    },
+            }))
 
-// const createGet = <T>(entity: string): (id: number) => Promise<RestResponse<T>> => (id: number) =>
-//     get(entity, id)
-//         .then(
-//             response => ({
-//                 code: response.status,
-//                 error: response.status !== code.OK ? response.data : null,
-//                 data: response.status === code.OK ? response.data : null,
-//             }),
-//             error => axiosErrorToResponseError(error)
-//         )
+const createGet = <T>(entity: string): (id: number) => Promise<RestResponse<T>> => (id: number) =>
+    get(entity, id)
+        .then(response => ({
+            code: response.status,
+            data: response.data,
+        }))
 
 // const createPost = <T>(entity: string): (object: T) => Promise<RestResponse<T>> => (object: T) =>
 //     post(entity, object)
@@ -120,15 +100,15 @@ const createGetList = <T>(enity: string): (params?: Parameter[]) => Promise<Rest
 
 interface RestMethods<T> {
     getList: (params?: Parameter[]) => Promise<RestResponse<Collection<T>>>
+    get: (id: number) => Promise<RestResponse<T>>
 }
 
 export type Rest = <T>(entity: string) => RestMethods<T>
 
 export default <T>(entity: string) => ({
     getList: createGetList<T>(entity),
+    get: createGet<T>(entity),
 
-    // getAll: createGetAll<T>(entity),
-    // get: createGet<T>(entity),
     // post: createPost<T>(entity),
     // put: createPut<T>(entity),
     // delete: createDelete<T>(entity),
