@@ -12,6 +12,7 @@ import menu, { MenuItem, INDEX_PAGE } from 'menu'
 import User from 'model/User'
 
 import Dashboard from './dashboard/Dashboard'
+import Vacations from './vacations/Vacations'
 
 const { Header, Content, Footer, Sider } = Layout
 const SubMenu = Menu.SubMenu
@@ -51,7 +52,7 @@ export default class App extends React.PureComponent<{}, LocalState> {
                     <Header className={this.s('header')} />
                     <Content className={this.s('content')}>
                         <Route path='/' exact component={Dashboard} />
-                        {/* <ContentBlock /> */}
+                        <Route path='/vacations' component={Vacations} />
                     </Content>
                     <Footer className={this.s('footer')}>
                         Numidium © 2017 – {new Date().getFullYear()}

@@ -33,9 +33,9 @@ export default function (User: React.ComponentClass<ComponentProps>) {
         }
 
         componentDidMount() {
-            const { get } = this.props
+            const { get, user } = this.props
 
-            if (get) get()
+            if (get && !user) get()
         }
     }
 

@@ -18,7 +18,7 @@ const store = createStore(
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <Route path='/' exact component={App} />
+            <Route path='/' component={App} />
         </Router>
     </Provider>,
     document.getElementById('app')

@@ -16,4 +16,8 @@ export default [
         icon: IconEnum.HOME,
         title: 'Обзор', key: INDEX_PAGE, path: '/',
     } as MenuItem,
+    {
+        icon: IconEnum.CALENDAR,
+        title: 'Отпуска', key: 'vacations', path: '/vacations',
+    } as MenuItem,
 ]
