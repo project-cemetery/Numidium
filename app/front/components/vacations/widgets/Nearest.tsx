@@ -1,31 +1,32 @@
 import * as React from 'react'
 
-import { Card, List } from 'antd'
+import { Card, List, Modal } from 'antd'
 import * as moment from 'moment'
 
 import Vacation from 'model/Vacation'
 import Icon from 'components/common/Icon'
-import IcomEnum from 'util/enum/IconEnum'
+import IconEnum from 'util/enum/IconEnum'
 
 import Container from './NearestContainer'
-import IconEnum from 'util/enum/IconEnum'
 
 
 export interface Props {
     vacations: Vacation[]
+
+    openModal: () => void
 }
 
 class Nearest extends React.PureComponent<Props, {}> {
 
     render() {
-        const { vacations } = this.props
+        const { vacations, openModal, } = this.props
 
         return (
             <React.Fragment>
                 <Card
                     title={'Ваши отпуска на ближайщий год'}
                     actions={[
-                        <Icon type={IconEnum.PLUS_CIRCLE} />,
+                        <span onClick={openModal}>Добавить</span>,
                     ]}
                 >
                     { (vacations.length > 0)

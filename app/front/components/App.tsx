@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 
 import ContentBlock from 'components/common/Content'
 import IconWithText from 'components/common/IconWithText'
+import ModalRoot from 'components/modal/ModalRoot'
 import IconEnum from 'util/enum/IconEnum'
 import menu, { MenuItem, INDEX_PAGE } from 'menu'
 import User from 'model/User'
@@ -64,6 +65,8 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
                         Numidium © 2017 – {new Date().getFullYear()}
                     </Footer>
                 </Layout>
+
+                <ModalRoot />
             </Layout>
         )
     }

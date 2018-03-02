@@ -9,7 +9,9 @@ interface Props {
     type: IconEnum
     spin?: boolean
     style?: any
+    
+    onClick?: () => void
 }
 
 export default (props: Props) =>
-    <Icon type={props.type} spin={props.spin} style={props.style} />
+    <Icon type={props.type} spin={props.spin} style={props.style} onClick={props.onClick} />
