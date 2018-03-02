@@ -3,9 +3,16 @@
 namespace App\Entity;
 
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
-/** @ORM\Entity  */
+/**
+ * @ApiResource(
+ *     attributes={"access_control"="is_granted('ROLE_USER')"}
+ * )
+ *
+ * @ORM\Entity
+ */
 class Vacation
 {
     /**

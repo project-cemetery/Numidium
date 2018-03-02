@@ -51,8 +51,10 @@ export default class App extends React.PureComponent<{}, LocalState> {
                 <Layout>
                     <Header className={this.s('header')} />
                     <Content className={this.s('content')}>
-                        <Route path='/' exact component={Dashboard} />
-                        <Route path='/vacations' component={Vacations} />
+                        <ContentBlock>
+                            <Route path='/' exact component={Dashboard} />
+                            <Route path='/vacations' component={Vacations} />
+                        </ContentBlock>
                     </Content>
                     <Footer className={this.s('footer')}>
                         Numidium © 2017 – {new Date().getFullYear()}
