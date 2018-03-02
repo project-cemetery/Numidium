@@ -9,7 +9,7 @@ import Container from './UserContainer'
 
 
 export interface Props {
-    user?: User
+    user: User
 }
 
 class UserComponent extends React.PureComponent<Props, {}> {
@@ -21,7 +21,7 @@ class UserComponent extends React.PureComponent<Props, {}> {
                 <Card cover={
                     <img alt='avatar' src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />
                 }>
-                    <Card.Meta title={!!user && user.email} />
+                    <Card.Meta title={user.email} />
                 </Card>
             </React.Fragment>
         )

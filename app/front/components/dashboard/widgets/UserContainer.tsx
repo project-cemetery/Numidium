@@ -27,7 +27,7 @@ export default function (User: React.ComponentClass<ComponentProps>) {
 
             return (
                 <Loader loading={loading || !user} error={error}>
-                    <User user={user} />
+                    {user && <User user={user} />}
                 </Loader>
             )
         }

@@ -4,29 +4,22 @@ import { Row, Col } from 'antd'
 
 import Collection from 'model/Collection'
 import Vacation from 'model/Vacation'
+import Breadcrumbs from 'components/common/Breadcrumbs'
 
-import Container from './VacationsContainer'
+import Nearest from './widgets/Nearest'
 
 
-export interface Props {
-    vacations?: Collection<Vacation>
+export default () => (
+    <React.Fragment>
+        <Breadcrumbs breadcrumbs={[ 'Отпуска' ]} />
 
-}
-class Vacations extends React.PureComponent<Props, {}> {
-
-    render() {
-        return (
-            <React.Fragment>
-                <Row gutter={16}>
-                    <Col md={8} xs={24}>
-                        <p>...</p>
-                    </Col>
-                    <Col md={16} xs={24}>col-16</Col>
-                </Row>
-            </React.Fragment>
-        )
-    }
-
-}
-
-export default Container(Vacations)
+        <Row gutter={16}>
+            <Col lg={16} md={24}>
+                <p>...</p>
+            </Col>
+            <Col lg={8} md={24}>
+                <Nearest />
+            </Col>
+        </Row>
+    </React.Fragment>
+)
