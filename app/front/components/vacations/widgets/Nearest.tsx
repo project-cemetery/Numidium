@@ -7,7 +7,7 @@ import Icon from 'components/common/Icon'
 import IcomEnum from 'util/enum/IconEnum'
 
 import Container from './NearestContainer'
-import IconEnum from 'util/enum/IconEnum';
+import IconEnum from 'util/enum/IconEnum'
 
 
 export interface Props {

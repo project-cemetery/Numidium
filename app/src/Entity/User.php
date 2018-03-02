@@ -42,7 +42,7 @@ class User implements UserInterface, \Serializable
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @Assert\NotBlank
-     * @Groups({"any", "me"})
+     * @Groups({"any", "me", "owner"})
      */
     private $id;
 

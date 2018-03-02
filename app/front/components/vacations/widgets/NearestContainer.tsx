@@ -38,7 +38,7 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
                     {(!!vacations && !!user) &&
                         <Vacations vacations={
                             vacations.member
-                                .filter(v => true) // current user
+                                .filter(v => v.user.id === user.id)
                                 .filter(v => true) // nearest dates
                         } />
                     }

@@ -5,10 +5,14 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *     attributes={"access_control"="is_granted('ROLE_USER')"}
+ *      attributes={
+ *          "access_control"="is_granted('ROLE_USER')",
+ *          "normalization_context"={"groups"={"owner"}}
+ *      }
  * )
  *
  * @ORM\Entity
@@ -19,18 +23,30 @@ class Vacation
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"owner"})
      */
     private $id;
 
-    /** @ORM\Column(type="date") */
+    /**
+     * @ORM\Column(type="date")
+     *
+     * @Groups({"owner"})
+     */
     private $start;
 
-    /** @ORM\Column(type="date") */
+    /**
+     * @ORM\Column(type="date")
+     *
+     * @Groups({"owner"})
+     */
     private $end;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="vacations")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
+     * @Groups({"owner"})
      */
     private $user;
 
