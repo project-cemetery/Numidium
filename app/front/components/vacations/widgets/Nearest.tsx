@@ -22,9 +22,14 @@ class Nearest extends React.PureComponent<Props, {}> {
 
         return (
             <React.Fragment>
-                <Card title={'Ваши отпуска на ближайщий год'}>
+                <Card
+                    title={'Ваши отпуска на ближайщий год'}
+                    actions={[
+                        <Icon type={IconEnum.PLUS_CIRCLE} />,
+                    ]}
+                >
                     { (vacations.length > 0)
-                        ? this.renderTimeline(vacations.sort((a, b) => a > b ? 1 : -1))
+                        ? this.renderTimeline(vacations)
                         : <p>Нет созданных отпусков</p>
                     }
                 </Card>
@@ -53,7 +58,7 @@ class Nearest extends React.PureComponent<Props, {}> {
 
     getDiffMessage = (v: Vacation) => v.start.diff(moment(), 'days') > 0
         ? `Через ${v.start.diff(moment(), 'days')} дн.`
-        : 'Сейчас!'
+        : 'Сейчас'
 }
 
 export default Container(Nearest)

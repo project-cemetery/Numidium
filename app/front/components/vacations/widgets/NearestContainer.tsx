@@ -34,8 +34,6 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
         render() {
             const { loading, error, vacations, user } = this.props
 
-            console.log(vacations)
-
             return (
                 <Loader loading={loading || !vacations || !user} error={error}>
                     {(!!vacations && !!user) &&
@@ -43,6 +41,7 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
                             vacations.member
                                 .filter(v => v.user.id === user.id)
                                 .filter(v => v.start.diff(moment(), 'days') < 365)
+                                .sort((a, b) => a > b ? 1 : -1)
                         } />
                     }
                 </Loader>
@@ -56,7 +55,9 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
             } = this.props
 
             if (!!vacationsActions && !!vacationsActions.getList && !vacations) {
-                vacationsActions.getList()
+                vacationsActions.getList({
+                    'end[after]': moment().format('YYYY-MM-DD'),
+                })
             }
 
             if (!!usersActions && !!usersActions.get && !user) {

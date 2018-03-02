@@ -14,10 +14,15 @@ export const actionCreators = createActionCreators<Vacation>(ENTITY)
 
 export const vacationRest = rest<Vacation>(ENTITY)
 
-const getList = () => (dispatch: any) => {
+const getList = (params?: any) => (dispatch: any) => {
     dispatch(actionCreators.getListRequest())
 
-    return vacationRest.getList()
+    const preparedParams = Object.keys(params).map(key => ({
+        key,
+        value: params[key],
+    }))
+
+    return vacationRest.getList(preparedParams)
         .then(
             collection => collection && dispatch(actionCreators.getListSuccess(collection)),
             err => dispatch(actionCreators.getListFailure())
@@ -25,7 +30,7 @@ const getList = () => (dispatch: any) => {
 }
 
 export interface VacationsActions extends ActionsCreators<Vacation> {
-    getList?: () => Promise<Collection<Vacation>>
+    getList?: (params?: any) => Promise<Collection<Vacation>>
 }
 
 export default {
