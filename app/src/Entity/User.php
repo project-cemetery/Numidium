@@ -4,6 +4,8 @@ namespace App\Entity;
 
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -62,6 +64,21 @@ class User implements UserInterface, \Serializable
      */
     private $active = false;
 
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="Vacation",
+     *     mappedBy="user",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     * )
+     */
+    private $vacations;
+
+    public function __construct()
+    {
+        $this->vacations = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,6 +126,27 @@ class User implements UserInterface, \Serializable
     public function setActive(bool $flag): User
     {
         $this->active = $flag;
+
+        return $this;
+    }
+
+    public function getVacations(): Collection
+    {
+        return $this->vacations;
+    }
+
+    public function addVacation(Vacation $vacation): User
+    {
+        $this->vacations->add($vacation);
+        $vacation->setUser($this);
+
+        return $this;
+    }
+
+    public function removeVacation(Vacation $vacation): User
+    {
+        $this->vacations->removeElement($vacation);
+        $vacation->setUser(null);
 
         return $this;
     }
