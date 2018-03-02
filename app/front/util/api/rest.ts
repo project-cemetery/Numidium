@@ -4,6 +4,8 @@ import * as code from 'http-status-codes'
 import encodeQuery, { Parameter } from 'util/encodeQuery'
 import Collection from 'model/Collection'
 
+import { momentalizeEntity } from './utils'
+
 
 export const API_URL = `${window.location.origin}/api`
 
@@ -33,13 +35,13 @@ const createGetList = <T>(enity: string): (params?: Parameter[]) => Promise<Coll
                 '@id': response.data['@id'],
                 '@type': response.data['@type'],
                 '@context': response.data['@context'],
-                member: response.data['hydra:member'],
+                member: response.data['hydra:member'].map(momentalizeEntity),
                 totalItems: parseInt(response.data['hydra:totalItems'], 10),
             }))
 
 const createGet = <T>(entity: string): (id: number) => Promise<T> => (id: number) =>
     get(entity, id)
-        .then(response => response.data)
+        .then(response => momentalizeEntity(response.data) as T)
 
 // const createPost = <T>(entity: string): (object: T) => Promise<RestResponse<T>> => (object: T) =>
 //     post(entity, object)

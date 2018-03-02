@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
+import * as moment from 'moment'
 
 import { AppState } from 'reducers'
 import Collection from 'model/Collection'
@@ -33,13 +34,15 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
         render() {
             const { loading, error, vacations, user } = this.props
 
+            console.log(vacations)
+
             return (
                 <Loader loading={loading || !vacations || !user} error={error}>
                     {(!!vacations && !!user) &&
                         <Vacations vacations={
                             vacations.member
                                 .filter(v => v.user.id === user.id)
-                                .filter(v => true) // nearest dates
+                                .filter(v => v.start.diff(moment(), 'days') < 365)
                         } />
                     }
                 </Loader>

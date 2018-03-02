@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { Card, List } from 'antd'
+import * as moment from 'moment'
 
 import Vacation from 'model/Vacation'
 import Icon from 'components/common/Icon'
@@ -21,7 +22,7 @@ class Nearest extends React.PureComponent<Props, {}> {
 
         return (
             <React.Fragment>
-                <Card title={'Ваши отпуска'}>
+                <Card title={'Ваши отпуска на ближайщий год'}>
                     { (vacations.length > 0)
                         ? this.renderTimeline(vacations.sort((a, b) => a > b ? 1 : -1))
                         : <p>Нет созданных отпусков</p>
@@ -38,12 +39,21 @@ class Nearest extends React.PureComponent<Props, {}> {
             renderItem={(v: Vacation) =>
                 <List.Item>
                     <List.Item.Meta
-                        title={`Начало: ${v.start}`}
-                        description={`Конец: ${v.end}`}
+                        title={this.getDiffMessage(v)}
+                        description={
+                            <p>
+                                Начало: {v.start.format('DD.MM.YYYY')}<br />
+                                Конец: {v.end.format('DD.MM.YYYY')}
+                            </p>
+                        }
                     />
                 </List.Item>
             }
         />
+
+    getDiffMessage = (v: Vacation) => v.start.diff(moment(), 'days') > 0
+        ? `Через ${v.start.diff(moment(), 'days')} дн.`
+        : 'Сейчас!'
 }
 
 export default Container(Nearest)
