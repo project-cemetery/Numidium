@@ -15,8 +15,6 @@ export interface Props {
 class Vacations extends React.PureComponent<Props, {}> {
 
     render() {
-        console.log(this.props)
-
         return (
             <React.Fragment>
                 <Row gutter={16}>

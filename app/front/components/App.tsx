@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { Layout, Menu } from 'antd'
 import { css } from 'emotion'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import ContentBlock from 'components/common/Content'
@@ -22,7 +22,7 @@ interface LocalState {
     collapsed: boolean
 }
 
-export default class App extends React.PureComponent<{}, LocalState> {
+export default class App extends React.PureComponent<RouteComponentProps<{}>, LocalState> {
 
     state = {
         collapsed: false,
@@ -33,6 +33,10 @@ export default class App extends React.PureComponent<{}, LocalState> {
     }
 
     render() {
+        const path = this.props.location.pathname
+        const currentItem = menu.find(item => item.path === path)
+        const currentKey = currentItem ? currentItem.key : INDEX_PAGE
+
         return (
             <Layout className={this.s('constainer')}>
                 <Sider
@@ -41,7 +45,7 @@ export default class App extends React.PureComponent<{}, LocalState> {
                     onCollapse={this.onCollapse}
                 >
                     <div className={this.s('logo')} />
-                    <Menu theme='dark' defaultSelectedKeys={[ INDEX_PAGE ]} mode='inline'>
+                    <Menu theme='dark' defaultSelectedKeys={[ currentKey ]} mode='inline'>
                         {menu.map((item, i) => !!item.children
                             ? this.renderSubMenu(item)
                             : this.renderMenuItem(item)
