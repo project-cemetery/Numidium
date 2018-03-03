@@ -3,7 +3,7 @@ import { Action } from 'redux-actions'
 import Collection from 'model/Collection'
 
 
-const actionType = (entity: string) => (name: string) => `${entity}/${name}`
+export const actionType = (entity: string) => (name: string) => `${entity}/${name}`
 
 export const createTypes = (entity: string) => ({
     GET_LIST_REQUEST: actionType(entity)('GET_LIST_REQUEST'),

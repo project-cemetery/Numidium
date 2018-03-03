@@ -45,5 +45,5 @@ export default function (User: React.ComponentClass<ComponentProps>) {
 const mapStateToProps = (state: AppState) => ({
     loading: !!state.users.get.loading,
     error: !!state.users.get.error,
-    user: state.users.user,
+    user: state.users.entities.find(u => u.id === state.users.currentId),
 })

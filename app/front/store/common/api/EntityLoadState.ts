@@ -16,11 +16,14 @@ export const initialState = {
         loading: false,
         error: false,
     } as PartialState,
-} as EntityLoadState<{}>
+
+    entities: [],
+} as EntityLoadState<any>
 
 export default interface EntityLoadState<T> {
     getList: PartialState
     get: PartialState
 
-    list: Collection<T>
+    list?: Collection<T>
+    entities: T[]
 }

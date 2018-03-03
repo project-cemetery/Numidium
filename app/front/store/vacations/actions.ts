@@ -9,13 +9,13 @@ import { VacationsState } from './reducers'
 
 const ENTITY = 'vacations'
 
-export const actionTypes = createTypes(ENTITY)
-export const actionCreators = createActionCreators<Vacation>(ENTITY)
+export const commonActionTypes = createTypes(ENTITY)
+export const commonActionCreators = createActionCreators<Vacation>(ENTITY)
 
 export const vacationRest = rest<Vacation>(ENTITY)
 
 const getList = (params?: any) => (dispatch: any) => {
-    dispatch(actionCreators.getListRequest())
+    dispatch(commonActionCreators.getListRequest())
 
     const preparedParams = Object.keys(params).map(key => ({
         key,
@@ -24,28 +24,27 @@ const getList = (params?: any) => (dispatch: any) => {
 
     return vacationRest.getList(preparedParams)
         .then(
-            collection => dispatch(actionCreators.getListSuccess(collection)),
-            err => dispatch(actionCreators.getListFailure())
+            collection => dispatch(commonActionCreators.getListSuccess(collection)),
+            err => dispatch(commonActionCreators.getListFailure())
         )
 }
 
 const get = (id: number) => (dispatch: any) => {
-    dispatch(actionCreators.getRequest())
+    dispatch(commonActionCreators.getRequest())
 
     return vacationRest.get(id)
         .then(
-            vacation => dispatch(actionCreators.getSuccess(vacation)),
-            err => dispatch(actionCreators.getFailure()),
+            vacation => dispatch(commonActionCreators.getSuccess(vacation)),
+            err => dispatch(commonActionCreators.getFailure()),
         )
 }
 
-export interface VacationsActions extends ActionsCreators<Vacation> {
-    getList?: (params?: any) => Promise<Collection<Vacation>>
+export interface VacationsActions extends ActionsCreators<Vacation> {getList?: (params?: any) => Promise<Collection<Vacation>>
     get?: (id: any) => Promise<Vacation>
 }
 
 export default {
-    ...actionCreators,
+    ...commonActionCreators,
     getList,
     get,
 }

@@ -41,6 +41,8 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
                 modalActions,
             } = this.props
 
+            console.log(this.props)
+
             return (
                 <Loader loading={loading || !vacations || !user} error={error}>
                     {(!!vacations && !!user && !!modalActions) &&
@@ -92,7 +94,7 @@ const mapStateToProps = (state: AppState) => ({
     error: !!state.vacations.getList.error || !!state.users.get.error,
 
     vacations: state.vacations.list,
-    user: state.users.user,
+    user: state.users.entities.find(u => u.id === state.users.currentId),
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
