@@ -25,7 +25,7 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
             } = this.props
 
             return (!!hide) &&
-                <ModalForm visible={visible} id={id} hide={hide} />
+                <ModalForm visible={visible} hide={hide} />
         }
 
         componentDidMount() {
