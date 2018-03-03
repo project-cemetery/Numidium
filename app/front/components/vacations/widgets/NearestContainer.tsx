@@ -41,13 +41,11 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
                 modalActions,
             } = this.props
 
-            console.log(this.props)
-
             return (
                 <Loader loading={loading || !vacations || !user} error={error}>
                     {(!!vacations && !!user && !!modalActions) &&
                         <Vacations
-                            openModal={() => this.openModal()}
+                            openModal={this.openModal}
 
                             vacations={
                                 vacations.member
@@ -76,10 +74,10 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
             if (!!usersActions && !!usersActions.get && !user) usersActions.get()
         }
 
-        openModal = () => {
+        openModal = (id?: number) => {
             const { modalActions } = this.props
 
-            if (modalActions && modalActions.show) modalActions.show(ModalEnum.VACATION)
+            if (modalActions && modalActions.show) modalActions.show(ModalEnum.VACATION, id)
         }
     }
 

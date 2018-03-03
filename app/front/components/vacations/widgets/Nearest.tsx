@@ -13,20 +13,20 @@ import Container from './NearestContainer'
 export interface Props {
     vacations: Vacation[]
 
-    openModal: () => void
+    openModal: (id?: number) => void
 }
 
 class Nearest extends React.PureComponent<Props, {}> {
 
     render() {
-        const { vacations, openModal, } = this.props
+        const { vacations, openModal } = this.props
 
         return (
             <React.Fragment>
                 <Card
                     title={'Ваши отпуска на ближайщий год'}
                     actions={[
-                        <span onClick={openModal}>Добавить</span>,
+                        <span onClick={() => openModal()}>Добавить</span>,
                     ]}
                 >
                     { (vacations.length > 0)
@@ -43,7 +43,9 @@ class Nearest extends React.PureComponent<Props, {}> {
             size={'large'}
             dataSource={vacations}
             renderItem={(v: Vacation) =>
-                <List.Item>
+                <List.Item actions={[
+                    <Icon onClick={() => this.props.openModal(v.id)} type={IconEnum.EDIT} />,
+                ]}>
                     <List.Item.Meta
                         title={this.getDiffMessage(v)}
                         description={

@@ -6,24 +6,44 @@ import { Moment } from 'moment'
 import { Form, Field } from 'react-final-form'
 
 import RangePicker from 'components/common/form/RangePicker'
+import Loader from 'components/common/Loader'
 import Vacation from 'model/Vacation'
 
 import Container from './ModalFormConatiner'
 
+
+export interface FormFields {
+    range: {
+        start: Moment
+        end: Moment
+    }
+}
 export interface Props {
+    loading: boolean
+    error: boolean
     visible: boolean
+
     vacation?: Vacation
 
     hide: () => void
+    submit: (values: FormFields) => void
 }
 
 class ModalForm extends React.PureComponent<Props, {}> {
     render() {
-        const { vacation, visible, hide } = this.props
+        const { loading, error, vacation, visible, hide, submit } = this.props
+
+        const initialValues = vacation &&
+            {
+                range: {
+                    start: vacation.start,
+                    end: vacation.end,
+                },
+            } as FormFields
 
         return <Form
-            onSubmit={(values) => console.log(values)}
-            initialValues={vacation}
+            onSubmit={values => submit(values as FormFields)}
+            initialValues={initialValues}
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
                 <Modal
                     title={'Отпуск'}
@@ -42,9 +62,11 @@ class ModalForm extends React.PureComponent<Props, {}> {
 
                     style={{ textAlign: 'center' }}
                 >
-                    <Field name='range'>
-                        {props => <RangePicker {...props} /> }
-                    </Field>
+                    <Loader loading={loading} error={error}>
+                        <Field name='range'>
+                            {props => <RangePicker {...props} /> }
+                        </Field>
+                    </Loader>
                 </Modal>
             )}
         />
