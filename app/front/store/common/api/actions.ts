@@ -15,6 +15,16 @@ export const createTypes = (entity: string) => ({
     GET_SUCCESS: actionType(entity)('GET_SUCCESS'),
 })
 
+export interface ActionTypes {
+    GET_LIST_REQUEST: string
+    GET_LIST_FAILURE: string
+    GET_LIST_SUCCESS: string
+
+    GET_REQUEST: string
+    GET_FAILURE: string
+    GET_SUCCESS: string
+}
+
 export const createActionCreators = <T>(entity: string) => ({
     // List
     getListRequest: () => ({

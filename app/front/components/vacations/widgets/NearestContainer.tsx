@@ -91,7 +91,7 @@ const mapStateToProps = (state: AppState) => ({
     loading: !!state.vacations.getList.loading || !!state.users.get.loading,
     error: !!state.vacations.getList.error || !!state.users.get.error,
 
-    vacations: state.vacations.vacations,
+    vacations: state.vacations.list,
     user: state.users.user,
 })
 

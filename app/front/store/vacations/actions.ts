@@ -24,16 +24,28 @@ const getList = (params?: any) => (dispatch: any) => {
 
     return vacationRest.getList(preparedParams)
         .then(
-            collection => collection && dispatch(actionCreators.getListSuccess(collection)),
+            collection => dispatch(actionCreators.getListSuccess(collection)),
             err => dispatch(actionCreators.getListFailure())
+        )
+}
+
+const get = (id: number) => (dispatch: any) => {
+    dispatch(actionCreators.getRequest())
+
+    return vacationRest.get(id)
+        .then(
+            vacation => dispatch(actionCreators.getSuccess(vacation)),
+            err => dispatch(actionCreators.getFailure()),
         )
 }
 
 export interface VacationsActions extends ActionsCreators<Vacation> {
     getList?: (params?: any) => Promise<Collection<Vacation>>
+    get?: (id: any) => Promise<Vacation>
 }
 
 export default {
     ...actionCreators,
     getList,
+    get,
 }

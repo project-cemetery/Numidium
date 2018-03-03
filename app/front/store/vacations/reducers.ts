@@ -1,51 +1,23 @@
 import { handleActions, Action } from 'redux-actions'
 
 import EntityLoadState, { initialState } from 'store/common/api/EntityLoadState'
+import { createCommonReducers } from 'store/common/api/reducers'
 import Collection from 'model/Collection'
 import Vacation from 'model/Vacation'
 
-import actions, {
-    actionTypes,
-} from './actions'
+import actions, { actionTypes } from './actions'
+import Vacations from 'components/vacations/Vacations';
 
 
-const handleFetchListRequest = (state: VacationsState, action: Action<{}>) => ({
-    ...state,
-    getList: {
-        ...state.getList,
-        loading: true,
-    },
-} as VacationsState)
+const commonReducers = createCommonReducers<Vacation>(actionTypes)
 
-const handleFetchListSuccess = (state: VacationsState, action: Action<Collection<Vacation>>) => ({
-    ...state,
-    getList: {
-        ...state.getList,
-        loading: false,
-        error: false,
-    },
-    vacations: action.payload,
-})
-
-const handleFetchListFailure = (state: VacationsState, action: Action<{}>) => ({
-    ...state,
-    getList: {
-        ...state.getList,
-        loading: false,
-        error: !!action.error,
-    },
-})
-
-export interface VacationsState extends EntityLoadState {
-    vacations?: Collection<Vacation>
+export interface VacationsState extends EntityLoadState<Vacation> {
 }
 
 export default handleActions(
     {
-        [actionTypes.GET_LIST_REQUEST]: handleFetchListRequest,
-        [actionTypes.GET_LIST_SUCCESS]: handleFetchListSuccess,
-        [actionTypes.GET_LIST_FAILURE]: handleFetchListFailure,
-    },
+        ...commonReducers,
+    } as any,
     {
         ...initialState,
     }
