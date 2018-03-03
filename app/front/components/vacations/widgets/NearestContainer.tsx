@@ -73,16 +73,13 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
                 })
             }
 
-            if (!!usersActions && !!usersActions.get && !user) {
-                usersActions.get()
-            }
+            if (!!usersActions && !!usersActions.get && !user) usersActions.get()
         }
 
         openModal = () => {
             const { modalActions } = this.props
-            if (modalActions && modalActions.show) {
-                modalActions.show(ModalEnum.VACATION)
-            }
+
+            if (modalActions && modalActions.show) modalActions.show(ModalEnum.VACATION)
         }
     }
 
