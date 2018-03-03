@@ -9,7 +9,7 @@ import { FieldRenderProps } from 'react-final-form'
 
 export default (props: FieldRenderProps) =>
     <DatePicker.RangePicker
-        defaultValue={[ props.input.value.start , props.input.value.end ]}
+        value={props.input.value && [ props.input.value.start , props.input.value.end ]}
         onChange={values => {
             props.input.onChange({
                 start: values[0],
