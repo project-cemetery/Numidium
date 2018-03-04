@@ -31,6 +31,7 @@ const actionCreators = {
 
 export const userRest = rest<User>(ENTITY)
 
+// Override default `get` action!
 const get = (id?: number) => (dispatch: any) => {
     dispatch(commonActionCreators.getRequest())
 

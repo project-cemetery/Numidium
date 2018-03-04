@@ -3,7 +3,8 @@ import { Action } from 'redux-actions'
 import Collection from 'model/Collection'
 import rest from 'util/api/rest'
 import { AppState } from 'reducers'
-import EntityLoadState from './EntityLoadState';
+import EntityLoadState from './EntityLoadState'
+import Entity from 'model/Entity'
 
 const createRequestActionCreator = (type: string) =>
     () => ({ type } as Action<{}>)
@@ -66,7 +67,7 @@ export interface ActionTypes {
     DELETE_SUCCESS: string
 }
 
-export const createActionCreators = <T>(
+export const createActionCreators = <T extends Entity>(
     entity: string,
     getEntityState: (state: AppState) => EntityLoadState<T>
 ) => {
@@ -119,9 +120,54 @@ export const createActionCreators = <T>(
             : undefined
     }
 
+    const get = (id: number) => (dispatch: any, getState: () => AppState) => {
+        const loading = getEntityState(getState()).getList.loading
+
+        dispatch(actionCreators.getRequest())
+
+        return loading
+            ? entityRest.get(id)
+                .then(
+                    reponse => dispatch(actionCreators.getSuccess(reponse)),
+                    err => dispatch(actionCreators.getFailure())
+                )
+            : undefined
+    }
+
+    const post = (object: T) => (dispatch: any, getState: () => AppState) => {
+        const loading = getEntityState(getState()).post.loading
+
+        dispatch(actionCreators.postRequest())
+
+        return loading
+            ? entityRest.post(object)
+                .then(
+                    response => dispatch(actionCreators.postSuccess(response)),
+                    err => dispatch(actionCreators.postFailure())
+                )
+            : undefined
+    }
+
+    const put = (object: T) => (dispatch: any, getState: () => AppState) => {
+        const loading = getEntityState(getState()).put.loading
+
+        dispatch(actionCreators.putRequest())
+
+        return loading
+            ? entityRest.put(object.id, object)
+                .then(
+                    reponse => dispatch(actionCreators.putSuccess(reponse)),
+                    err => dispatch(actionCreators.putFailure())
+                )
+            : undefined
+    }
+
     return {
         ...actionCreators,
         getList,
+        get,
+        post,
+        put,
     }
 }
 
@@ -147,4 +193,7 @@ export interface ActionsCreators<T> {
     deleteFailure?: () => Action<{}>,
 
     getList?: (params?: any) => Promise<Collection<T>>
+    get?: (id: number) => Promise<T>
+    post?: (object: T) => Promise<T>
+    put?: (object: T) => Promise<T>
 }

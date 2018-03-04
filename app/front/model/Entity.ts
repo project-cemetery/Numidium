@@ -3,6 +3,8 @@ interface Entity {
     '@type': string
 
     '@context'?: string
+
+    id: number
 }
 
 export default Entity
