@@ -17,7 +17,7 @@ class Stats extends React.PureComponent<Props, {}> {
         const { vacations } = this.props
 
         return (
-            <Card title={'Отпуска сотрудников'}>
+            <Card title={'Статистика'}>
                 <p>...</p>
             </Card>
         )
