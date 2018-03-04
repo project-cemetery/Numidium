@@ -32,7 +32,9 @@ const actionCreators = {
 export const userRest = rest<User>(ENTITY)
 
 // Override default `get` action!
-const get = (id?: number) => (dispatch: any) => {
+const get = (id?: number) => (dispatch: any, getState: () => AppState) => {
+    const loading = getState().users.get.loading
+
     dispatch(commonActionCreators.getRequest())
 
     const promise = id
@@ -44,12 +46,14 @@ const get = (id?: number) => (dispatch: any) => {
                 return id
             })
 
-    return promise
-        .then(id => userRest.get(id))
-        .then(
-            item => item && dispatch(commonActionCreators.getSuccess(item)),
-            err => dispatch(commonActionCreators.getFailure())
-        )
+    return !loading
+        ? promise
+            .then(id => userRest.get(id))
+            .then(
+                item => item && dispatch(commonActionCreators.getSuccess(item)),
+                err => dispatch(commonActionCreators.getFailure())
+            )
+        : Promise.resolve()
 }
 
 export interface UsersActions extends ActionsCreators<User> {
