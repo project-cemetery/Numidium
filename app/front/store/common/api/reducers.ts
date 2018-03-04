@@ -15,24 +15,25 @@ const createHandleGetListRequest = <T extends Entity>() => (state: State<T>, act
     },
 })
 
-const createHandleGetListSuccess = <T extends Entity>() => (state: State<T>, action: Action<Collection<T>>) => ({
-    ...state,
-    getList: {
-        ...state.getList,
-        loading: false,
-        error: false,
-    },
-    list: action.payload,
-    entities: [
-        ...state.entities.filter(e => action.payload
-            ? action.payload.member
-                .map(v => v['@id'])
-                .indexOf(e['@id']) !== -1
-            : true
-        ),
-        ...(action.payload ? action.payload.member : []),
-    ],
-})
+const createHandleGetListSuccess = <T extends Entity>() => (state: State<T>, action: Action<Collection<T>>) => {
+    const newIds = action.payload
+        ? action.payload.member.map(v => v['@id'])
+        : []
+
+    return ({
+        ...state,
+        getList: {
+            ...state.getList,
+            loading: false,
+            error: false,
+        },
+        list: action.payload,
+        entities: [
+            ...state.entities.filter(e => newIds.indexOf(e['@id']) === -1),
+            ...(action.payload ? action.payload.member : []),
+        ],
+    })
+}
 
 const createHandleGetListFailure = <T extends Entity>() => (state: State<T>, action: Action<{}>) => ({
     ...state,

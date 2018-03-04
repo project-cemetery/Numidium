@@ -22,19 +22,17 @@ class Nearest extends React.PureComponent<Props, {}> {
         const { vacations, openModal } = this.props
 
         return (
-            <React.Fragment>
-                <Card
-                    title={'Ваши отпуска на ближайщий год'}
-                    actions={[
-                        <span onClick={() => openModal()}>Добавить</span>,
-                    ]}
-                >
-                    { (vacations.length > 0)
-                        ? this.renderTimeline(vacations)
-                        : <p>Нет созданных отпусков</p>
-                    }
-                </Card>
-            </React.Fragment>
+            <Card
+                title={'Ваши отпуска на ближайщий год'}
+                actions={[
+                    <span onClick={() => openModal()}>Добавить</span>,
+                ]}
+            >
+                { (vacations.length > 0)
+                    ? this.renderTimeline(vacations)
+                    : <p>Нет созданных отпусков</p>
+                }
+            </Card>
         )
     }
 

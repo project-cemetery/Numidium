@@ -7,6 +7,7 @@ import Vacation from 'model/Vacation'
 import Breadcrumbs from 'components/common/Breadcrumbs'
 
 import Nearest from './widgets/Nearest'
+import Stats from './widgets/Stats'
 
 
 export default () => (
@@ -15,7 +16,7 @@ export default () => (
 
         <Row gutter={16}>
             <Col lg={16} md={24}>
-                <p>...</p>
+                <Stats />
             </Col>
             <Col lg={8} md={24}>
                 <Nearest />
