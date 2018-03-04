@@ -13,7 +13,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *      attributes={
  *          "access_control"="is_granted('ROLE_USER')",
- *          "normalization_context"={"groups"={"owner"}}
+ *          "normalization_context"={"groups"={"owner"}},
+ *          "denormalization_context"={"groups"={"owner"}}
  *      }
  * )
  * @ApiFilter(DateFilter::class, properties={"end"})

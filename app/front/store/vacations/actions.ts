@@ -44,10 +44,7 @@ const post = (vacation: Vacation) => (dispatch: any) => {
 
     return vacationRest.post(vacation)
         .then(
-            vacation => {
-                dispatch(getList())
-                return dispatch(commonActionCreators.postSuccess(vacation))
-            },
+            vacation => dispatch(commonActionCreators.postSuccess(vacation)),
             err => dispatch(commonActionCreators.postFailure())
         )
 }
@@ -57,10 +54,7 @@ const put = (vacation: Vacation) => (dispatch: any) => {
 
     return vacationRest.put(vacation.id, vacation)
         .then(
-            vacation => {
-                dispatch(getList())
-                return dispatch(commonActionCreators.putSuccess(vacation))
-            },
+            vacation => dispatch(commonActionCreators.putSuccess(vacation)),
             err => dispatch(commonActionCreators.putFailure())
         )
 }

@@ -23,6 +23,15 @@ const createHandleGetListSuccess = <T extends Entity>() => (state: State<T>, act
         error: false,
     },
     list: action.payload,
+    entities: [
+        ...state.entities.filter(e => action.payload
+            ? action.payload.member
+                .map(v => v['@id'])
+                .indexOf(e['@id']) !== -1
+            : true
+        ),
+        ...(action.payload ? action.payload.member : []),
+    ],
 })
 
 const createHandleGetListFailure = <T extends Entity>() => (state: State<T>, action: Action<{}>) => ({

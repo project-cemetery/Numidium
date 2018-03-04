@@ -19,8 +19,10 @@ interface Props {
     loading?: boolean
     error?: boolean
 
-    vacations?: Collection<Vacation>
+    vacations?: Vacation[]
     user?: User
+
+    vacationsLoaded?: boolean
 
     vacationsActions?: VacationsActions
     usersActions?: UsersActions
@@ -48,7 +50,7 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
                             openModal={this.openModal}
 
                             vacations={
-                                vacations.member
+                                vacations
                                     .filter(v => v.user.id === user.id)
                                     .filter(v => v.start.diff(moment(), 'days') < 365)
                                     .sort((a, b) => a.start.diff(b.start) > 0 ? 1 : -1)
@@ -61,11 +63,11 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
 
         componentDidMount() {
             const {
-                vacations, user,
+                vacationsLoaded, user,
                 vacationsActions, usersActions,
             } = this.props
 
-            if (!!vacationsActions && !!vacationsActions.getList && !vacations) {
+            if (!!vacationsActions && !!vacationsActions.getList && !vacationsLoaded) {
                 vacationsActions.getList({
                     'end[after]': moment().format('YYYY-MM-DD'),
                 })
@@ -88,7 +90,8 @@ const mapStateToProps = (state: AppState) => ({
     loading: !!state.vacations.getList.loading || !!state.users.get.loading,
     error: !!state.vacations.getList.error || !!state.users.get.error,
 
-    vacations: state.vacations.list,
+    vacations: state.vacations.entities,
+    vacationsLoaded: !!state.vacations.list,
     user: state.users.entities.find(u => u.id === state.users.currentId),
 })
 
