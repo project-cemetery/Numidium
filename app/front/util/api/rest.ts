@@ -32,6 +32,7 @@ const createGetList = <T>(enity: string): (params?: Parameter[]) => Promise<Coll
     (params?: Parameter[]) =>
         getList(enity, params)
             .then(response => ({
+                id: 0, // TODO: think about it!
                 '@id': response.data['@id'],
                 '@type': response.data['@type'],
                 '@context': response.data['@context'],

@@ -111,27 +111,27 @@ export const createActionCreators = <T extends Entity>(
             value: params[key],
         }))
 
-        return loading
+        return !loading
             ? entityRest.getList(preparedParams)
                 .then(
                     collection => dispatch(actionCreators.getListSuccess(collection)),
                     err => dispatch(actionCreators.getListFailure())
                 )
-            : undefined
+            : Promise.resolve()
     }
 
     const get = (id: number) => (dispatch: any, getState: () => AppState) => {
-        const loading = getEntityState(getState()).getList.loading
+        const loading = getEntityState(getState()).get.loading
 
         dispatch(actionCreators.getRequest())
 
-        return loading
+        return !loading
             ? entityRest.get(id)
                 .then(
                     reponse => dispatch(actionCreators.getSuccess(reponse)),
                     err => dispatch(actionCreators.getFailure())
                 )
-            : undefined
+            : Promise.resolve()
     }
 
     const post = (object: T) => (dispatch: any, getState: () => AppState) => {
@@ -139,13 +139,13 @@ export const createActionCreators = <T extends Entity>(
 
         dispatch(actionCreators.postRequest())
 
-        return loading
+        return !loading
             ? entityRest.post(object)
                 .then(
                     response => dispatch(actionCreators.postSuccess(response)),
                     err => dispatch(actionCreators.postFailure())
                 )
-            : undefined
+            : Promise.resolve()
     }
 
     const put = (object: T) => (dispatch: any, getState: () => AppState) => {
@@ -153,13 +153,13 @@ export const createActionCreators = <T extends Entity>(
 
         dispatch(actionCreators.putRequest())
 
-        return loading
+        return !loading
             ? entityRest.put(object.id, object)
                 .then(
                     reponse => dispatch(actionCreators.putSuccess(reponse)),
                     err => dispatch(actionCreators.putFailure())
                 )
-            : undefined
+            : Promise.resolve()
     }
 
     return {
