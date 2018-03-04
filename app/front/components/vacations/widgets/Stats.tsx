@@ -18,7 +18,7 @@ class Stats extends React.PureComponent<Props, {}> {
 
         return (
             <Card title={'Статистика'}>
-                <p>...</p>
+                <p>Coming soon...</p>
             </Card>
         )
     }
