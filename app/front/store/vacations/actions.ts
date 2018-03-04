@@ -14,7 +14,7 @@ export const commonActionCreators = createActionCreators<Vacation>(ENTITY)
 
 export const vacationRest = rest<Vacation>(ENTITY)
 
-const getList = (params?: any) => (dispatch: any) => {
+const getList = (params: any = {}) => (dispatch: any) => {
     dispatch(commonActionCreators.getListRequest())
 
     const preparedParams = Object.keys(params).map(key => ({
@@ -35,16 +35,47 @@ const get = (id: number) => (dispatch: any) => {
     return vacationRest.get(id)
         .then(
             vacation => dispatch(commonActionCreators.getSuccess(vacation)),
-            err => dispatch(commonActionCreators.getFailure()),
+            err => dispatch(commonActionCreators.getFailure())
         )
 }
 
-export interface VacationsActions extends ActionsCreators<Vacation> {getList?: (params?: any) => Promise<Collection<Vacation>>
+const post = (vacation: Vacation) => (dispatch: any) => {
+    dispatch(commonActionCreators.postRequest())
+
+    return vacationRest.post(vacation)
+        .then(
+            vacation => {
+                dispatch(getList())
+                return dispatch(commonActionCreators.postSuccess(vacation))
+            },
+            err => dispatch(commonActionCreators.postFailure())
+        )
+}
+
+const put = (vacation: Vacation) => (dispatch: any) => {
+    dispatch(commonActionCreators.putRequest())
+
+    return vacationRest.put(vacation.id, vacation)
+        .then(
+            vacation => {
+                dispatch(getList())
+                return dispatch(commonActionCreators.putSuccess(vacation))
+            },
+            err => dispatch(commonActionCreators.putFailure())
+        )
+}
+
+export interface VacationsActions extends ActionsCreators<Vacation> {
+    getList?: (params?: any) => Promise<Collection<Vacation>>
     get?: (id: any) => Promise<Vacation>
+    post?: (vacation: Vacation) => Promise<Vacation>
+    put?: (vacation: Vacation) => Promise<Vacation>
 }
 
 export default {
     ...commonActionCreators,
     getList,
     get,
+    post,
+    put,
 }

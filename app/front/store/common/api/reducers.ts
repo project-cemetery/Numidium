@@ -64,6 +64,66 @@ const createHandleGetFailure = <T extends Entity>() => (state: State<T>, action:
     },
 })
 
+const createHandlePostRequest = <T extends Entity>() => (state: State<T>, action: Action<{}>) => ({
+    ...state,
+    post: {
+        ...state.get,
+        loading: true,
+    },
+})
+
+const createHandlePostSuccess = <T extends Entity>() => (state: State<T>, action: Action<T>) => ({
+    ...state,
+    post: {
+        ...state.get,
+        loading: false,
+        error: false,
+    },
+    entities: [
+        ...state.entities.filter(e => e['@id'] !== (action.payload as Entity)['@id']),
+        action.payload,
+    ],
+})
+
+const createHandlePostFailure = <T extends Entity>() => (state: State<T>, action: Action<{}>) => ({
+    ...state,
+    post: {
+        ...state.get,
+        loading: false,
+        error: !!action.error,
+    },
+})
+
+const createHandlePutRequest = <T extends Entity>() => (state: State<T>, action: Action<{}>) => ({
+    ...state,
+    put: {
+        ...state.get,
+        loading: true,
+    },
+})
+
+const createHandlePutSuccess = <T extends Entity>() => (state: State<T>, action: Action<T>) => ({
+    ...state,
+    put: {
+        ...state.get,
+        loading: false,
+        error: false,
+    },
+    entities: [
+        ...state.entities.filter(e => e['@id'] !== (action.payload as Entity)['@id']),
+        action.payload,
+    ],
+})
+
+const createHandlePutFailure = <T extends Entity>() => (state: State<T>, action: Action<{}>) => ({
+    ...state,
+    put: {
+        ...state.get,
+        loading: false,
+        error: !!action.error,
+    },
+})
+
 export const createReducers = <T extends Entity>(types: ActionTypes) => ({
     [types.GET_LIST_REQUEST]: createHandleGetListRequest<T>(),
     [types.GET_LIST_SUCCESS]: createHandleGetListSuccess<T>(),
@@ -72,4 +132,12 @@ export const createReducers = <T extends Entity>(types: ActionTypes) => ({
     [types.GET_REQUEST]: createHandleGetRequest<T>(),
     [types.GET_SUCCESS]: createHandleGetSuccess<T>(),
     [types.GET_FAILURE]: createHandleGetFailure<T>(),
+
+    [types.POST_REQUEST]: createHandlePostRequest<T>(),
+    [types.POST_SUCCESS]: createHandlePostSuccess<T>(),
+    [types.POST_FAILURE]: createHandlePostFailure<T>(),
+
+    [types.PUT_REQUEST]: createHandlePutRequest<T>(),
+    [types.PUT_SUCCESS]: createHandlePutSuccess<T>(),
+    [types.PUT_FAILURE]: createHandlePutFailure<T>(),
 })

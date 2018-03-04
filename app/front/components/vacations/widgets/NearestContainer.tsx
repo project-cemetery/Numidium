@@ -51,7 +51,7 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
                                 vacations.member
                                     .filter(v => v.user.id === user.id)
                                     .filter(v => v.start.diff(moment(), 'days') < 365)
-                                    .sort((a, b) => a > b ? 1 : -1)
+                                    .sort((a, b) => a.start.diff(b.start) > 0 ? 1 : -1)
                             }
                         />
                     }
