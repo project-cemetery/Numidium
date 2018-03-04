@@ -5,6 +5,7 @@ import { getMyId } from 'util/api/helper'
 import Collection from 'model/Collection'
 import rest from 'util/api/rest'
 import User from 'model/User'
+import { AppState } from 'reducers'
 
 import { UsersState } from './reducers'
 
@@ -12,7 +13,10 @@ import { UsersState } from './reducers'
 const ENTITY = 'users'
 
 export const commonActionTypes = createTypes(ENTITY)
-export const commonActionCreators = createActionCreators<User>(ENTITY)
+export const commonActionCreators = createActionCreators<User>(
+    ENTITY,
+    (state: AppState) => state.users
+)
 
 export const actionTypes = {
     SET_CURRENT_ID: actionType(ENTITY)('SET_CURRENT_ID'),
@@ -26,16 +30,6 @@ const actionCreators = {
 }
 
 export const userRest = rest<User>(ENTITY)
-
-const getList = () => (dispatch: any) => {
-    dispatch(commonActionCreators.getListRequest())
-
-    return userRest.getList()
-        .then(
-            collection => collection && dispatch(commonActionCreators.getListSuccess(collection)),
-            err => dispatch(commonActionCreators.getListFailure())
-        )
-}
 
 const get = (id?: number) => (dispatch: any) => {
     dispatch(commonActionCreators.getRequest())
@@ -59,14 +53,11 @@ const get = (id?: number) => (dispatch: any) => {
 
 export interface UsersActions extends ActionsCreators<User> {
     setCurrentId?: (id: number) => void
-
-    getList?: () => Promise<Collection<User>>
     get?: (id?: number) => Promise<User>
 }
 
 export default {
     ...commonActionCreators,
     ...actionCreators,
-    getList,
     get,
 }

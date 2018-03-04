@@ -1,6 +1,9 @@
 import { Action } from 'redux-actions'
 
 import Collection from 'model/Collection'
+import rest from 'util/api/rest'
+import { AppState } from 'reducers'
+import EntityLoadState from './EntityLoadState';
 
 const createRequestActionCreator = (type: string) =>
     () => ({ type } as Action<{}>)
@@ -63,10 +66,14 @@ export interface ActionTypes {
     DELETE_SUCCESS: string
 }
 
-export const createActionCreators = <T>(entity: string) => {
+export const createActionCreators = <T>(
+    entity: string,
+    getEntityState: (state: AppState) => EntityLoadState<T>
+) => {
     const types = createTypes(entity)
+    const entityRest = rest<T>(entity)
 
-    return {
+    const actionCreators =  {
         // List
         getListRequest: createRequestActionCreator(types.GET_LIST_REQUEST),
         getListSuccess: createSuccessActionCreator<Collection<T>>(types.GET_LIST_SUCCESS),
@@ -92,6 +99,30 @@ export const createActionCreators = <T>(entity: string) => {
         deleteSuccess: createSuccessActionCreator<boolean>(types.DELETE_SUCCESS),
         deleteFailure: createFailureActionCreator(types.DELETE_FAILURE),
     }
+
+    const getList = (params: any = {}) => (dispatch: any, getState: () => AppState) => {
+        const loading = getEntityState(getState()).getList.loading
+
+        dispatch(actionCreators.getListRequest())
+
+        const preparedParams = Object.keys(params).map(key => ({
+            key,
+            value: params[key],
+        }))
+
+        return loading
+            ? entityRest.getList(preparedParams)
+                .then(
+                    collection => dispatch(actionCreators.getListSuccess(collection)),
+                    err => dispatch(actionCreators.getListFailure())
+                )
+            : undefined
+    }
+
+    return {
+        ...actionCreators,
+        getList,
+    }
 }
 
 export interface ActionsCreators<T> {
@@ -114,4 +145,6 @@ export interface ActionsCreators<T> {
     deleteRequest?: () => Action<{}>,
     deleteSuccess?: (flag: boolean) => Action<boolean>,
     deleteFailure?: () => Action<{}>,
+
+    getList?: (params?: any) => Promise<Collection<T>>
 }
