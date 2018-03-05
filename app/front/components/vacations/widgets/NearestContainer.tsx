@@ -73,7 +73,7 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
                 })
             }
 
-            if (!!usersActions && !!usersActions.get && !user) usersActions.get()
+            if (!!usersActions && !!usersActions.getMe && !user) usersActions.getMe()
         }
 
         openModal = (id?: number) => {
@@ -92,7 +92,7 @@ const mapStateToProps = (state: AppState) => ({
 
     vacations: state.vacations.entities,
     vacationsLoaded: !!state.vacations.list,
-    user: state.users.entities.find(u => u.id === state.users.currentId),
+    user: state.users.entities.find(u => u.id === state.users.meId),
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({

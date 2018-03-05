@@ -6,16 +6,16 @@ import { AppState } from 'reducers'
 import EntityLoadState from './EntityLoadState'
 import Entity from 'model/Entity'
 
-const createRequestActionCreator = (type: string) =>
+export const createRequestActionCreator = (type: string) =>
     () => ({ type } as Action<{}>)
 
-const createSuccessActionCreator = <T>(type: string) =>
+export const createSuccessActionCreator = <T>(type: string) =>
     (object: T) => ({
         type,
         payload: object,
     } as Action<T>)
 
-const createFailureActionCreator = (type: string) =>
+export const createFailureActionCreator = (type: string) =>
     () => ({
         type,
         error: true,

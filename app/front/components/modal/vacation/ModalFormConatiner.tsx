@@ -84,7 +84,7 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
             if (visible && id && !vacation && !!vacationsActions && !!vacationsActions.get)
                 vacationsActions.get(id)
 
-            if (visible && !user && !!usersActions && !!usersActions.get) usersActions.get()
+            if (visible && !user && !!usersActions && !!usersActions.getMe) usersActions.getMe()
         }
 
         componentDidMount() {
@@ -99,7 +99,7 @@ const mapStateToProps = (state: AppState) => ({
     id: state.modal.id,
 
     vacation: state.vacations.entities.find(v => v.id === state.modal.id),
-    user: state.users.entities.find(u => u.id === state.users.currentId),
+    user: state.users.entities.find(u => u.id === state.users.meId),
 
     saveLoading: !!state.vacations.post.loading || !!state.vacations.put.loading,
     saveError: !!state.vacations.post.error || !!state.vacations.put.error,

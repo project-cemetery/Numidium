@@ -1,7 +1,7 @@
 import Collection from 'model/Collection'
 
 
-interface PartialState {
+export interface PartialState {
     loading: boolean
     error: boolean
 }

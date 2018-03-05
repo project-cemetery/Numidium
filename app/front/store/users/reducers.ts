@@ -1,6 +1,6 @@
 import { handleActions, Action } from 'redux-actions'
 
-import EntityLoadState, { initialState } from 'store/common/api/EntityLoadState'
+import EntityLoadState, { PartialState, initialState } from 'store/common/api/EntityLoadState'
 import { createReducers } from 'store/common/api/reducers'
 import Collection from 'model/Collection'
 import User from 'model/User'
@@ -10,21 +10,50 @@ import actions, { actionTypes, commonActionTypes } from './actions'
 
 const commonReducers = createReducers<User>(commonActionTypes)
 
-const handleSetCurrentId = (state: UsersState, action: Action<{ id: number }>) => ({
+const handleMeRequest = (state: UsersState, action: Action<{}>) => ({
     ...state,
-    currentId: action.payload,
+    me: {
+        ...state.me,
+        loading: true,
+    },
+})
+
+const handleMeSuccess = (state: UsersState, action: Action<number>) => ({
+    ...state,
+    me: {
+        ...state.me,
+        loading: false,
+        error: false,
+    },
+    meId: action.payload || state.meId,
+})
+
+const handleMeError = (state: UsersState, action: Action<{}>) => ({
+    ...state,
+    me: {
+        ...state.me,
+        loading: false,
+        error: !!action.error,
+    },
 })
 
 export interface UsersState extends EntityLoadState<User> {
-    currentId?: number
+    me: PartialState
+    meId?: number
 }
 
 export default handleActions(
     {
         ...commonReducers,
-        [actionTypes.SET_CURRENT_ID]: handleSetCurrentId,
+        [actionTypes.ME_REQUEST]: handleMeRequest,
+        [actionTypes.ME_SUCCESS]: handleMeSuccess,
+        [actionTypes.ME_FAILURE]: handleMeError,
     } as any,
     {
         ...initialState,
+        me: {
+            loading: false,
+            error: false,
+        } as PartialState,
     }
 )
