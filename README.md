@@ -3,6 +3,7 @@
 Roadmap and tasks on [Trello board](https://trello.com/b/tOSS7V7z).
 
 ## Development
+
 + `git clone git@github.com:TheNovel/Numidium.git`
 + `cd Numidium/app`
 + `composer install -o`
@@ -12,3 +13,6 @@ Roadmap and tasks on [Trello board](https://trello.com/b/tOSS7V7z).
 + `php bin/console server:start`
 + `yarn install`
 + `yarn watch`
+
+### Tests (in app dir)
++ `php bin/phpunit`
