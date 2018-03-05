@@ -8,11 +8,9 @@ interface Props {
 }
 
 export default (props: Props) =>
-    <React.Fragment>
-        <div className={s.content}>
-            {props.children}
-        </div>
-    </React.Fragment>
+    <div className={s.content}>
+        {props.children}
+    </div>
 
 
 const s = {
