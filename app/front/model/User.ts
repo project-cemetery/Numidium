@@ -1,10 +1,9 @@
 import Entity from './Entity'
 
+export interface Owner extends Entity {
+}
 
-interface User extends Entity {
-    id: number
+export default interface User extends Owner {
     email: string
     active: boolean
 }
-
-export default User

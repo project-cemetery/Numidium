@@ -27,15 +27,15 @@ export default function (User: React.ComponentClass<ComponentProps>) {
 
             return (
                 <Loader loading={loading || !user} error={error}>
-                    <User user={user} />
+                    {user && <User user={user} />}
                 </Loader>
             )
         }
 
         componentDidMount() {
-            const { get } = this.props
+            const { getMe, user } = this.props
 
-            if (get) get()
+            if (getMe && !user) getMe()
         }
     }
 
@@ -45,5 +45,5 @@ export default function (User: React.ComponentClass<ComponentProps>) {
 const mapStateToProps = (state: AppState) => ({
     loading: !!state.users.get.loading,
     error: !!state.users.get.error,
-    user: state.users.user,
+    user: state.users.entities.find(u => u.id === state.users.meId),
 })

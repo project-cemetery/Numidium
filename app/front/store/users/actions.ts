@@ -1,51 +1,67 @@
-import { createTypes, createActionCreators, ActionsCreators } from 'store/common/api/actions'
+import { Action } from 'redux-actions'
+
+import {
+    actionType, createTypes, createActionCreators, ActionsCreators,
+    createRequestActionCreator, createSuccessActionCreator, createFailureActionCreator,
+} from 'store/common/api/actions'
 import { getMyId } from 'util/api/helper'
 import Collection from 'model/Collection'
 import rest from 'util/api/rest'
 import User from 'model/User'
+import { AppState } from 'reducers'
 
 import { UsersState } from './reducers'
 
 
 const ENTITY = 'users'
 
-export const actionTypes = createTypes(ENTITY)
-export const actionCreators = createActionCreators<User>(ENTITY)
+export const commonActionTypes = createTypes(ENTITY)
+export const commonActionCreators = createActionCreators<User>(
+    ENTITY,
+    (state: AppState) => state.users
+)
+
+export const actionTypes = {
+    ME_REQUEST: actionType(ENTITY)('ME_REQUEST'),
+    ME_SUCCESS: actionType(ENTITY)('ME_SUCCESS'),
+    ME_FAILURE: actionType(ENTITY)('ME_FAILURE'),
+}
+
+const actionCreators = {
+    meRequest: createRequestActionCreator(actionTypes.ME_REQUEST),
+    meSuccess: createSuccessActionCreator<number>(actionTypes.ME_SUCCESS),
+    meFailure: createFailureActionCreator(actionTypes.ME_FAILURE),
+}
 
 export const userRest = rest<User>(ENTITY)
 
-const getList = () => (dispatch: any) => {
-    dispatch(actionCreators.getListRequest())
+const getMe = () => (dispatch: any, getState: () => AppState) => {
+    const loading = getState().users.me.loading
 
-    return userRest.getList()
-        .then(
-            collection => collection && dispatch(actionCreators.getListSuccess(collection)),
-            err => dispatch(actionCreators.getListFailure())
-        )
-}
+    dispatch(actionCreators.meRequest())
 
-const get = (id?: number) => (dispatch: any) => {
-    dispatch(actionCreators.getRequest())
-
-    const promise = id
-        ? new Promise<number>(resolve => resolve(id))
-        : getMyId().then(response => parseInt(response.data, 10))
-
-    return promise
-        .then(id => userRest.get(id))
-        .then(
-            item => item && dispatch(actionCreators.getSuccess(item)),
-            err => dispatch(actionCreators.getFailure())
-        )
+    return loading
+        ? getMyId()
+            .then(
+                id => {
+                    dispatch(actionCreators.meSuccess(id))
+                    dispatch(commonActionCreators.get(id))
+                },
+                err => dispatch(actionCreators.meFailure())
+            )
+        : Promise.resolve()
 }
 
 export interface UsersActions extends ActionsCreators<User> {
-    getList?: () => Promise<Collection<User>>
-    get?: (id?: number) => Promise<User>
+    meRequest?: () => Action<{}>
+    meSuccess?: (id: number) => Action<number>
+    meFailure?: () => Action<{}>
+
+    getMe?: () => Promise<number>
 }
 
 export default {
+    ...commonActionCreators,
     ...actionCreators,
-    getList,
-    get,
+    getMe,
 }

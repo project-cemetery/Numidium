@@ -1,85 +1,59 @@
 import { handleActions, Action } from 'redux-actions'
 
-import EntityLoadState, { initialState } from 'store/common/api/EntityLoadState'
+import EntityLoadState, { PartialState, initialState } from 'store/common/api/EntityLoadState'
+import { createReducers } from 'store/common/api/reducers'
 import Collection from 'model/Collection'
 import User from 'model/User'
 
-import actions, {
-    actionTypes,
-} from './actions'
+import actions, { actionTypes, commonActionTypes } from './actions'
 
 
-const handleFetchListRequest = (state: UsersState, action: Action<{}>) => ({
+const commonReducers = createReducers<User>(commonActionTypes)
+
+const handleMeRequest = (state: UsersState, action: Action<{}>) => ({
     ...state,
-    getList: {
-        ...state.getList,
+    me: {
+        ...state.me,
         loading: true,
     },
 })
 
-const handleFetchListSuccess = (state: UsersState, action: Action<Collection<User>>) => ({
+const handleMeSuccess = (state: UsersState, action: Action<number>) => ({
     ...state,
-    getList: {
-        ...state.getList,
+    me: {
+        ...state.me,
         loading: false,
         error: false,
     },
-    users: action.payload,
+    meId: action.payload || state.meId,
 })
 
-const handleFetchListFailure = (state: UsersState, action: Action<{}>) => ({
+const handleMeError = (state: UsersState, action: Action<{}>) => ({
     ...state,
-    getList: {
-        ...state.getList,
+    me: {
+        ...state.me,
         loading: false,
         error: !!action.error,
     },
 })
 
-const handleFetchItemRequest = (state: UsersState, action: Action<{}>) => ({
-    ...state,
-    get: {
-        ...state.get,
-        loading: true,
-    },
-})
-
-// TODO: type of action
-const handleFetchItemSuccess = (state: UsersState, action: any) => ({
-    ...state,
-    get: {
-        ...state.get,
-        loading: false,
-        error: false,
-    },
-    user: action.payload,
-})
-
-const handleFetchItemFailure = (state: UsersState, action: Action<{}>) => ({
-    ...state,
-    get: {
-        ...state.get,
-        loading: false,
-        error: !!action.error,
-    },
-})
-
-export interface UsersState extends EntityLoadState {
-    users?: Collection<User>
-    user?: User
+export interface UsersState extends EntityLoadState<User> {
+    me: PartialState
+    meId?: number
 }
 
 export default handleActions(
     {
-        [actionTypes.GET_LIST_REQUEST]: handleFetchListRequest,
-        [actionTypes.GET_LIST_SUCCESS]: handleFetchListSuccess,
-        [actionTypes.GET_LIST_FAILURE]: handleFetchListFailure,
-
-        [actionTypes.GET_REQUEST]: handleFetchItemRequest,
-        [actionTypes.GET_SUCCESS]: handleFetchItemSuccess,
-        [actionTypes.GET_FAILURE]: handleFetchItemFailure,
-    },
+        ...commonReducers,
+        [actionTypes.ME_REQUEST]: handleMeRequest,
+        [actionTypes.ME_SUCCESS]: handleMeSuccess,
+        [actionTypes.ME_FAILURE]: handleMeError,
+    } as any,
     {
         ...initialState,
+        me: {
+            loading: false,
+            error: false,
+        } as PartialState,
     }
 )

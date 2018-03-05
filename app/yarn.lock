@@ -2452,6 +2452,10 @@ fill-range@^4.0.0:
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
+final-form@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/final-form/-/final-form-4.2.1.tgz#f3ec1d871b4b89115bf03c1fcb89455efe7a347d"
+
 finalhandler@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-1.1.0.tgz#ce0b6855b45853e791b2fcc680046d88253dd7f5"
@@ -3746,7 +3750,7 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   dependencies:
     minimist "0.0.8"
 
-moment@2.x, moment@^2.19.3:
+moment@2.x, moment@^2.19.3, moment@^2.20.1:
   version "2.20.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
 
@@ -4970,6 +4974,10 @@ react-dom@^16.2.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react-final-form@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/react-final-form/-/react-final-form-3.1.2.tgz#94eae1c8ed8ef0cef48144f88f1f669dd21e5181"
 
 react-lazy-load@^3.0.12:
   version "3.0.13"

@@ -2,16 +2,18 @@ import * as React from 'react'
 
 import { Layout, Menu } from 'antd'
 import { css } from 'emotion'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import ContentBlock from 'components/common/Content'
 import IconWithText from 'components/common/IconWithText'
+import ModalRoot from 'components/modal/ModalRoot'
 import IconEnum from 'util/enum/IconEnum'
 import menu, { MenuItem, INDEX_PAGE } from 'menu'
 import User from 'model/User'
 
 import Dashboard from './dashboard/Dashboard'
+import Vacations from './vacations/Vacations'
 
 const { Header, Content, Footer, Sider } = Layout
 const SubMenu = Menu.SubMenu
@@ -21,7 +23,7 @@ interface LocalState {
     collapsed: boolean
 }
 
-export default class App extends React.PureComponent<{}, LocalState> {
+export default class App extends React.PureComponent<RouteComponentProps<{}>, LocalState> {
 
     state = {
         collapsed: false,
@@ -32,6 +34,10 @@ export default class App extends React.PureComponent<{}, LocalState> {
     }
 
     render() {
+        const path = this.props.location.pathname
+        const currentItem = menu.find(item => item.path === path)
+        const currentKey = currentItem ? currentItem.key : INDEX_PAGE
+
         return (
             <Layout className={this.s('constainer')}>
                 <Sider
@@ -40,7 +46,7 @@ export default class App extends React.PureComponent<{}, LocalState> {
                     onCollapse={this.onCollapse}
                 >
                     <div className={this.s('logo')} />
-                    <Menu theme='dark' defaultSelectedKeys={[ INDEX_PAGE ]} mode='inline'>
+                    <Menu theme='dark' defaultSelectedKeys={[ currentKey ]} mode='inline'>
                         {menu.map((item, i) => !!item.children
                             ? this.renderSubMenu(item)
                             : this.renderMenuItem(item)
@@ -50,13 +56,17 @@ export default class App extends React.PureComponent<{}, LocalState> {
                 <Layout>
                     <Header className={this.s('header')} />
                     <Content className={this.s('content')}>
-                        <Route path='/' exact component={Dashboard} />
-                        {/* <ContentBlock /> */}
+                        <ContentBlock>
+                            <Route path='/' exact component={Dashboard} />
+                            <Route path='/vacations' component={Vacations} />
+                        </ContentBlock>
                     </Content>
                     <Footer className={this.s('footer')}>
                         Numidium © 2017 – {new Date().getFullYear()}
                     </Footer>
                 </Layout>
+
+                <ModalRoot />
             </Layout>
         )
     }

@@ -4,5 +4,7 @@ api_me:
     controller: App\Controller\MeController::getId
 
 front:
-    path: /
+    path: /{req}
     controller: App\Controller\FrontController::index
+    requirements:
+        req: ".*"
