@@ -3,26 +3,29 @@
 namespace App\Command;
 
 
-use App\Service\UserManager;
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CreateSuperAdminCommand extends Command
 {
-    private const ERROR_MESSAGE = '<error>%s</error>';
-
-    private $userManager;
+    private $encoder;
+    private $em;
 
     public function __construct(
         ?string $name = null,
-        UserManager $userManager
+        UserPasswordEncoderInterface $encoder,
+        EntityManagerInterface $em
     )
     {
         parent::__construct($name);
 
-        $this->userManager = $userManager;
+        $this->encoder = $encoder;
+        $this->em = $em;
     }
 
     protected function configure()
@@ -38,12 +41,11 @@ class CreateSuperAdminCommand extends Command
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
 
-        try {
-            $this->userManager->create($email, $password);
+        $user = User::createUser($this->encoder, $email, $password);
 
-            $output->writeln('User created!');
-        } catch (\Exception $e) {
-            $output->writeln(sprintf(self::ERROR_MESSAGE, $e->getMessage()));
-        }
+        $this->em->persist($user);
+        $this->em->flush();
+
+        $output->writeln('User created!');
     }
 }
