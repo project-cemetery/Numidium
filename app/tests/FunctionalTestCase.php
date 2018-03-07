@@ -4,6 +4,7 @@ namespace App\Tests;
 
 
 use App\DataFixtures\UserFixtures;
+use App\DataFixtures\VacationFixtures;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
@@ -16,7 +17,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 abstract class FunctionalTestCase extends WebTestCase
 {
     private const FIXTURES = [
-        UserFixtures::class => 'test.App\DataFixtures\UserFixtures'
+        UserFixtures::class     => 'test.App\DataFixtures\UserFixtures',
+        VacationFixtures::class => 'test.App\DataFixtures\VacationFixtures',
     ];
 
     /** @var \Doctrine\ORM\EntityManager */

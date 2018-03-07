@@ -10,6 +10,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
+    const DEFAULT_USER = 'default-user';
+
     private $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
@@ -27,5 +29,7 @@ class UserFixtures extends Fixture
 
         $manager->persist($user);
         $manager->flush();
+
+        $this->addReference(self::DEFAULT_USER, $user);
     }
 }
