@@ -16,3 +16,4 @@ Roadmap and tasks on [Trello board](https://trello.com/b/tOSS7V7z).
 
 ### Tests (in app dir)
 + `php bin/phpunit`
++ `yarn test`

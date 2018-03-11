@@ -4,7 +4,8 @@
     "scripts": {
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production"
+        "build": "encore production",
+        "test": "jest"
     },
     "dependencies": {
         "antd": "^3.2.2",
@@ -30,9 +31,17 @@
         "@types/react-router-dom": "^4.2.4",
         "@types/redux-actions": "^2.2.4",
         "babel-preset-react": "^6.24.1",
+        "react-test-renderer": "^16.2.0",
+        "ts-jest": "^22.4.1",
         "ts-loader": "^3.5.0",
         "tslint": "^5.9.1",
         "tslint-eslint-rules": "^5.1.0",
         "typescript": "^2.7.2"
-    }
-}
+    },
+    "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "\\.spec\\.tsx?$",
+    "moduleFileExtensions": [ "ts", "tsx", "js", "jsx", "json", "node" ]
+  }}
