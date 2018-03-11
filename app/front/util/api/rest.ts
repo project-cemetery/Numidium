@@ -60,5 +60,5 @@ export default <T>(entity: string) => ({
     get: createGet<T>(entity),
     post: createPost<T>(entity),
     put: createPut<T>(entity),
-    delete: createDelete<T>(entity),
+    del: createDelete<T>(entity),
 })
