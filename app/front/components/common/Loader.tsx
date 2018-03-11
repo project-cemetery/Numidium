@@ -3,9 +3,7 @@ import * as React from 'react'
 import { Spin } from 'antd'
 import { css } from 'emotion'
 
-import AlertEnum from 'util/enum/AlertEnum'
-
-import Alert from './Alert'
+import Alert, { AlertType } from './Alert'
 
 
 interface Props {
@@ -16,7 +14,7 @@ interface Props {
 
 export default (props: Props) =>
     props.error
-        ? <Alert message='Произошла ошибка, попробуйте обновить страницу' type={AlertEnum.ERROR} />
+        ? <Alert message='Произошла ошибка, попробуйте обновить страницу' type={AlertType.ERROR} />
         : props.loading
             ? <div className={s.spinContainer}><Spin /></div>
             : props.children

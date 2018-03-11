@@ -2,11 +2,16 @@ import * as React from 'react'
 
 import { Alert } from 'antd'
 
-import AlertEnum from 'util/enum/AlertEnum'
 
+export enum AlertType {
+    SUCCESS = 'success',
+    INFO    = 'info',
+    WARNING = 'warning',
+    ERROR   = 'error',
+}
 
 interface Props {
-    type: AlertEnum
+    type: AlertType
     message: string
 }
 
