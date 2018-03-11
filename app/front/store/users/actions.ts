@@ -40,7 +40,7 @@ const getMe = () => (dispatch: any, getState: () => AppState) => {
 
     dispatch(actionCreators.meRequest())
 
-    return loading
+    return !loading
         ? getMyId()
             .then(
                 id => {
