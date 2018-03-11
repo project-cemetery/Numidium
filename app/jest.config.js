@@ -5,5 +5,6 @@ module.exports = {
     testRegex: "\\.spec\\.tsx?$",
     moduleFileExtensions: [ "ts", "tsx", "js" ],
     collectCoverage: true,
-    coverageDirectory: "./front/coverage"
+    coverageDirectory: "./front/coverage",
+    moduleDirectories: ["node_modules", "front"],
 }
