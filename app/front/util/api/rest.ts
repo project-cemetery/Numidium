@@ -1,10 +1,9 @@
 import axios from 'axios'
 import * as code from 'http-status-codes'
 
-import encodeQuery, { Parameter } from 'util/encodeQuery'
+import encodeQuery, { Parameter } from 'util/api/encodeQuery'
+import momentalizeEntity from 'util/api//momentalizeEntity'
 import Collection from 'model/Collection'
-
-import { momentalizeEntity } from './utils'
 
 
 export const API_URL = `${window.location.origin}/api`

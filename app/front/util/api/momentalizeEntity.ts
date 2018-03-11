@@ -1,6 +1,6 @@
 import * as moment from 'moment'
 
-export const momentalizeEntity = (entity: any) => {
+export default (entity: any) => {
     let newEntity = {}
 
     Object.keys(entity).forEach(key => {
