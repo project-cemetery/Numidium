@@ -37,11 +37,5 @@
         "tslint": "^5.9.1",
         "tslint-eslint-rules": "^5.1.0",
         "typescript": "^2.7.2"
-    },
-    "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "\\.spec\\.tsx?$",
-    "moduleFileExtensions": [ "ts", "tsx", "js", "jsx", "json", "node" ]
-  }}
+    }
+}
