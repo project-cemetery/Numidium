@@ -10,10 +10,7 @@ import { momentalizeEntity } from './utils'
 export const API_URL = `${window.location.origin}/api`
 
 const getList = (entity: string, params?: Parameter[]) =>
-    axios.get((!params || params.length === 0)
-        ? `${API_URL}/${entity}`
-        : `${API_URL}/${entity}${encodeQuery(params)}`
-    )
+    axios.get(`${API_URL}/${entity}${encodeQuery(params || [])}`)
 
 const get = (entity: string, id: number) =>
     axios.get(`${API_URL}/${entity}/${id}`)
