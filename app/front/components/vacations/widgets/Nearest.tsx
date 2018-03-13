@@ -15,7 +15,7 @@ export interface Props {
     openModal: (id?: number) => void
 }
 
-class Nearest extends React.PureComponent<Props, {}> {
+export class Nearest extends React.PureComponent<Props, {}> {
 
     render() {
         const { vacations, openModal } = this.props

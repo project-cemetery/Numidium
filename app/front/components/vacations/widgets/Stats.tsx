@@ -11,7 +11,7 @@ export interface Props {
     vacations: Vacation[]
 }
 
-class Stats extends React.PureComponent<Props, {}> {
+export class Stats extends React.PureComponent<Props, {}> {
 
     render() {
         const { vacations } = this.props
