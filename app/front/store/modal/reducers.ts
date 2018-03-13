@@ -3,16 +3,18 @@ import { handleActions, Action } from 'redux-actions'
 import actionCreator, { actionTypes, ModalEnum } from './actions'
 
 
-const handleShow = (state: ModalState, action: Action<{modal: ModalEnum, id?: number}>) => ({
+export const handleShow = (state: ModalState, action: Action<{modal: ModalEnum, id?: number}>) => ({
     ...state,
     show: true,
     type: !!action.payload && action.payload.modal,
     id: !!action.payload && action.payload.id,
 })
 
-const handleHide = (state: ModalState, action: Action<{}>) => ({
+export const handleHide = (state: ModalState, action: Action<{}>) => ({
     ...state,
     show: false,
+    type: undefined,
+    id: undefined,
 })
 
 export interface ModalState {
@@ -21,7 +23,7 @@ export interface ModalState {
     id?: number
 }
 
-const initialState = {
+export const initialState = {
     show: false,
 } as ModalState
 
