@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`alert renders correctly 1`] = `
+exports[`\`Alert\` renders correctly 1`] = `
 <div
   className="ant-alert ant-alert-info ant-alert-no-icon"
   data-show={true}

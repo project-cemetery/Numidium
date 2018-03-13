@@ -1,12 +1,10 @@
 import * as React from 'react'
 
-import Icon from './Icon'
-
-import IconEnum from 'util/enum/IconEnum'
+import Icon, { IconType } from './Icon'
 
 
 interface Props {
-    icon?: IconEnum
+    icon?: IconType
     text: string
 }
 
@@ -15,3 +13,5 @@ export default (props: Props) =>
         {props.icon && <Icon type={props.icon} />}
         <span>{props.text}</span>
     </React.Fragment>
+
+export { IconType } from './Icon'

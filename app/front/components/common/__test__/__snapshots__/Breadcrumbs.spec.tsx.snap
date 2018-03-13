@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`breadcrumbs renders correctly with items 1`] = `
+exports[`\`Breadcrumbs\` renders correctly with items 1`] = `
 <div
   className="css-6kt5zf ant-breadcrumb"
   style={undefined}
@@ -32,7 +32,7 @@ exports[`breadcrumbs renders correctly with items 1`] = `
 </div>
 `;
 
-exports[`breadcrumbs renders correctly withpout items 1`] = `
+exports[`\`Breadcrumbs\` renders correctly withpout items 1`] = `
 <div
   className="css-6kt5zf ant-breadcrumb"
   style={undefined}

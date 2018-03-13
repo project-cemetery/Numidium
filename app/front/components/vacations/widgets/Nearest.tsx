@@ -4,8 +4,7 @@ import { Card, List, Modal } from 'antd'
 import * as moment from 'moment'
 
 import Vacation from 'model/Vacation'
-import Icon from 'components/common/Icon'
-import IconEnum from 'util/enum/IconEnum'
+import Icon, { IconType } from 'components/common/Icon'
 
 import Container from './NearestContainer'
 
@@ -42,7 +41,7 @@ class Nearest extends React.PureComponent<Props, {}> {
             dataSource={vacations}
             renderItem={(v: Vacation) =>
                 <List.Item actions={[
-                    <Icon onClick={() => this.props.openModal(v.id)} type={IconEnum.EDIT} />,
+                    <Icon onClick={() => this.props.openModal(v.id)} type={IconType.EDIT} />,
                 ]}>
                     <List.Item.Meta
                         title={this.getDiffMessage(v)}

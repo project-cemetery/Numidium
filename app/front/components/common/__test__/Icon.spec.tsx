@@ -1,12 +1,12 @@
 import * as React from 'react'
 import * as renderer from 'react-test-renderer'
 
-import Alert, { AlertType } from '../Alert'
+import Icon, { IconType } from '../Icon'
 
 
-test('`Alert` renders correctly', () => {
+test('`Icon` renders correctly', () => {
     const tree = renderer
-        .create(<Alert type={AlertType.INFO} message={'Test message!'} />)
+        .create(<Icon type={IconType.ANDROID} />)
         .toJSON()
 
     expect(tree).toMatchSnapshot()
