@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`\`Loader\` renders correctly with content 1`] = `
+<p>
+  Content
+</p>
+`;
+
+exports[`\`Loader\` renders correctly with error state 1`] = `
+<div
+  className="ant-alert ant-alert-error ant-alert-no-icon"
+  data-show={true}
+  style={undefined}
+>
+  <span
+    className="ant-alert-message"
+  >
+    Произошла ошибка, попробуйте обновить страницу
+  </span>
+  <span
+    className="ant-alert-description"
+  />
+</div>
+`;
+
+exports[`\`Loader\` renders correctly with loading state 1`] = `
+<div
+  className="css-gng0k7"
+>
+  <div
+    className="ant-spin ant-spin-spinning ant-spin-show-text"
+  >
+    <span
+      className="ant-spin-dot ant-spin-dot-spin"
+    >
+      <i />
+      <i />
+      <i />
+      <i />
+    </span>
+  </div>
+</div>
+`;
