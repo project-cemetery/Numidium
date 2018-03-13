@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`\`User\` widget renders correctly 1`] = `
+<div
+  className="ant-card ant-card-bordered"
+>
+  <div
+    className="ant-card-cover"
+  >
+    <img
+      alt="avatar"
+      src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+    />
+  </div>
+  <div
+    className="ant-card-body"
+    style={undefined}
+  >
+    <div
+      className="ant-card-meta"
+    >
+      <div
+        className="ant-card-meta-detail"
+      >
+        <div
+          className="ant-card-meta-title"
+        >
+          test@example.com
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
