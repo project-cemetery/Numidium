@@ -1,19 +1,13 @@
 import axios from 'axios'
 import * as code from 'http-status-codes'
 
-import encodeQuery, { Parameter } from 'util/encodeQuery'
+import encodeQuery, { Parameter } from 'util/api/encodeQuery'
+import momentalizeEntity from 'util/api/momentalizeEntity'
+import { API_URL } from 'util/api/config'
 import Collection from 'model/Collection'
 
-import { momentalizeEntity } from './utils'
-
-
-export const API_URL = `${window.location.origin}/api`
-
 const getList = (entity: string, params?: Parameter[]) =>
-    axios.get((!params || params.length === 0)
-        ? `${API_URL}/${entity}`
-        : `${API_URL}/${entity}${encodeQuery(params)}`
-    )
+    axios.get(`${API_URL}/${entity}${encodeQuery(params || [])}`)
 
 const get = (entity: string, id: number) =>
     axios.get(`${API_URL}/${entity}/${id}`)
@@ -66,5 +60,5 @@ export default <T>(entity: string) => ({
     get: createGet<T>(entity),
     post: createPost<T>(entity),
     put: createPut<T>(entity),
-    delete: createDelete<T>(entity),
+    del: createDelete<T>(entity),
 })

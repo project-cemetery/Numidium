@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`\`Icon\` renders correctly 1`] = `
+Array [
+  <i
+    className="anticon anticon-android"
+    onClick={undefined}
+    style={undefined}
+  />,
+  <span>
+    My favorite text
+  </span>,
+]
+`;

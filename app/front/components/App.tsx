@@ -6,9 +6,8 @@ import { Route, Link, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import ContentBlock from 'components/common/Content'
-import IconWithText from 'components/common/IconWithText'
+import IconWithText, { IconType } from 'components/common/IconWithText'
 import ModalRoot from 'components/modal/ModalRoot'
-import IconEnum from 'util/enum/IconEnum'
 import menu, { MenuItem, INDEX_PAGE } from 'menu'
 import User from 'model/User'
 

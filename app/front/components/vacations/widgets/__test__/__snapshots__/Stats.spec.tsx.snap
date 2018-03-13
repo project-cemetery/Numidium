@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`\`Stats\` widget renders correctly 1`] = `
+<div
+  className="ant-card ant-card-bordered"
+>
+  <div
+    className="ant-card-head"
+  >
+    <div
+      className="ant-card-head-wrapper"
+    >
+      <div
+        className="ant-card-head-title"
+      >
+        Статистика
+      </div>
+    </div>
+  </div>
+  <div
+    className="ant-card-body"
+    style={undefined}
+  >
+    <p>
+      Coming soon...
+    </p>
+  </div>
+</div>
+`;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`\`Alert\` renders correctly 1`] = `
+<div
+  className="ant-alert ant-alert-info ant-alert-no-icon"
+  data-show={true}
+  style={undefined}
+>
+  <span
+    className="ant-alert-message"
+  >
+    Test message!
+  </span>
+  <span
+    className="ant-alert-description"
+  />
+</div>
+`;

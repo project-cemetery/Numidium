@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`\`Breadcrumbs\` renders correctly with items 1`] = `
+<div
+  className="css-6kt5zf ant-breadcrumb"
+  style={undefined}
+>
+  <span>
+    <span
+      className="ant-breadcrumb-link"
+    >
+      Home
+    </span>
+    <span
+      className="ant-breadcrumb-separator"
+    >
+      /
+    </span>
+  </span>
+  <span>
+    <span
+      className="ant-breadcrumb-link"
+    >
+      Profile
+    </span>
+    <span
+      className="ant-breadcrumb-separator"
+    >
+      /
+    </span>
+  </span>
+</div>
+`;
+
+exports[`\`Breadcrumbs\` renders correctly withpout items 1`] = `
+<div
+  className="css-6kt5zf ant-breadcrumb"
+  style={undefined}
+/>
+`;

@@ -12,7 +12,7 @@ export interface Props {
     user: User
 }
 
-class UserComponent extends React.PureComponent<Props, {}> {
+export class UserComponent extends React.PureComponent<Props, {}> {
     render() {
         const { user } = this.props
 
