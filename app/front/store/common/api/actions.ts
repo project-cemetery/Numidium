@@ -6,6 +6,7 @@ import { AppState } from 'reducers'
 import EntityLoadState from './EntityLoadState'
 import Entity from 'model/Entity'
 
+// Request-Success-Failure
 export const createRequestActionCreator = (type: string) =>
     () => ({ type } as Action<{}>)
 
