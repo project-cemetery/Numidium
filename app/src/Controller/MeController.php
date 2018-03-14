@@ -13,10 +13,6 @@ class MeController extends Controller
     {
         $user = $this->getUser();
 
-        if (!$user) {
-            throw $this->createNotFoundException();
-        }
-
         return new JsonResponse($user->getId());
     }
 }

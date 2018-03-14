@@ -3,4 +3,3 @@ services:
         public: true
 
     test.App\DataFixtures\UserFixtures:     '@App\DataFixtures\UserFixtures'
-    test.App\DataFixtures\VacationFixtures: '@App\DataFixtures\VacationFixtures'
