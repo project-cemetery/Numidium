@@ -18,7 +18,6 @@ abstract class FunctionalTestCase extends WebTestCase
 {
     private const FIXTURES = [
         UserFixtures::class     => 'test.App\DataFixtures\UserFixtures',
-        VacationFixtures::class => 'test.App\DataFixtures\VacationFixtures',
     ];
 
     /** @var \Doctrine\ORM\EntityManager */

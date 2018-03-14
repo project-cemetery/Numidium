@@ -15,5 +15,5 @@ Roadmap and tasks on [Trello board](https://trello.com/b/tOSS7V7z).
 + `yarn watch`
 
 ### Tests (in app dir)
-+ `php bin/phpunit`
++ `php bin/phpunit --coverage-text`
 + `yarn test`
