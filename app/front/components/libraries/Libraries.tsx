@@ -4,6 +4,8 @@ import { Row, Col } from 'antd'
 
 import Breadcrumbs from 'components/common/Breadcrumbs'
 
+import List from './widgets/List'
+
 
 export default () => (
     <React.Fragment>
@@ -14,7 +16,7 @@ export default () => (
                 <p>...</p>
             </Col>
             <Col lg={8} md={24}>
-                <p>...</p>
+                <List />
             </Col>
         </Row>
     </React.Fragment>

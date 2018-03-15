@@ -15,7 +15,7 @@ const ENTITY = 'libraries'
 export const commonActionTypes = createTypes(ENTITY)
 export const commonActionCreators = createActionCreators<Library>(ENTITY, (state: AppState) => state.libraries)
 
-export interface VacationsActions extends ActionsCreators<Library> {
+export interface LibrariesActions extends ActionsCreators<Library> {
 }
 
 export default {

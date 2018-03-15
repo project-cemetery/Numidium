@@ -3,7 +3,6 @@ import * as React from 'react'
 import { Card } from 'antd'
 
 import User from 'model/User'
-import Loader from 'components/common/Loader'
 
 import Container from './UserContainer'
 
