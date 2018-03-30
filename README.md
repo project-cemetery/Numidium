@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/TheNovel/Numidium.svg?branch=master)](https://travis-ci.org/TheNovel/Numidium)
+
 # Numidium
 
 Roadmap and tasks on [Trello board](https://trello.com/b/tOSS7V7z).
