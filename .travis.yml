@@ -2,6 +2,8 @@ matrix:
   include:
     - language: php
       php: 7.1
+      services:
+        - mysql
       before_script:
         - cd app
         - composer self-update
