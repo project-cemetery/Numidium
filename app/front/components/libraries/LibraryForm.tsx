@@ -5,6 +5,7 @@ import { Form } from 'react-final-form'
 
 import Breadcrumbs from 'components/common/Breadcrumbs'
 import SubmitButton from 'components/common/form/SubmitButton'
+import CancelButton  from 'components/common/form/CancelButton'
 import TextInput from 'components/common/form/TextInput'
 import TextArea from 'components/common/form/TextArea'
 import FormWrapper from 'components/common/form/FormWrapper'
@@ -22,13 +23,14 @@ export interface FormFields {
 export interface Props {
     library?: Library
     submit: (values: FormFields) => void
+    cancel: () => void
     validate: (values: any) => any
 }
 
 class LibraryForm extends React.PureComponent<Props, {}> {
 
     render() {
-        const { library, submit, validate } = this.props
+        const { library, submit, cancel, validate } = this.props
 
         const initialValues = !!library
             ? this.initialLibrary(library)
@@ -62,6 +64,7 @@ class LibraryForm extends React.PureComponent<Props, {}> {
 
                                 <ItemWrapper>
                                     <SubmitButton label={!!library ? 'Сохранить' : 'Создать'} />
+                                    <CancelButton label={'Отменить'} cancel={cancel} />
                                 </ItemWrapper>
 
                             </FormWrapper>

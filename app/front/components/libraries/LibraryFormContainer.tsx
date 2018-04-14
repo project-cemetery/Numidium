@@ -49,6 +49,7 @@ export default function (Form: React.ComponentClass<ComponentProps>) {
                     <Form
                         library={library}
                         submit={this.submit}
+                        cancel={this.cancel}
                         validate={this.validate}
                     />
                 </Loader>
@@ -74,6 +75,8 @@ export default function (Form: React.ComponentClass<ComponentProps>) {
                     .then(() => this.props.history.push('/libs'))
             }
         }
+
+        cancel = () => this.props.history.push('/libs')
 
         validate = (values: FormFields) => {
             const errors = {} as any
