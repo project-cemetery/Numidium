@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { Row, Col, Card, List } from 'antd'
+import { Link } from 'react-router-dom'
 
 import Breadcrumbs from 'components/common/Breadcrumbs'
 import Icon, { IconType } from 'components/common/Icon'
@@ -30,7 +31,14 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
                 <Row gutter={16}>
 
                     <Col lg={24}>
-                        <Card title={library.title}>
+                        <Card
+                            title={library.title}
+                            actions={[
+                                <Link to={`/libs/form/${library.id}`}>Редактировать раздел</Link>,
+                                <Link to={'/libs/form'}>Добавить книгу</Link>,
+                                <Link to={'/libs/form'}>Добавить статью</Link>,
+                            ]}
+                        >
                             <p>{library.description}</p>
                         </Card>
                     </Col>

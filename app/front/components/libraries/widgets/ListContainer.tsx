@@ -28,7 +28,7 @@ export default function (List: React.ComponentClass<ComponentProps>) {
 
             return (
                 <Loader loading={loading || !libs} error={error}>
-                    {loaded && libs && <List libs={libs} />}
+                    {loaded && libs && <List libs={libs.sort((a, b) => a.title > b.title ? 1 : -1)} />}
                 </Loader>
             )
         }
