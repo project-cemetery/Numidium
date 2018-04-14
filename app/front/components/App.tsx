@@ -68,7 +68,7 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
 
                             <Route path='/libs' exact component={Libraries} />
                             <Route path='/libs/form' component={LibraryForm} />
-                            <Route path='/libs/:id' render={
+                            <Route path='/libs/show/:id' render={
                                 ({ match }) => <Library id={parseInt(match.params.id, 10)} />
                             } />
                         </ContentBlock>
