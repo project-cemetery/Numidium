@@ -41,7 +41,7 @@ export class ListComponent extends React.PureComponent<Props, {}> {
             dataSource={libs}
             renderItem={(l: Library) =>
                 <List.Item actions={[
-                    <Link to={'/'}><Icon type={IconType.EYE_O} /></Link>,
+                    <Link to={`/libs/${l.id}`}><Icon type={IconType.EYE_O} /></Link>,
                 ]}>
                     <List.Item.Meta title={l.title} description={l.description} />
                 </List.Item>

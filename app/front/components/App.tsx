@@ -17,6 +17,7 @@ import Dashboard from './dashboard/Dashboard'
 import Vacations from './vacations/Vacations'
 
 import Libraries from './libraries/Libraries'
+import Library from './libraries/Library'
 import LibraryForm from './libraries/LibraryForm'
 
 const { Header, Content, Footer, Sider } = Layout
@@ -67,6 +68,9 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
 
                             <Route path='/libs' exact component={Libraries} />
                             <Route path='/libs/form' component={LibraryForm} />
+                            <Route path='/libs/:id' render={
+                                ({ match }) => <Library id={parseInt(match.params.id, 10)} />
+                            } />
                         </ContentBlock>
                     </Content>
                     <Footer className={this.s('footer')}>

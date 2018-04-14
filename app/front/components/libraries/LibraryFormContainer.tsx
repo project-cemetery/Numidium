@@ -102,10 +102,8 @@ export default function (Form: React.ComponentClass<ComponentProps>) {
     return Wrapped
 }
 
-const mapStateToProps = (state: AppState) => ({
-    id: state.modal.id,
-
-    library: state.libraries.entities.find(v => v.id === state.modal.id),
+const mapStateToProps = (state: AppState, ownProps: Props) => ({
+    library: state.libraries.entities.find(v => v.id === ownProps.id),
     user: state.users.entities.find(u => u.id === state.users.meId),
 
     saveLoading: !!state.libraries.post.loading || !!state.libraries.put.loading,
