@@ -40,7 +40,7 @@ class Article
     private $title;
 
     /**
-     * @Groups({"owner"})
+     * @Groups({"lib"})
      *
      * @ORM\Column(type="string", length=255)
      */

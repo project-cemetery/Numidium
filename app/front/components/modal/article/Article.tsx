@@ -30,7 +30,7 @@ export class ArticleComponent extends React.PureComponent<Props, {}> {
 
         return (
             <Modal
-                title={article.title}
+                title={`${article.title} | ${article.author} | ${article.year} год`}
                 visible={visible}
 
                 okText={'Читать в новой вкладке'}
@@ -41,6 +41,7 @@ export class ArticleComponent extends React.PureComponent<Props, {}> {
                     const win = window.open(article.link, '_blank') as any;
                     win.focus()
                 }}
+                width='90%'
             >
                 <p>{article.description}</p>
                 <p>Со временем тут будет показываться полный текст статьи.</p>
