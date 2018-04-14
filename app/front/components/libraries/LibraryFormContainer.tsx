@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
+import { RouteComponentProps } from 'react-router'
 
 import { AppState } from 'reducers'
 import librariesActions, { LibrariesActions } from 'store/libraries/actions'
@@ -30,7 +31,7 @@ interface Props {
 
 export default function (Form: React.ComponentClass<ComponentProps>) {
 
-    type ConatinerProps = Props
+    type ConatinerProps = Props & RouteComponentProps<{}>
 
     @(connect(mapStateToProps, mapDispatchToProps) as any)
     class Wrapped extends React.Component<ConatinerProps, {}> {
@@ -65,13 +66,12 @@ export default function (Form: React.ComponentClass<ComponentProps>) {
             } as Library
 
             if (!!librariesActions && !!librariesActions.post && !!librariesActions.put) {
-                console.log('ok')
-
                 const promise = !lib.id
                     ? librariesActions.post(lib)
                     : librariesActions.put(lib)
 
-                promise.then(() => console.log('saved!'))
+                promise
+                    .then(() => this.props.history.push('/libs'))
             }
         }
 
