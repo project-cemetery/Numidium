@@ -6,8 +6,6 @@ import Article from 'model/Article'
 
 import Container from './ArticleConatiner'
 
-// const extractor = require('article-extractor')
-
 
 export interface Props {
     error: boolean
@@ -16,14 +14,7 @@ export interface Props {
     hide: () => void
 }
 
-interface LocalState {
-    loadedArticle: any
-}
-
 export class ArticleComponent extends React.PureComponent<Props, {}> {
-    state = {
-        loadedArticle: undefined,
-    } as LocalState
 
     render() {
         const { visible, article, hide } = this.props

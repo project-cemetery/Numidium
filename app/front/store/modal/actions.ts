@@ -10,6 +10,7 @@ export const actionTypes = {
 export enum ModalEnum {
     ARTICLE  = 'article',
     VACATION = 'vacation',
+    BOOK     = 'book',
 }
 
 export interface ModalActions {

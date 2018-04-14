@@ -6,6 +6,7 @@ import Breadcrumbs from 'components/common/Breadcrumbs'
 import Icon, { IconType } from 'components/common/Icon'
 import Library from 'model/Library'
 import Article from 'model/Article'
+import Book from 'model/Book'
 
 import Container from './LibraryContainer'
 
@@ -14,6 +15,7 @@ export interface Props {
     library: Library
 
     openArticle: (id: number) => void
+    openBook: (id: number) => void
 }
 
 export class LibraryComponent extends React.PureComponent<Props, {}> {
@@ -35,7 +37,10 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
 
                     <Col lg={12} md={24}>
                         <Card title='Книги'>
-                            <p>{library.description}</p>
+                            { (library.books.length > 0)
+                                ? this.renderBooks(library.books)
+                                : <p>В разделе нет книг</p>
+                            }
                         </Card>
                     </Col>
 
@@ -59,12 +64,22 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
             dataSource={articles}
             renderItem={(article: Article) =>
                 <List.Item actions={[
-                    <Icon
-                        type={IconType.EYE_O}
-                        onClick={() => this.props.openArticle(article.id)}
-                    />,
+                    <Icon type={IconType.EYE_O} onClick={() => this.props.openArticle(article.id)} />,
                 ]}>
-                    <List.Item.Meta title={article.title} description={article.description} />
+                    <List.Item.Meta title={article.title} description={`${article.author} | ${article.year}`} />
+                </List.Item>
+            }
+        />
+
+    renderBooks = (books: Book[]) =>
+        <List
+            size={'large'}
+            dataSource={books}
+            renderItem={(book: Book) =>
+                <List.Item actions={[
+                    <Icon type={IconType.EYE_O} onClick={() => this.props.openBook(book.id)} />,
+                ]}>
+                    <List.Item.Meta title={book.title} description={`${book.author} | ${book.year}`} />
                 </List.Item>
             }
         />

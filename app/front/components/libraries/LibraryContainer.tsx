@@ -44,6 +44,7 @@ export default function (Component: React.ComponentClass<ComponentProps>) {
                         <Component
                             library={library}
                             openArticle={this.openArticle}
+                            openBook={this.openBook}
                         />
                     }
                 </Loader>
@@ -65,6 +66,13 @@ export default function (Component: React.ComponentClass<ComponentProps>) {
 
             if (modalActions && modalActions.show)
                 modalActions.show(ModalEnum.ARTICLE, id)
+        }
+
+        openBook = (id: number) => {
+            const { modalActions } = this.props
+
+            if (modalActions && modalActions.show)
+                modalActions.show(ModalEnum.BOOK, id)
         }
     }
 
