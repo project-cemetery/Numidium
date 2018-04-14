@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Modal } from 'antd'
 import * as moment from 'moment'
 import { Moment } from 'moment'
-import { Form, Field } from 'react-final-form'
+import { Form } from 'react-final-form'
 
 import RangePicker from 'components/common/form/RangePicker'
 import Loader from 'components/common/Loader'
@@ -59,9 +59,7 @@ class ModalForm extends React.PureComponent<Props, {}> {
                     style={{ textAlign: 'center' }}
                 >
                     <Loader loading={loading} error={error}>
-                        <Field name='range'>
-                            {props => <RangePicker {...props} /> }
-                        </Field>
+                        <RangePicker name={'range'} />
                     </Loader>
                 </Modal>
             )}

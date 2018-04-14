@@ -7,8 +7,8 @@ import Breadcrumbs from 'components/common/Breadcrumbs'
 import SubmitButton from 'components/common/form/SubmitButton'
 import TextInput from 'components/common/form/TextInput'
 import TextArea from 'components/common/form/TextArea'
-import FormContainer from 'components/common/form/FormContainer'
-import ItemContainer from 'components/common/form/ItemContainer'
+import FormWrapper from 'components/common/form/FormWrapper'
+import ItemWrapper from 'components/common/form/ItemWrapper'
 import Library from 'model/Library'
 
 import Container from './LibraryFormContainer'
@@ -44,25 +44,25 @@ class LibraryForm extends React.PureComponent<Props, {}> {
                         onSubmit={values => submit(values as FormFields)}
                         initialValues={initialValues}
                         render={({ handleSubmit, reset, submitting, pristine, values }) => (
-                            <FormContainer handleSubmit={handleSubmit}>
+                            <FormWrapper handleSubmit={handleSubmit}>
 
-                                <ItemContainer label='Название' tail>
+                                <ItemWrapper label='Название' tail>
                                     <TextInput name='title' placeholder='Саморазвитие' />
-                                </ItemContainer>
+                                </ItemWrapper>
 
-                                <ItemContainer label='Описание' tail>
+                                <ItemWrapper label='Описание' tail>
                                     <TextArea
                                         name='description'
                                         placeholder='Книги разные, веселые и грустные'
                                         rows={5}
                                     />
-                                </ItemContainer>
+                                </ItemWrapper>
 
-                                <ItemContainer>
+                                <ItemWrapper>
                                     <SubmitButton label={!!library ? 'Сохранить' : 'Создать'} />
-                                </ItemContainer>
+                                </ItemWrapper>
 
-                            </FormContainer>
+                            </FormWrapper>
                         )}
                     />
                 </Card>
