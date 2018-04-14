@@ -276,6 +276,18 @@ RUN yarn install && yarn build
 
 WORKDIR /
 
+# set up maria db
+
+ENV DB_DATA_PATH="/var/lib/mysql"
+
+RUN apk add --no-cache mariadb mariadb-client
+
+RUN mysql_install_db --user=mysql --datadir=${DB_DATA_PATH}
+RUN mkdir /run/mysqld
+RUN chmod 777 /run/mysqld
+
+ENV DATABASE_URL=mysql://root:@127.0.0.1:3306/numudium_prod
+
 
 EXPOSE 443 80
 

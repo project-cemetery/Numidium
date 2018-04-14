@@ -1,3 +1,6 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/TheNovel/Numidium.svg?branch=master)](https://travis-ci.org/TheNovel/Numidium)
+
 # Numidium
 
 Roadmap and tasks on [Trello board](https://trello.com/b/tOSS7V7z).
