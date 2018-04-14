@@ -17,7 +17,8 @@ export default (ownProps: Props) =>
         {props =>
             <React.Fragment>
                 <Input.TextArea
-                    {...props}
+                    value={props.input.value}
+                    onChange={props.input.onChange}
                     placeholder={ownProps.placeholder}
                     rows={ownProps.rows}
                 />
