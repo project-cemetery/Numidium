@@ -13,8 +13,11 @@ import User from 'model/User'
 import findMostSimilar from 'util/findMostSimilar'
 
 import Dashboard from './dashboard/Dashboard'
+
 import Vacations from './vacations/Vacations'
+
 import Libraries from './libraries/Libraries'
+import LibraryForm from './libraries/LibraryForm'
 
 const { Header, Content, Footer, Sider } = Layout
 const SubMenu = Menu.SubMenu
@@ -59,8 +62,11 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
                     <Content className={this.s('content')}>
                         <ContentBlock>
                             <Route path='/' exact component={Dashboard} />
+
                             <Route path='/vacations' component={Vacations} />
-                            <Route path='/libs' component={Libraries} />
+
+                            <Route path='/libs' exact component={Libraries} />
+                            <Route path='/libs/form' component={LibraryForm} />
                         </ContentBlock>
                     </Content>
                     <Footer className={this.s('footer')}>
