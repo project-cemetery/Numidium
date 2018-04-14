@@ -1,5 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/TheNovel/Numidium.svg?branch=master)](https://travis-ci.org/TheNovel/Numidium)
+[![Build Status](https://travis-ci.org/QEEP-Pro/Numidium.svg?branch=master)](https://travis-ci.org/QEEP-Pro/Numidium)
 
 # Numidium
 
@@ -7,7 +7,7 @@ Roadmap and tasks on [Trello board](https://trello.com/b/tOSS7V7z).
 
 ## Development
 
-+ `git clone git@github.com:TheNovel/Numidium.git`
++ `git clone git@github.com:QEEP-Pro/Numidium.git`
 + `cd Numidium/app`
 + `composer install -o`
 + `php bin/console doctrine:database:create`
