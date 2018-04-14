@@ -32,7 +32,6 @@ export class BookComponent extends React.PureComponent<Props, {}> {
                 onOk={() => {
                     alert('Скачивание пока недоступно!')
                 }}
-                width='90%'
             >
                 <p>{book.description}</p>
             </Modal>

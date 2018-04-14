@@ -29,10 +29,9 @@ export class ArticleComponent extends React.PureComponent<Props, {}> {
 
                 onCancel={() => hide()}
                 onOk={() => {
-                    const win = window.open(article.link, '_blank') as any;
+                    const win = window.open(article.link, '_blank') as any
                     win.focus()
                 }}
-                width='90%'
             >
                 <p>{article.description}</p>
                 <p>Со временем тут будет показываться полный текст статьи.</p>

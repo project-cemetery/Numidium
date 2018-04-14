@@ -35,8 +35,8 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
                             title={library.title}
                             actions={[
                                 <Link to={`/libs/form/${library.id}`}>Редактировать раздел</Link>,
-                                <Link to={'/libs/form'}>Добавить книгу</Link>,
-                                <Link to={'/libs/form'}>Добавить статью</Link>,
+                                <span>Добавить книгу</span>,
+                                <span>Добавить статью</span>,
                             ]}
                         >
                             <p>{library.description}</p>
@@ -73,6 +73,7 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
             renderItem={(article: Article) =>
                 <List.Item actions={[
                     <Icon type={IconType.EYE_O} onClick={() => this.props.openArticle(article.id)} />,
+                    <Icon type={IconType.EDIT} />,
                 ]}>
                     <List.Item.Meta title={article.title} description={`${article.author} | ${article.year}`} />
                 </List.Item>
@@ -86,6 +87,7 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
             renderItem={(book: Book) =>
                 <List.Item actions={[
                     <Icon type={IconType.EYE_O} onClick={() => this.props.openBook(book.id)} />,
+                    <Icon type={IconType.EDIT} />,
                 ]}>
                     <List.Item.Meta title={book.title} description={`${book.author} | ${book.year}`} />
                 </List.Item>
