@@ -7,11 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *      attributes={
  *          "access_control"="is_granted('ROLE_USER')",
+ *          "normalization_context"={"groups"={"lib"}},
+ *          "denormalization_context"={"groups"={"lib"}}
  *      }
  * )
  *
@@ -20,25 +23,38 @@ use ApiPlatform\Core\Annotation\ApiResource;
 class Library
 {
     /**
+     * @Groups({"lib"})
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
-    /** @ORM\Column(type="string", length=255) */
+    /**
+     * @Groups({"lib"})
+     *
+     * @ORM\Column(type="string", length=255) */
     private $title;
 
-    /** @ORM\Column(type="text") */
+    /**
+     * @Groups({"lib"})
+     *
+     * @ORM\Column(type="text")
+     */
     private $description;
 
     /**
+     * @Groups({"lib"})
+     *
      * @ORM\ManyToMany(targetEntity="Book", inversedBy="libs")
      * @ORM\JoinTable(name="libs_books")
      */
     private $books;
 
     /**
+     * @Groups({"lib"})
+     *
      * @ORM\ManyToMany(targetEntity="Article", inversedBy="libs")
      * @ORM\JoinTable(name="libs_articles")
      */

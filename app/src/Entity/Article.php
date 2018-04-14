@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
@@ -20,6 +21,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 class Article
 {
     /**
+     * @Groups({"lib"})
+     *
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -29,19 +32,39 @@ class Article
     /** @ORM\ManyToMany(targetEntity="Library", mappedBy="articles") */
     private $libs;
 
-    /** @ORM\Column(type="string", length=255) */
+    /**
+     * @Groups({"lib"})
+     *
+     * @ORM\Column(type="string", length=255)
+     */
     private $title;
 
-    /** @ORM\Column(type="string", length=255) */
+    /**
+     * @Groups({"owner"})
+     *
+     * @ORM\Column(type="string", length=255)
+     */
     private $author;
 
-    /** @ORM\Column(type="smallint") */
+    /**
+     * @Groups({"lib"})
+     *
+     * @ORM\Column(type="smallint")
+     */
     private $year;
 
-    /** @ORM\Column(type="text") */
+    /**
+     * @Groups({"lib"})
+     *
+     * @ORM\Column(type="text")
+     */
     private $description;
 
-    /** @ORM\Column(type="string", length=511) */
+    /**
+     * @Groups({"lib"})
+     *
+     * @ORM\Column(type="string", length=511)
+     */
     private $link;
 
     public function __construct()

@@ -8,6 +8,7 @@ export const actionTypes = {
 }
 
 export enum ModalEnum {
+    ARTICLE  = 'article',
     VACATION = 'vacation',
 }
 
@@ -20,7 +21,7 @@ export default {
     show: (type: ModalEnum, id?: number) => ({
         type: actionTypes.SHOW,
         payload: {
-            modal: ModalEnum.VACATION,
+            modal: type,
             id,
         },
     } as Action<{modal: ModalEnum, id?: number}>),
