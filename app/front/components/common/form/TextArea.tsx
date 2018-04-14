@@ -3,6 +3,8 @@ import * as React from 'react'
 import { Field } from 'react-final-form'
 import { Input } from 'antd'
 
+import Alert, { AlertType } from 'components/common/Alert'
+
 
 interface Props {
     name: string
@@ -12,9 +14,14 @@ interface Props {
 
 export default (ownProps: Props) =>
     <Field name={ownProps.name}>
-        {props => <Input.TextArea
-            {...props}
-            placeholder={ownProps.placeholder}
-            rows={ownProps.rows}
-        /> }
+        {props =>
+            <React.Fragment>
+                <Input.TextArea
+                    {...props}
+                    placeholder={ownProps.placeholder}
+                    rows={ownProps.rows}
+                />
+                {!!props.meta.error && <Alert type={AlertType.WARNING} message={props.meta.error} /> }
+            </React.Fragment>
+        }
     </Field>

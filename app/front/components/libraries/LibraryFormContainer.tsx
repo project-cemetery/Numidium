@@ -45,29 +45,45 @@ export default function (Form: React.ComponentClass<ComponentProps>) {
                     loading={loading || (!!id && !library) || saveLoading}
                     error={error || saveError}
                 >
-                    <Form library={library} submit={console.log} />
+                    <Form
+                        library={library}
+                        submit={this.submit}
+                        validate={this.validate}
+                    />
                 </Loader>
             )
         }
 
-        // submit = (values: FormFields) => {
-        //     const { vacationsActions, user, modalActions } = this.props
+        submit = (values: FormFields) => {
+            const { librariesActions, user } = this.props
 
-        //     const vacation = {
-        //         id: this.props.id,
-        //         start: values.range.start,
-        //         end: values.range.end,
-        //         user: user as Owner,
-        //     } as Vacation
+            const lib = {
+                id: this.props.id,
+                title: values.title,
+                description: values.description,
+                author: user as Owner,
+            } as Library
 
-        //     if (!!vacationsActions && !!vacationsActions.post && !!vacationsActions.put) {
-        //         const promise = !vacation.id
-        //             ? vacationsActions.post(vacation)
-        //             : vacationsActions.put(vacation)
+            if (!!librariesActions && !!librariesActions.post && !!librariesActions.put) {
+                console.log('ok')
 
-        //         promise.then(() => !!modalActions && !!modalActions.hide && modalActions.hide())
-        //     }
-        // }
+                const promise = !lib.id
+                    ? librariesActions.post(lib)
+                    : librariesActions.put(lib)
+
+                promise.then(() => console.log('saved!'))
+            }
+        }
+
+        validate = (values: FormFields) => {
+            const errors = {} as any
+
+            if (!values.title) {
+                errors.title = 'Обязательное поле'
+            }
+
+            return errors
+        }
 
         componentDidMount() {
             const {
@@ -100,6 +116,6 @@ const mapStateToProps = (state: AppState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-    vacationsActions: bindActionCreators(librariesActions, dispatch),
+    librariesActions: bindActionCreators(librariesActions, dispatch),
     usersActions: bindActionCreators(usersActions, dispatch),
 })

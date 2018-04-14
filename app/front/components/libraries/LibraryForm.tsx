@@ -22,12 +22,13 @@ export interface FormFields {
 export interface Props {
     library?: Library
     submit: (values: FormFields) => void
+    validate: (values: any) => any
 }
 
 class LibraryForm extends React.PureComponent<Props, {}> {
 
     render() {
-        const { library, submit } = this.props
+        const { library, submit, validate } = this.props
 
         const initialValues = !!library
             ? this.initialLibrary(library)
@@ -42,6 +43,7 @@ class LibraryForm extends React.PureComponent<Props, {}> {
                 <Card>
                     <Form
                         onSubmit={values => submit(values as FormFields)}
+                        validate={validate}
                         initialValues={initialValues}
                         render={({ handleSubmit, reset, submitting, pristine, values }) => (
                             <FormWrapper handleSubmit={handleSubmit}>
