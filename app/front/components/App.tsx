@@ -60,6 +60,7 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
                 </Sider>
                 <Layout>
                     <Header className={this.s('header')} />
+
                     <Content className={this.s('content')}>
                         <ContentBlock>
                             <Route path='/' exact component={Dashboard} />
@@ -67,15 +68,15 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
                             <Route path='/vacations' component={Vacations} />
 
                             <Route path='/libs' exact component={Libraries} />
-                            <Route path='/libs/form/:id?' render={
-                                ({ match, history }) =>
-                                    <LibraryForm id={parseInt(match.params.id, 10)} goBack={history.goBack} />
+                            <Route path='/libs/form/:id?' render={({ match, history }) =>
+                                <LibraryForm id={parseInt(match.params.id, 10)} goBack={history.goBack} />
                             } />
-                            <Route path='/libs/show/:id' render={
-                                ({ match }) => <Library id={parseInt(match.params.id, 10)} />
+                            <Route path='/libs/show/:id' render={({ match }) =>
+                                <Library id={parseInt(match.params.id, 10)} />
                             } />
                         </ContentBlock>
                     </Content>
+
                     <Footer className={this.s('footer')}>
                         Numidium © 2017 – {new Date().getFullYear()}
                     </Footer>
