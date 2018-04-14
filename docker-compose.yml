@@ -1,0 +1,9 @@
+version: "3"
+services:
+  web:
+    image: numidium
+    ports:
+      - "8000:80"
+    environment:
+      - DATABASE_URL=mysql://root:@127.0.0.1:3306/numudium_prod
+      - CORS_ALLOW_ORIGIN=*
