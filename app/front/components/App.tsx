@@ -39,8 +39,6 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
     render() {
         const { menuKey, collapsed } = this.state
 
-        console.log(this.state)
-
         return (
             <Layout className={this.s('constainer')}>
                 <Sider
