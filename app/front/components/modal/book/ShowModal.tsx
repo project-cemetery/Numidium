@@ -32,13 +32,13 @@ export class ShowModal extends React.PureComponent<Props, {}> {
                         <Button onClick={() => this.openLink(book.externalFileLink)} type="primary">Скачать</Button>,
                 ]}
             >
-                <p>{book.description}</p>
                 {!!book.paper &&
                     <Alert
                         message="Доступна в бумажном варианте. Спросите у кого-ниубдь."
                         type={AlertType.INFO}
                     />
                 }
+                <p>{book.description}</p>
             </Modal>
         )
     }
