@@ -1,7 +1,6 @@
 import { actionTypes, ModalEnum } from '../actions'
 
-import { handleShow, handleHide } from '../reducers'
-
+import { handleHide, handleShow } from '../reducers'
 
 test('`handleShow` returns correctly state', () => {
     const state = {

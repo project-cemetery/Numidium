@@ -1,7 +1,6 @@
-import { handleActions, Action } from 'redux-actions'
+import { Action, handleActions } from 'redux-actions'
 
 import actionCreator, { actionTypes, ModalEnum } from './actions'
-
 
 export const handleShow = (state: ModalState, action: Action<{modal: ModalEnum, id?: number}>) => ({
     ...state,
@@ -34,5 +33,5 @@ export default handleActions(
     } as any,
     {
         ...initialState,
-    }
+    },
 )

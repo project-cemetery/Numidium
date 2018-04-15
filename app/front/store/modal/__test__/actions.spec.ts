@@ -1,6 +1,5 @@
 import creators, { actionTypes, ModalEnum } from '../actions'
 
-
 test('`show` action creator returns correctly action', () => {
     const action = creators.show(ModalEnum.VACATION, 1)
 

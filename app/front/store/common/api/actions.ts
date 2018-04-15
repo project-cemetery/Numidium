@@ -1,10 +1,10 @@
 import { Action } from 'redux-actions'
 
 import Collection from 'model/Collection'
-import rest from 'util/api/rest'
-import { AppState } from 'reducers'
-import EntityLoadState from './EntityLoadState'
 import Entity from 'model/Entity'
+import { AppState } from 'reducers'
+import rest from 'util/api/rest'
+import EntityLoadState from './EntityLoadState'
 
 // Request-Success-Failure
 export const createRequestActionCreator = (type: string) =>
@@ -70,7 +70,7 @@ export interface ActionTypes {
 
 export const createActionCreators = <T extends Entity>(
     entity: string,
-    getEntityState: (state: AppState) => EntityLoadState<T>
+    getEntityState: (state: AppState) => EntityLoadState<T>,
 ) => {
     const types = createTypes(entity)
     const entityRest = rest<T>(entity)
@@ -107,7 +107,7 @@ export const createActionCreators = <T extends Entity>(
 
         dispatch(actionCreators.getListRequest())
 
-        const preparedParams = Object.keys(params).map(key => ({
+        const preparedParams = Object.keys(params).map((key) => ({
             key,
             value: params[key],
         }))
@@ -115,8 +115,8 @@ export const createActionCreators = <T extends Entity>(
         return !loading
             ? entityRest.getList(preparedParams)
                 .then(
-                    collection => dispatch(actionCreators.getListSuccess(collection)),
-                    err => dispatch(actionCreators.getListFailure())
+                    (collection) => dispatch(actionCreators.getListSuccess(collection)),
+                    (err) => dispatch(actionCreators.getListFailure()),
                 )
             : Promise.resolve()
     }
@@ -129,8 +129,8 @@ export const createActionCreators = <T extends Entity>(
         return !loading
             ? entityRest.get(id)
                 .then(
-                    reponse => dispatch(actionCreators.getSuccess(reponse)),
-                    err => dispatch(actionCreators.getFailure())
+                    (reponse) => dispatch(actionCreators.getSuccess(reponse)),
+                    (err) => dispatch(actionCreators.getFailure()),
                 )
             : Promise.resolve()
     }
@@ -143,8 +143,8 @@ export const createActionCreators = <T extends Entity>(
         return !loading
             ? entityRest.post(object)
                 .then(
-                    response => dispatch(actionCreators.postSuccess(response)),
-                    err => dispatch(actionCreators.postFailure())
+                    (response) => dispatch(actionCreators.postSuccess(response)),
+                    (err) => dispatch(actionCreators.postFailure()),
                 )
             : Promise.resolve()
     }
@@ -157,8 +157,8 @@ export const createActionCreators = <T extends Entity>(
         return !loading
             ? entityRest.put(object.id, object)
                 .then(
-                    reponse => dispatch(actionCreators.putSuccess(reponse)),
-                    err => dispatch(actionCreators.putFailure())
+                    (reponse) => dispatch(actionCreators.putSuccess(reponse)),
+                    (err) => dispatch(actionCreators.putFailure()),
                 )
             : Promise.resolve()
     }

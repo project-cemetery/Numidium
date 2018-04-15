@@ -5,7 +5,8 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production",
-        "test": "jest"
+        "test": "jest",
+        "lint": "tslint -c tslint.json 'front/**/*.ts'"
     },
     "dependencies": {
         "antd": "^3.2.2",

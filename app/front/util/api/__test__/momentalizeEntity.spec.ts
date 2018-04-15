@@ -2,7 +2,6 @@ import * as moment from 'moment'
 
 import momentalizeEntity from '../momentalizeEntity'
 
-
 test('momentalize empty object', () => {
     expect(momentalizeEntity({})).toEqual({})
 })

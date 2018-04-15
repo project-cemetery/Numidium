@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 
+import modalReducers, { ModalState } from 'store/modal/reducers'
 import usersReducer, { UsersState } from 'store/users/reducers'
 import vacationsReduser, { VacationsState } from 'store/vacations/reducers'
-import modalReducers, { ModalState } from 'store/modal/reducers'
 
 export interface AppState {
     users: UsersState

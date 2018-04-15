@@ -1,12 +1,11 @@
-import { createTypes, createActionCreators, ActionsCreators } from 'store/common/api/actions'
-import { getMyId } from 'util/api/helper'
 import Collection from 'model/Collection'
-import rest from 'util/api/rest'
 import Vacation from 'model/Vacation'
 import { AppState } from 'reducers'
+import { ActionsCreators, createActionCreators, createTypes } from 'store/common/api/actions'
+import { getMyId } from 'util/api/helper'
+import rest from 'util/api/rest'
 
 import { VacationsState } from './reducers'
-
 
 const ENTITY = 'vacations'
 

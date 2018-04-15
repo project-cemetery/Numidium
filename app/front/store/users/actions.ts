@@ -1,24 +1,23 @@
 import { Action } from 'redux-actions'
 
-import {
-    actionType, createTypes, createActionCreators, ActionsCreators,
-    createRequestActionCreator, createSuccessActionCreator, createFailureActionCreator,
-} from 'store/common/api/actions'
-import { getMyId } from 'util/api/helper'
 import Collection from 'model/Collection'
-import rest from 'util/api/rest'
 import User from 'model/User'
 import { AppState } from 'reducers'
+import {
+    ActionsCreators, actionType, createActionCreators, createFailureActionCreator,
+    createRequestActionCreator, createSuccessActionCreator, createTypes,
+} from 'store/common/api/actions'
+import { getMyId } from 'util/api/helper'
+import rest from 'util/api/rest'
 
 import { UsersState } from './reducers'
-
 
 const ENTITY = 'users'
 
 export const commonActionTypes = createTypes(ENTITY)
 export const commonActionCreators = createActionCreators<User>(
     ENTITY,
-    (state: AppState) => state.users
+    (state: AppState) => state.users,
 )
 
 export const actionTypes = {
@@ -43,11 +42,11 @@ const getMe = () => (dispatch: any, getState: () => AppState) => {
     return !loading
         ? getMyId()
             .then(
-                id => {
+                (id) => {
                     dispatch(actionCreators.meSuccess(id))
                     dispatch(commonActionCreators.get(id))
                 },
-                err => dispatch(actionCreators.meFailure())
+                (err) => dispatch(actionCreators.meFailure()),
             )
         : Promise.resolve()
 }

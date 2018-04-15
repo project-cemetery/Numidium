@@ -1,0 +1,17 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->exclude('Migrations')
+    ->notPath('Kernel.php')
+    ->in(__DIR__ . '/src')
+;
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'concat_space' => ['spacing' => 'one'],
+        'binary_operator_spaces' => ['default' => 'align'],
+    ])
+    ->setFinder($finder)
+;
