@@ -24,6 +24,8 @@ export class ShowModal extends React.PureComponent<Props, {}> {
                 title={`${book.title} | ${book.author} | ${book.year} год`}
                 visible={visible}
 
+                onCancel={() => hide()}
+
                 footer={[
                     <Button onClick={() => hide()}>Закрыть</Button>,
                     !!book.shopLink &&
