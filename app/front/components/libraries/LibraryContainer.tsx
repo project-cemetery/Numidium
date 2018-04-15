@@ -2,15 +2,13 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 
+import Loader from 'components/common/Loader'
+import Library from 'model/Library'
 import { AppState } from 'reducers'
 import librariesActions, { LibrariesActions } from 'store/libraries/actions'
 import modalActions, { ModalActions, ModalEnum } from 'store/modal/actions'
-import Library from 'model/Library'
-import Loader from 'components/common/Loader'
 
 import { Props as ComponentProps } from './Library'
-
-
 
 interface Props {
     id: number
@@ -24,14 +22,14 @@ interface Props {
     modalActions?: ModalActions,
 }
 
-export default function (Component: React.ComponentClass<ComponentProps>) {
+export default function(Component: React.ComponentClass<ComponentProps>) {
 
     type ConatinerProps = Props
 
     @(connect(mapStateToProps, mapDispatchToProps) as any)
     class Wrapped extends React.Component<ConatinerProps, {}> {
 
-        render() {
+        public render() {
             const {
                 id, library, loading, error,
             } = this.props
@@ -56,42 +54,52 @@ export default function (Component: React.ComponentClass<ComponentProps>) {
             )
         }
 
-        componentDidMount() {
+        public componentDidMount() {
             const {
                 id, library,
+                // tslint:disable-next-line:no-shadowed-variable
                 librariesActions,
             } = this.props
 
-            if (id && !library && !!librariesActions && !!librariesActions.get)
+            if (id && !library && !!librariesActions && !!librariesActions.get) {
                 librariesActions.get(id)
+            }
         }
 
-        openArticle = (id: number) => {
+        public openArticle = (id: number) => {
+            // tslint:disable-next-line:no-shadowed-variable
             const { modalActions } = this.props
 
-            if (modalActions && modalActions.show)
+            if (modalActions && modalActions.show) {
                 modalActions.show(ModalEnum.ARTICLE_SHOW, id)
+            }
         }
 
-        editArticle = (lib: Library, id?: number) => {
+        public editArticle = (lib: Library, id?: number) => {
+            // tslint:disable-next-line:no-shadowed-variable
             const { modalActions } = this.props
 
-            if (modalActions && modalActions.show)
+            if (modalActions && modalActions.show) {
                 modalActions.show(ModalEnum.ARTICLE_EDIT, id, lib)
+            }
         }
 
-        openBook = (id: number) => {
+        public openBook = (id: number) => {
+            // tslint:disable-next-line:no-shadowed-variable
             const { modalActions } = this.props
 
-            if (modalActions && modalActions.show)
+            if (modalActions && modalActions.show) {
                 modalActions.show(ModalEnum.BOOK_SHOW, id)
+            }
         }
 
-        editBook = (lib: Library, id?: number) => {
+        public editBook = (lib: Library, id?: number) => {
+            // tslint:disable-next-line:no-shadowed-variable
             const { modalActions } = this.props
 
-            if (modalActions && modalActions.show)
+            if (modalActions && modalActions.show) {
                 modalActions.show(ModalEnum.BOOK_EDIT, id, lib)
+            }
         }
     }
 
@@ -99,7 +107,7 @@ export default function (Component: React.ComponentClass<ComponentProps>) {
 }
 
 const mapStateToProps = (state: AppState, ownProps: Props) => ({
-    library: state.libraries.entities.find(v => v.id === ownProps.id),
+    library: state.libraries.entities.find((v) => v.id === ownProps.id),
 
     loading: !!state.libraries.get.loading,
     error: !!state.libraries.get.error,

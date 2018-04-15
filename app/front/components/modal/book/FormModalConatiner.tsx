@@ -2,15 +2,14 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 
-import { AppState } from 'reducers'
-import modalActions, { ModalActions } from 'store/modal/actions'
-import librariesActions, { LibrariesActions } from 'store/libraries/actions'
-import booksActions, { BooksActions } from 'store/books/actions'
 import Book from 'model/Book'
 import Library from 'model/Library'
+import { AppState } from 'reducers'
+import booksActions, { BooksActions } from 'store/books/actions'
+import librariesActions, { LibrariesActions } from 'store/libraries/actions'
+import modalActions, { ModalActions } from 'store/modal/actions'
 
-import { Props as ComponentProps, FormFields } from './FormModal'
-
+import { FormFields, Props as ComponentProps } from './FormModal'
 
 interface Props {
     id?: number
@@ -31,16 +30,17 @@ interface Props {
     librariesActions?: LibrariesActions
 }
 
-export default function (ModalForm: React.ComponentClass<ComponentProps>) {
+export default function(ModalForm: React.ComponentClass<ComponentProps>) {
 
     type ConatinerProps = Props
 
     @(connect(mapStateToProps, mapDispatchToProps) as any)
     class Wrapped extends React.Component<ConatinerProps, {}> {
 
-        render() {
+        public render() {
             const {
                 id, book, visible, loading, error, saveLoading, saveError,
+                // tslint:disable-next-line:no-shadowed-variable
                 modalActions,
             } = this.props
 
@@ -58,7 +58,8 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
                 />
         }
 
-        submit = (values: FormFields) => {
+        public submit = (values: FormFields) => {
+            // tslint:disable-next-line:no-shadowed-variable
             const { booksActions, modalActions, librariesActions, payload } = this.props
 
             const book = {
@@ -89,7 +90,7 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
             }
         }
 
-        validate = (values: FormFields) => {
+        public validate = (values: FormFields) => {
             const errors = {} as any
 
             if (!values.title) {
@@ -102,17 +103,19 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
             return errors
         }
 
-        componentWillReceiveProps(nextProps: Props) {
+        public componentWillReceiveProps(nextProps: Props) {
             const {
                 id, visible, book,
+                // tslint:disable-next-line:no-shadowed-variable
                 booksActions,
             } = nextProps
 
-            if (visible && id && !book && !!booksActions && !!booksActions.get)
+            if (visible && id && !book && !!booksActions && !!booksActions.get) {
                 booksActions.get(id)
+            }
         }
 
-        componentDidMount() {
+        public componentDidMount() {
             this.componentWillReceiveProps(this.props)
         }
     }
@@ -124,9 +127,9 @@ const mapStateToProps = (state: AppState) => ({
     id: state.modal.id,
 
     book: state.libraries.entities
-        .map(lib => lib.books)
+        .map((lib) => lib.books)
         .reduce((acc, arr, []) => [...acc, ...arr])
-        .find(book => book.id === state.modal.id),
+        .find((book) => book.id === state.modal.id),
 
     saveLoading: !!state.books.post.loading || !!state.books.put.loading,
     saveError: !!state.books.post.error || !!state.books.put.error,

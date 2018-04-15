@@ -1,13 +1,12 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { AppState } from 'reducers'
-import Library from 'model/Library'
-import librariesAction, { LibrariesActions } from 'store/libraries/actions'
 import Loader from 'components/common/Loader'
+import Library from 'model/Library'
+import { AppState } from 'reducers'
+import librariesAction, { LibrariesActions } from 'store/libraries/actions'
 
 import { Props as ComponentProps } from './List'
-
 
 interface Props {
     loading?: boolean
@@ -16,14 +15,14 @@ interface Props {
     libs?: Library[]
 }
 
-export default function (List: React.ComponentClass<ComponentProps>) {
+export default function(List: React.ComponentClass<ComponentProps>) {
 
     type ConatinerProps = Props & LibrariesActions
 
     @(connect(mapStateToProps, { ...librariesAction }) as any)
     class Wrapped extends React.Component<ConatinerProps, {}> {
 
-        render() {
+        public render() {
             const { loading, loaded, error, libs } = this.props
 
             return (
@@ -33,10 +32,10 @@ export default function (List: React.ComponentClass<ComponentProps>) {
             )
         }
 
-        componentDidMount() {
+        public componentDidMount() {
             const { getList, loaded } = this.props
 
-            if (getList && !loaded) getList()
+            if (getList && !loaded) { getList() }
         }
     }
 

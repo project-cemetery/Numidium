@@ -1,16 +1,15 @@
 import * as React from 'react'
 
-import { Row, Col, Card, List } from 'antd'
+import { Card, Col, List, Row } from 'antd'
 import { Link } from 'react-router-dom'
 
 import Breadcrumbs from 'components/common/Breadcrumbs'
 import Icon, { IconType } from 'components/common/Icon'
-import Library from 'model/Library'
 import Article from 'model/Article'
 import Book from 'model/Book'
+import Library from 'model/Library'
 
 import Container from './LibraryContainer'
-
 
 export interface Props {
     library: Library
@@ -24,7 +23,7 @@ export interface Props {
 
 export class LibraryComponent extends React.PureComponent<Props, {}> {
 
-    render() {
+    public render() {
         const { library } = this.props
 
         return (
@@ -47,7 +46,7 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
                     </Col>
 
                     <Col lg={12} md={24}>
-                        <Card title='Книги'>
+                        <Card title="Книги">
                             { (library.books.length > 0)
                                 ? this.renderBooks(library.books)
                                 : <p>В разделе нет книг</p>
@@ -56,7 +55,7 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
                     </Col>
 
                     <Col lg={12} md={24}>
-                        <Card title='Статьи'>
+                        <Card title="Статьи">
                             { (library.articles.length > 0)
                                 ? this.renderArticles(library.articles)
                                 : <p>В разделе нет статей</p>
@@ -69,7 +68,7 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
         )
     }
 
-    renderArticles = (articles: Article[]) =>
+    public renderArticles = (articles: Article[]) =>
         <List
             size={'large'}
             dataSource={articles}
@@ -87,7 +86,7 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
             }
         />
 
-    renderBooks = (books: Book[]) =>
+    public renderBooks = (books: Book[]) =>
         <List
             size={'large'}
             dataSource={books}

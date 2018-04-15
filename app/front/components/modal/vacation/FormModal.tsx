@@ -11,11 +11,10 @@ import Vacation from 'model/Vacation'
 
 import Container from './FormModalConatiner'
 
-
 export interface FormFields {
     range: {
         start?: Moment
-        end?: Moment
+        end?: Moment,
     }
 }
 export interface Props {
@@ -30,7 +29,7 @@ export interface Props {
 }
 
 class ModalForm extends React.PureComponent<Props, {}> {
-    render() {
+    public render() {
         const { loading, error, vacation, visible, hide, submit } = this.props
 
         const initialValues = !!vacation
@@ -38,7 +37,7 @@ class ModalForm extends React.PureComponent<Props, {}> {
             : this.initialEmpty()
 
         return <Form
-            onSubmit={values => submit(values as FormFields)}
+            onSubmit={(values) => submit(values as FormFields)}
             initialValues={initialValues}
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
                 <Modal
@@ -66,14 +65,14 @@ class ModalForm extends React.PureComponent<Props, {}> {
         />
     }
 
-    initialVacation = (vacation: Vacation) => ({
+    public initialVacation = (vacation: Vacation) => ({
         range: {
             start: vacation.start,
             end: vacation.end,
         },
     } as FormFields)
 
-    initialEmpty = () => ({
+    public initialEmpty = () => ({
         range: {
             start: undefined,
             end: undefined,

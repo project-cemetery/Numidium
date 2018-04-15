@@ -1,14 +1,13 @@
 import * as React from 'react'
 
-import { Row, Col } from 'antd'
+import { Col, Row } from 'antd'
 
+import Breadcrumbs from 'components/common/Breadcrumbs'
 import Collection from 'model/Collection'
 import Vacation from 'model/Vacation'
-import Breadcrumbs from 'components/common/Breadcrumbs'
 
 import Nearest from './widgets/Nearest'
 import Stats from './widgets/Stats'
-
 
 export default () => (
     <React.Fragment>

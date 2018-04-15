@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import Icon, { IconType } from './Icon'
 
-
 interface Props {
     icon?: IconType
     text: string

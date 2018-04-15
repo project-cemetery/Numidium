@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { Icon } from 'antd'
 
-
 interface Props {
     type: IconType
     spin?: boolean

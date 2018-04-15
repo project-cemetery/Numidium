@@ -1,12 +1,11 @@
 import * as React from 'react'
 
-import { Row, Col } from 'antd'
+import { Col, Row } from 'antd'
 
 import Breadcrumbs from 'components/common/Breadcrumbs'
 
 import List from './widgets/List'
 import Recommended from './widgets/Recommended'
-
 
 export default () => (
     <React.Fragment>

@@ -6,7 +6,6 @@ import Article from 'model/Article'
 
 import Container from './ShowModalConatiner'
 
-
 export interface Props {
     error: boolean
     article: Article
@@ -16,7 +15,7 @@ export interface Props {
 
 export class ShowModal extends React.PureComponent<Props, {}> {
 
-    render() {
+    public render() {
         const { visible, article, hide } = this.props
 
         return (

@@ -3,19 +3,18 @@ import * as React from 'react'
 import { Card, List } from 'antd'
 import { Link } from 'react-router-dom'
 
-import Library from 'model/Library'
 import Icon, { IconType } from 'components/common/Icon'
 import Loader from 'components/common/Loader'
+import Library from 'model/Library'
 
 import Container from './ListContainer'
-
 
 export interface Props {
     libs: Library[]
 }
 
 export class ListComponent extends React.PureComponent<Props, {}> {
-    render() {
+    public render() {
         const { libs } = this.props
 
         return (
@@ -33,7 +32,7 @@ export class ListComponent extends React.PureComponent<Props, {}> {
         )
     }
 
-    renderLibs = (libs: Library[]) =>
+    public renderLibs = (libs: Library[]) =>
         <List
             size={'large'}
             dataSource={libs}
