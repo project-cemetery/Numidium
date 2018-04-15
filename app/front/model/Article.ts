@@ -7,6 +7,8 @@ interface Article extends Entity {
     year: number
     description: string
     link: string
+
+    libs: any[] // TODO: fix it!
 }
 
 export default Article

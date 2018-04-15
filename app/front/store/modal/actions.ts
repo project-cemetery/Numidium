@@ -11,6 +11,7 @@ export enum ModalEnum {
     VACATION_EDIT = 'vacation/edit',
 
     ARTICLE_SHOW  = 'article/show',
+    ARTICLE_EDIT  = 'a rticle/edit',
 
     BOOK_SHOW     = 'book/show',
     BOOK_EDIT     = 'book/edit',

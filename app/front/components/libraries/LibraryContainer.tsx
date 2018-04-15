@@ -11,6 +11,7 @@ import Loader from 'components/common/Loader'
 import { Props as ComponentProps } from './Library'
 
 
+
 interface Props {
     id: number
 
@@ -45,6 +46,7 @@ export default function (Component: React.ComponentClass<ComponentProps>) {
                             library={library}
 
                             openArticle={this.openArticle}
+                            editArticle={this.editArticle}
 
                             openBook={this.openBook}
                             editBook={this.editBook}
@@ -69,6 +71,13 @@ export default function (Component: React.ComponentClass<ComponentProps>) {
 
             if (modalActions && modalActions.show)
                 modalActions.show(ModalEnum.ARTICLE_SHOW, id)
+        }
+
+        editArticle = (lib: Library, id?: number) => {
+            const { modalActions } = this.props
+
+            if (modalActions && modalActions.show)
+                modalActions.show(ModalEnum.ARTICLE_EDIT, id, lib)
         }
 
         openBook = (id: number) => {
