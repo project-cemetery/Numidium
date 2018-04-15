@@ -20,6 +20,8 @@ export interface FormFields {
     year: number
     description: string
     paper: boolean
+    shopLink: string
+    externalFileLink: string
 }
 
 export interface Props {
@@ -84,6 +86,14 @@ class ModalForm extends React.PureComponent<Props, {}> {
                                 />
                             </ItemWrapper>
 
+                            <ItemWrapper tail label="Ссылка на покупку">
+                                <TextInput name="shopLink" />
+                            </ItemWrapper>
+
+                            <ItemWrapper tail label="Ссылка на файл">
+                                <TextInput name="externalFileLink" />
+                            </ItemWrapper>
+
                             <ItemWrapper>
                                 <Checkbox name="paper" label="Есть бумажный экземпляр" />
                             </ItemWrapper>
@@ -101,6 +111,8 @@ class ModalForm extends React.PureComponent<Props, {}> {
         year: book.year,
         description: book.description,
         paper: book.paper,
+        shopLink: book.shopLink,
+        externalFileLink: book.externalFileLink,
     } as FormFields)
 
     public initialEmpty = () => ({
@@ -109,6 +121,8 @@ class ModalForm extends React.PureComponent<Props, {}> {
         year: (new Date()).getFullYear(),
         description: '',
         paper: false,
+        shopLink: '',
+        externalFileLink: '',
     } as FormFields)
 }
 

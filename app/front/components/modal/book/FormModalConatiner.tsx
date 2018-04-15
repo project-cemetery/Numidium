@@ -69,6 +69,8 @@ export default function(ModalForm: React.ComponentClass<ComponentProps>) {
                 year: values.year,
                 description: values.description,
                 paper: values.paper,
+                shopLink: values.shopLink,
+                externalFileLink: values.externalFileLink,
                 libs: [
                     payload['@id'],
                 ],

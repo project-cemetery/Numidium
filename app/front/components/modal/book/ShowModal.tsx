@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Modal } from 'antd'
+import { Button, Modal } from 'antd'
 
 import Alert, { AlertType } from 'components/common/Alert'
 import Book from 'model/Book'
@@ -24,17 +24,28 @@ export class ShowModal extends React.PureComponent<Props, {}> {
                 title={`${book.title} | ${book.author} | ${book.year} год`}
                 visible={visible}
 
-                okText={'Скачать'}
-                cancelText={'Закрыть'}
-
-                onCancel={() => hide()}
-                onOk={() => {
-                    alert('Скачивание пока недоступно!')
-                }}
+                footer={[
+                    <Button onClick={() => hide()}>Закрыть</Button>,
+                    !!book.shopLink &&
+                        <Button onClick={() => this.openLink(book.shopLink)} type="primary">Купить</Button>,
+                    !!book.externalFileLink &&
+                        <Button onClick={() => this.openLink(book.externalFileLink)} type="primary">Скачать</Button>,
+                ]}
             >
                 <p>{book.description}</p>
+                {!!book.paper &&
+                    <Alert
+                        message="Доступна в бумажном варианте. Спросите у кого-ниубдь."
+                        type={AlertType.INFO}
+                    />
+                }
             </Modal>
         )
+    }
+
+    public openLink = (link: string) => {
+        const win = window.open(link, '_blank') as any
+        win.focus()
     }
 }
 

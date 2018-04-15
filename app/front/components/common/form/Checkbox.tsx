@@ -15,7 +15,7 @@ export default (ownProps: Props) =>
         {(props) =>
             <React.Fragment>
                 <Checkbox
-                    value={props.input.value}
+                    checked={props.input.value}
                     onChange={props.input.onChange}
                 >
                     {ownProps.label}
