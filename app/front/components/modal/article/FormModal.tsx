@@ -78,7 +78,7 @@ class ModalForm extends React.PureComponent<Props, {}> {
                                 <NumberInput name='year' />
                             </ItemWrapper>
 
-                            <ItemWrapper label='Описание' tail>
+                            <ItemWrapper tail label='Описание'>
                                 <TextArea
                                     name='description'
                                     placeholder='Статья о новом слове в синхронизации состояния'
