@@ -12,14 +12,14 @@ test('`handleShow` returns correctly state', () => {
     const newState = handleShow(state, {
         type: actionTypes.SHOW,
         payload: {
-            modal: ModalEnum.VACATION,
+            modal: ModalEnum.VACATION_EDIT,
             id: 1,
         },
     })
 
     expect(newState).toEqual({
         show: true,
-        type: ModalEnum.VACATION,
+        type: ModalEnum.VACATION_EDIT,
         id: 1,
     })
 })
@@ -27,7 +27,7 @@ test('`handleShow` returns correctly state', () => {
 test('`handleHide` returns correctly state', () => {
     const state = {
         show: true,
-        type: ModalEnum.VACATION,
+        type: ModalEnum.VACATION_EDIT,
         id: 12,
     }
 

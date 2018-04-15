@@ -79,7 +79,8 @@ export default function (Vacations: React.ComponentClass<ComponentProps>) {
         openModal = (id?: number) => {
             const { modalActions } = this.props
 
-            if (modalActions && modalActions.show) modalActions.show(ModalEnum.VACATION, id)
+            if (modalActions && modalActions.show)
+                modalActions.show(ModalEnum.VACATION_EDIT, id)
         }
     }
 
