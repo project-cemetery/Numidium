@@ -41,20 +41,19 @@ const findIntersectionFromStart = (a: string, b: string) => {
 }
 
 const findIntersection = (a: string, b: string) => {
-    let bestResult = undefined
+    let bestResult = {
+        position: 0,
+        length: 0,
+    }
+
     for (let i = 0; i < a.length - 1; i++) {
         const result = findIntersectionFromStart(a.substring(i), b)
-        if (result) {
-            if (!bestResult) {
-                bestResult = result
-            } else {
-                if (result.length > bestResult.length) {
-                    bestResult = result
-                }
-            }
+        if (result && (result.length > bestResult.length)) {
+            bestResult = result
         }
-        if (bestResult && bestResult.length >= a.length - i)
+        if (bestResult.length >= a.length - i) {
             break
+        }
     }
     return bestResult
 }
