@@ -1,11 +1,10 @@
-import { createTypes, createActionCreators, ActionsCreators } from 'store/common/api/actions'
 import { AppState } from 'reducers'
+import { ActionsCreators, createActionCreators, createTypes } from 'store/common/api/actions'
 
-import rest from 'util/api/rest'
 import Library from 'model/Library'
+import rest from 'util/api/rest'
 
 import { LibrariesState } from './reducers'
-
 
 const ENTITY = 'libraries'
 

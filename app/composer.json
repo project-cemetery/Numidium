@@ -17,6 +17,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "friendsofphp/php-cs-fixer": "^2.11",
         "symfony/browser-kit": "^4.0",
         "symfony/dotenv": "^4.0",
         "symfony/phpunit-bridge": "^4.0",
@@ -54,7 +55,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "lint": "./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix -v --dry-run --stop-on-violation --using-cache=no",
+        "fix-style": "./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix"
     },
     "conflict": {
         "symfony/symfony": "*"

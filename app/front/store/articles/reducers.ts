@@ -1,11 +1,10 @@
-import { handleActions, Action } from 'redux-actions'
+import { Action, handleActions } from 'redux-actions'
 
+import Article from 'model/Article'
 import EntityLoadState, { initialState } from 'store/common/api/EntityLoadState'
 import { createReducers } from 'store/common/api/reducers'
-import Article from 'model/Article'
 
 import actions, { commonActionTypes } from './actions'
-
 
 const commonReducers = createReducers<Article>(commonActionTypes)
 
@@ -18,5 +17,5 @@ export default handleActions(
     } as any,
     {
         ...initialState,
-    }
+    },
 )

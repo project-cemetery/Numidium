@@ -6,7 +6,6 @@ import Entity from 'model/Entity'
 import { ActionTypes } from './actions'
 import State from './EntityLoadState'
 
-
 export const createHandleGetListRequest = <T extends Entity>() =>
     (state: State<T>, action: Action<{}>) => ({
         ...state,
@@ -19,7 +18,7 @@ export const createHandleGetListRequest = <T extends Entity>() =>
 export const createHandleGetListSuccess = <T extends Entity>() =>
     (state: State<T>, action: Action<Collection<T>>) => {
         const newIds = action.payload
-            ? action.payload.member.map(v => v['@id'])
+            ? action.payload.member.map((v) => v['@id'])
             : []
 
         return ({
@@ -31,7 +30,7 @@ export const createHandleGetListSuccess = <T extends Entity>() =>
             },
             list: action.payload,
             entities: [
-                ...state.entities.filter(e => newIds.indexOf(e['@id']) === -1),
+                ...state.entities.filter((e) => newIds.indexOf(e['@id']) === -1),
                 ...(action.payload ? action.payload.member : []),
             ],
         })
@@ -65,7 +64,7 @@ export const createHandleGetSuccess = <T extends Entity>() =>
             error: false,
         },
         entities: [
-            ...state.entities.filter(e => e['@id'] !== (action.payload as Entity)['@id']),
+            ...state.entities.filter((e) => e['@id'] !== (action.payload as Entity)['@id']),
             action.payload,
         ],
     })
@@ -98,7 +97,7 @@ export const createHandlePostSuccess = <T extends Entity>() =>
             error: false,
         },
         entities: [
-            ...state.entities.filter(e => e['@id'] !== (action.payload as Entity)['@id']),
+            ...state.entities.filter((e) => e['@id'] !== (action.payload as Entity)['@id']),
             action.payload,
         ],
     })
@@ -131,7 +130,7 @@ export const createHandlePutSuccess = <T extends Entity>() =>
             error: false,
         },
         entities: [
-            ...state.entities.filter(e => e['@id'] !== (action.payload as Entity)['@id']),
+            ...state.entities.filter((e) => e['@id'] !== (action.payload as Entity)['@id']),
             action.payload,
         ],
     })

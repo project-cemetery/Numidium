@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -62,7 +61,7 @@ class Library
 
     public function __construct()
     {
-        $this->books = new ArrayCollection();
+        $this->books    = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }
 

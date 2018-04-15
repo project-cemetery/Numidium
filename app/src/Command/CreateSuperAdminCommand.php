@@ -2,7 +2,6 @@
 
 namespace App\Command;
 
-
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -20,12 +19,11 @@ class CreateSuperAdminCommand extends Command
         ?string $name = null,
         UserPasswordEncoderInterface $encoder,
         EntityManagerInterface $em
-    )
-    {
+    ) {
         parent::__construct($name);
 
         $this->encoder = $encoder;
-        $this->em = $em;
+        $this->em      = $em;
     }
 
     protected function configure()
@@ -38,7 +36,7 @@ class CreateSuperAdminCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $email = $input->getArgument('email');
+        $email    = $input->getArgument('email');
         $password = $input->getArgument('password');
 
         $user = User::createUser($this->encoder, $email, $password);

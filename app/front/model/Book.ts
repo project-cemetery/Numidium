@@ -1,6 +1,5 @@
 import Entity from './Entity'
 
-
 interface Book extends Entity {
     title: string
     author: string

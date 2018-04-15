@@ -1,6 +1,5 @@
 import { IconType } from 'components/common/Icon'
 
-
 export const INDEX_PAGE = 'INDEX_PAGE'
 
 export interface MenuItem {

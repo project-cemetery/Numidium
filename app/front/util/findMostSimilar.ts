@@ -6,22 +6,23 @@ interface Counter<T> {
 export default <T>(
     needle: string,
     haystack: T[],
-    getField: (e: T) => string | undefined
+    getField: (e: T) => string | undefined,
 ) => {
-    const exact = haystack.find(value => getField(value) === needle)
+    const exact = haystack.find((value) => getField(value) === needle)
 
-    if (!!exact)
+    if (!!exact) {
         return exact
+    }
 
     return haystack
-        .filter(value => (getField(value) || '').includes(needle) || needle.includes(getField(value) || ''))
+        .filter((value) => (getField(value) || '').includes(needle) || needle.includes(getField(value) || ''))
         .map((value, index) => ({
             item: value,
             intersection: intersectionLength(getField(value) || '', needle),
         } as Counter<T>))
         .reduce(
             (prev, current) => (prev.intersection >= current.intersection) ? prev : current,
-            { item: undefined, intersection: 0 } as Counter<T>
+            { item: undefined, intersection: 0 } as Counter<T>,
         ).item
 }
 
