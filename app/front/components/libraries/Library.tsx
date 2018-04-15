@@ -18,7 +18,7 @@ export interface Props {
     openArticle: (id: number) => void
 
     openBook: (id: number) => void
-    editBook: (id?: number) => void
+    editBook: (lib: Library, id?: number) => void
 }
 
 export class LibraryComponent extends React.PureComponent<Props, {}> {
@@ -37,7 +37,7 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
                             title={library.title}
                             actions={[
                                 <Link to={`/libs/form/${library.id}`}>Редактировать раздел</Link>,
-                                <span onClick={() => this.props.editBook()}>Добавить книгу</span>,
+                                <span onClick={() => this.props.editBook(library)}>Добавить книгу</span>,
                                 <span>Добавить статью</span>,
                             ]}
                         >
@@ -88,8 +88,12 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
             dataSource={books}
             renderItem={(book: Book) =>
                 <List.Item actions={[
-                    <Icon type={IconType.EYE_O} onClick={() => this.props.openBook(book.id)} />,
-                    <Icon type={IconType.EDIT} onClick={() => this.props.editBook(book.id)} />,
+                    <Icon type={IconType.EYE_O} onClick={
+                        () => this.props.openBook(book.id)
+                    } />,
+                    <Icon type={IconType.EDIT} onClick={
+                        () => this.props.editBook(this.props.library, book.id)
+                    }/>,
                 ]}>
                     <List.Item.Meta title={book.title} description={`${book.author} | ${book.year}`} />
                 </List.Item>

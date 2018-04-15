@@ -85,6 +85,7 @@ class Book
     public function addLib(Library $lib): Book
     {
         $this->libs->add($lib);
+        $lib->addBook($this);
 
         return $this;
     }
@@ -92,6 +93,7 @@ class Book
     public function removeLib(Library $lib): Book
     {
         $this->libs->removeElement($lib);
+        $lib->removeBook($this);
 
         return $this;
     }

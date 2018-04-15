@@ -25,12 +25,14 @@ const mapStateToProps = (state: AppState) => ({
     visible: state.modal.show,
     type: state.modal.type,
     id: state.modal.id,
+    payload: state.modal.payload,
 })
 
 interface Props {
     visible?: boolean,
     type?: ModalEnum,
     id?: number,
+    payload?: any
 }
 
 @(connect(mapStateToProps, {...modalActions}) as any)

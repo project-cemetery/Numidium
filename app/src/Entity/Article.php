@@ -85,6 +85,7 @@ class Article
     public function addLib(Library $lib): Article
     {
         $this->libs->add($lib);
+        $lib->addArticle($this);
 
         return $this;
     }
@@ -92,6 +93,7 @@ class Article
     public function removeLib(Library $lib): Article
     {
         $this->libs->removeElement($lib);
+        $lib->removeArticle($this);
 
         return $this;
     }

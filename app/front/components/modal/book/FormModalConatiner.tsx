@@ -4,14 +4,18 @@ import { bindActionCreators, Dispatch } from 'redux'
 
 import { AppState } from 'reducers'
 import modalActions, { ModalActions } from 'store/modal/actions'
+import librariesActions, { LibrariesActions } from 'store/libraries/actions'
 import booksActions, { BooksActions } from 'store/books/actions'
 import Book from 'model/Book'
+import Library from 'model/Library'
 
 import { Props as ComponentProps, FormFields } from './FormModal'
 
 
 interface Props {
     id?: number
+    payload: Library
+
     visible: boolean
 
     loading?: boolean
@@ -24,6 +28,7 @@ interface Props {
 
     modalActions?: ModalActions
     booksActions?: BooksActions
+    librariesActions?: LibrariesActions
 }
 
 export default function (ModalForm: React.ComponentClass<ComponentProps>) {
@@ -53,7 +58,7 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
         }
 
         submit = (values: FormFields) => {
-            const { booksActions, modalActions } = this.props
+            const { booksActions, modalActions, librariesActions, payload } = this.props
 
             const book = {
                 id: this.props.id,
@@ -62,14 +67,24 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
                 year: values.year,
                 description: values.description,
                 paper: values.paper,
+                libs: [
+                    payload['@id'],
+                ],
             } as Book
 
-            if (!!booksActions && !!booksActions.post && !!booksActions.put) {
+            if (
+                !!booksActions && !!booksActions.post && !!booksActions.put &&
+                !!librariesActions && !!librariesActions.get
+            ) {
                 const promise = !book.id
                     ? booksActions.post(book)
                     : booksActions.put(book)
 
-                promise.then(() => !!modalActions && !!modalActions.hide && modalActions.hide())
+                promise
+                    .then(() => !!modalActions && !!modalActions.hide && modalActions.hide())
+                    .then(() => (!!librariesActions && !!librariesActions.get &&
+                        librariesActions.get(payload.id)
+                    ) as any)
             }
         }
 
@@ -109,4 +124,5 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
     booksActions: bindActionCreators(booksActions, dispatch),
     modalActions: bindActionCreators(modalActions, dispatch),
+    librariesActions: bindActionCreators(librariesActions, dispatch),
 })

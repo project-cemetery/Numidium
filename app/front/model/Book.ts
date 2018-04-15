@@ -7,6 +7,8 @@ interface Book extends Entity {
     year: number
     description: string
     paper: boolean
+
+    libs: any[] // TODO: fix it!
 }
 
 export default Book

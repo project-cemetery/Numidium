@@ -103,7 +103,6 @@ class Library
     public function addBook(Book $book): Library
     {
         $this->books->add($book);
-        $book->addLib($this);
 
         return $this;
     }
@@ -111,7 +110,6 @@ class Library
     public function removeBook(Book $book): Library
     {
         $this->books->removeElement($book);
-        $book->removeLib($this);
 
         return $this;
     }
@@ -124,7 +122,6 @@ class Library
     public function addArticle(Article $article): Library
     {
         $this->articles->add($article);
-        $article->addLib($this);
 
         return $this;
     }
@@ -132,7 +129,6 @@ class Library
     public function removeArticle(Article $article): Library
     {
         $this->articles->removeElement($article);
-        $article->removeLib($this);
 
         return $this;
     }
