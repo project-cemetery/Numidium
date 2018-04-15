@@ -40,7 +40,7 @@ export class ListComponent extends React.PureComponent<Props, {}> {
                 <List.Item actions={[
                     <Link to={`/libs/show/${l.id}`}><Icon type={IconType.EYE_O} /></Link>,
                 ]}>
-                    <List.Item.Meta title={l.title} description={l.description} />
+                    <List.Item.Meta title={l.title} />
                 </List.Item>
             }
         />
