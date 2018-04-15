@@ -3,7 +3,6 @@ import * as renderer from 'react-test-renderer'
 
 import Icon, { IconType } from '../Icon'
 
-
 test('`Icon` renders correctly', () => {
     const tree = renderer
         .create(<Icon type={IconType.ANDROID} />)

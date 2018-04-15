@@ -1,10 +1,9 @@
 import * as React from 'react'
 
-import { Field } from 'react-final-form'
 import { Input } from 'antd'
+import { Field } from 'react-final-form'
 
 import Alert, { AlertType } from 'components/common/Alert'
-
 
 interface Props {
     name: string
@@ -14,7 +13,7 @@ interface Props {
 
 export default (ownProps: Props) =>
     <Field name={ownProps.name}>
-        {props =>
+        {(props) =>
             <React.Fragment>
                 <Input.TextArea
                     value={props.input.value}

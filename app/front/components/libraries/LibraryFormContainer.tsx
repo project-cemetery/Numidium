@@ -1,16 +1,15 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
 import { RouteComponentProps } from 'react-router'
+import { bindActionCreators, Dispatch } from 'redux'
 
-import { AppState } from 'reducers'
-import librariesActions, { LibrariesActions } from 'store/libraries/actions'
+import Loader from 'components/common/Loader'
 import Library from 'model/Library'
 import User, { Owner } from 'model/User'
-import Loader from 'components/common/Loader'
+import { AppState } from 'reducers'
+import librariesActions, { LibrariesActions } from 'store/libraries/actions'
 
-import { Props as ComponentProps, FormFields } from './LibraryForm'
-
+import { FormFields, Props as ComponentProps } from './LibraryForm'
 
 interface Props {
     id?: number
@@ -28,15 +27,14 @@ interface Props {
     goBack: () => void
 }
 
-export default function (Form: React.ComponentClass<ComponentProps>) {
+export default function(Form: React.ComponentClass<ComponentProps>) {
 
-    // type ConatinerProps = Props & RouteComponentProps<{}>
     type ConatinerProps = Props
 
     @(connect(mapStateToProps, mapDispatchToProps) as any)
     class Wrapped extends React.Component<ConatinerProps, {}> {
 
-        render() {
+        public render() {
             const {
                 id, library, loading, error, saveLoading, saveError,
             } = this.props
@@ -56,7 +54,8 @@ export default function (Form: React.ComponentClass<ComponentProps>) {
             )
         }
 
-        submit = (values: FormFields) => {
+        public submit = (values: FormFields) => {
+            // tslint:disable-next-line:no-shadowed-variable
             const { librariesActions } = this.props
 
             const lib = {
@@ -75,9 +74,9 @@ export default function (Form: React.ComponentClass<ComponentProps>) {
             }
         }
 
-        cancel = () => this.props.goBack()
+        public cancel = () => this.props.goBack()
 
-        validate = (values: FormFields) => {
+        public validate = (values: FormFields) => {
             const errors = {} as any
 
             if (!values.title) {
@@ -87,14 +86,16 @@ export default function (Form: React.ComponentClass<ComponentProps>) {
             return errors
         }
 
-        componentDidMount() {
+        public componentDidMount() {
             const {
                 id, library,
+                // tslint:disable-next-line:no-shadowed-variable
                 librariesActions,
             } = this.props
 
-            if (id && !library && !!librariesActions && !!librariesActions.get)
+            if (id && !library && !!librariesActions && !!librariesActions.get) {
                 librariesActions.get(id)
+            }
         }
     }
 
@@ -102,7 +103,7 @@ export default function (Form: React.ComponentClass<ComponentProps>) {
 }
 
 const mapStateToProps = (state: AppState, ownProps: Props) => ({
-    library: state.libraries.entities.find(v => v.id === ownProps.id),
+    library: state.libraries.entities.find((v) => v.id === ownProps.id),
 
     saveLoading: !!state.libraries.post.loading || !!state.libraries.put.loading,
     saveError: !!state.libraries.post.error || !!state.libraries.put.error,

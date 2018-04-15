@@ -2,12 +2,11 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 
+import Article from 'model/Article'
 import { AppState } from 'reducers'
 import modalActions, { ModalActions } from 'store/modal/actions'
-import Article from 'model/Article'
 
 import { Props as ComponentProps } from './ShowModal'
-
 
 interface Props {
     id: number
@@ -20,16 +19,17 @@ interface Props {
     modalActions?: ModalActions
 }
 
-export default function (Component: React.ComponentClass<ComponentProps>) {
+export default function(Component: React.ComponentClass<ComponentProps>) {
 
     type ConatinerProps = Props
 
     @(connect(mapStateToProps, mapDispatchToProps) as any)
     class Wrapped extends React.Component<ConatinerProps, {}> {
 
-        render() {
+        public render() {
             const {
                 id, article, visible, error,
+                // tslint:disable-next-line:no-shadowed-variable
                 modalActions,
             } = this.props
 
@@ -52,9 +52,9 @@ const mapStateToProps = (state: AppState) => ({
     id: state.modal.id,
 
     article: state.libraries.entities
-        .map(lib => lib.articles)
+        .map((lib) => lib.articles)
         .reduce((acc, arr, []) => [...acc, ...arr])
-        .find(article => article.id === state.modal.id),
+        .find((article) => article.id === state.modal.id),
 
     error: !!state.vacations.get.error || !!state.users.get.error,
 })

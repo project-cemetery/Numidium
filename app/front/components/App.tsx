@@ -2,13 +2,13 @@ import * as React from 'react'
 
 import { Layout, Menu } from 'antd'
 import { css } from 'emotion'
-import { Route, Link, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Link, Route, RouteComponentProps } from 'react-router-dom'
 
 import ContentBlock from 'components/common/Content'
 import IconWithText, { IconType } from 'components/common/IconWithText'
 import ModalRoot from 'components/modal/ModalRoot'
-import menu, { MenuItem, INDEX_PAGE } from 'menu'
+import menu, { INDEX_PAGE, MenuItem } from 'menu'
 import User from 'model/User'
 import findMostSimilar from 'util/findMostSimilar'
 
@@ -23,7 +23,6 @@ import LibraryForm from './libraries/LibraryForm'
 const { Header, Content, Footer, Sider } = Layout
 const SubMenu = Menu.SubMenu
 
-
 interface LocalState {
     collapsed: boolean
     menuKey: string
@@ -31,16 +30,16 @@ interface LocalState {
 
 export default class App extends React.PureComponent<RouteComponentProps<{}>, LocalState> {
 
-    state = {
+    public state = {
         collapsed: false,
         menuKey: '',
     } as LocalState
 
-    onCollapse = (collapsed: boolean) => {
+    public onCollapse = (collapsed: boolean) => {
         this.setState({ collapsed })
     }
 
-    render() {
+    public render() {
         const { menuKey, collapsed } = this.state
 
         return (
@@ -51,10 +50,10 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
                     onCollapse={this.onCollapse}
                 >
                     <div className={this.s('logo')} />
-                    <Menu theme='dark' selectedKeys={[ menuKey ]} mode='inline'>
+                    <Menu theme="dark" selectedKeys={[ menuKey ]} mode="inline">
                         {menu.map((item, i) => !!item.children
                             ? this.renderSubMenu(item)
-                            : this.renderMenuItem(item)
+                            : this.renderMenuItem(item),
                         )}
                     </Menu>
                 </Sider>
@@ -63,15 +62,15 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
 
                     <Content className={this.s('content')}>
                         <ContentBlock>
-                            <Route path='/' exact component={Dashboard} />
+                            <Route path="/" exact component={Dashboard} />
 
-                            <Route path='/vacations' component={Vacations} />
+                            <Route path="/vacations" component={Vacations} />
 
-                            <Route path='/libs' exact component={Libraries} />
-                            <Route path='/libs/form/:id?' render={({ match, history }) =>
+                            <Route path="/libs" exact component={Libraries} />
+                            <Route path="/libs/form/:id?" render={({ match, history }) =>
                                 <LibraryForm id={parseInt(match.params.id, 10)} goBack={history.goBack} />
                             } />
-                            <Route path='/libs/show/:id' render={({ match }) =>
+                            <Route path="/libs/show/:id" render={({ match }) =>
                                 <Library id={parseInt(match.params.id, 10)} />
                             } />
                         </ContentBlock>
@@ -87,19 +86,19 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
         )
     }
 
-    renderSubMenu = (item: MenuItem) =>
+    public renderSubMenu = (item: MenuItem) =>
         <SubMenu key={item.key} title={<IconWithText icon={item.icon} text={item.title} />}>
             {item.children && item.children.map(this.renderMenuItem)}
         </SubMenu>
 
-    renderMenuItem = (item: MenuItem) =>
+    public renderMenuItem = (item: MenuItem) =>
         <Menu.Item key={item.key}>
             <Link to={item.path || '/'}>
                 <IconWithText icon={item.icon} text={item.title} />
             </Link>
         </Menu.Item>
 
-    s = (className: string) => ({
+    public s = (className: string) => ({
         constainer: css`
             min-height: 100vh;
         `,
@@ -120,15 +119,15 @@ export default class App extends React.PureComponent<RouteComponentProps<{}>, Lo
         `,
     } as any)[className]
 
-    componentWillReceiveProps(nextProps: RouteComponentProps<{}>) {
+    public componentWillReceiveProps(nextProps: RouteComponentProps<{}>) {
         const path = nextProps.location.pathname
-        const currentItem = findMostSimilar(path, menu, e => e.path)
+        const currentItem = findMostSimilar(path, menu, (e) => e.path)
         const currentKey = currentItem ? currentItem.key : INDEX_PAGE
 
         this.setState({ menuKey: currentKey })
     }
 
-    componentWillMount() {
+    public componentWillMount() {
         this.componentWillReceiveProps(this.props)
     }
 }

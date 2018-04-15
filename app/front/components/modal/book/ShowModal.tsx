@@ -2,11 +2,10 @@ import * as React from 'react'
 
 import { Modal } from 'antd'
 
-import Book from 'model/Book'
 import Alert, { AlertType } from 'components/common/Alert'
+import Book from 'model/Book'
 
 import Container from './ShowModalConatiner'
-
 
 export interface Props {
     error: boolean
@@ -17,7 +16,7 @@ export interface Props {
 
 export class ShowModal extends React.PureComponent<Props, {}> {
 
-    render() {
+    public render() {
         const { visible, book, hide } = this.props
 
         return (

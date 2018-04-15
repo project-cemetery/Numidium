@@ -1,9 +1,8 @@
 import * as React from 'react'
 
-import { Row, Col } from 'antd'
+import { Col, Row } from 'antd'
 
 import UserWidget from './widgets/User'
-
 
 export default () =>
     <React.Fragment>

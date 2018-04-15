@@ -3,7 +3,6 @@ import * as renderer from 'react-test-renderer'
 
 import Breadcrumbs from '../Breadcrumbs'
 
-
 test('`Breadcrumbs` renders correctly with items', () => {
     const breadcrumbs = [ 'Home', 'Profile' ]
 

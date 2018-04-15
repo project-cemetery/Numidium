@@ -2,15 +2,14 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 
+import User, { Owner } from 'model/User'
+import Vacation from 'model/Vacation'
 import { AppState } from 'reducers'
 import modalActions, { ModalActions } from 'store/modal/actions'
-import vacationsActions, { VacationsActions } from 'store/vacations/actions'
 import usersActions, { UsersActions } from 'store/users/actions'
-import Vacation from 'model/Vacation'
-import User, { Owner } from 'model/User'
+import vacationsActions, { VacationsActions } from 'store/vacations/actions'
 
-import { Props as ComponentProps, FormFields } from './FormModal'
-
+import { FormFields, Props as ComponentProps } from './FormModal'
 
 interface Props {
     id?: number
@@ -30,16 +29,17 @@ interface Props {
     usersActions?: UsersActions
 }
 
-export default function (ModalForm: React.ComponentClass<ComponentProps>) {
+export default function(ModalForm: React.ComponentClass<ComponentProps>) {
 
     type ConatinerProps = Props
 
     @(connect(mapStateToProps, mapDispatchToProps) as any)
     class Wrapped extends React.Component<ConatinerProps, {}> {
 
-        render() {
+        public render() {
             const {
                 id, vacation, visible, loading, error, saveLoading, saveError,
+                // tslint:disable-next-line:no-shadowed-variable
                 modalActions,
             } = this.props
 
@@ -56,7 +56,8 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
                 />
         }
 
-        submit = (values: FormFields) => {
+        public submit = (values: FormFields) => {
+            // tslint:disable-next-line:no-shadowed-variable
             const { vacationsActions, user, modalActions } = this.props
 
             const vacation = {
@@ -75,19 +76,21 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
             }
         }
 
-        componentWillReceiveProps(nextProps: Props) {
+        public componentWillReceiveProps(nextProps: Props) {
             const {
                 id, visible, vacation, user,
+                // tslint:disable-next-line:no-shadowed-variable
                 vacationsActions, usersActions,
             } = nextProps
 
-            if (visible && id && !vacation && !!vacationsActions && !!vacationsActions.get)
+            if (visible && id && !vacation && !!vacationsActions && !!vacationsActions.get) {
                 vacationsActions.get(id)
+            }
 
-            if (visible && !user && !!usersActions && !!usersActions.getMe) usersActions.getMe()
+            if (visible && !user && !!usersActions && !!usersActions.getMe) { usersActions.getMe() }
         }
 
-        componentDidMount() {
+        public componentDidMount() {
             this.componentWillReceiveProps(this.props)
         }
     }
@@ -98,8 +101,8 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
 const mapStateToProps = (state: AppState) => ({
     id: state.modal.id,
 
-    vacation: state.vacations.entities.find(v => v.id === state.modal.id),
-    user: state.users.entities.find(u => u.id === state.users.meId),
+    vacation: state.vacations.entities.find((v) => v.id === state.modal.id),
+    user: state.users.entities.find((u) => u.id === state.users.meId),
 
     saveLoading: !!state.vacations.post.loading || !!state.vacations.put.loading,
     saveError: !!state.vacations.post.error || !!state.vacations.put.error,

@@ -5,7 +5,6 @@ import { css } from 'emotion'
 
 import Alert, { AlertType } from './Alert'
 
-
 interface Props {
     loading: boolean
     error: boolean
@@ -14,7 +13,7 @@ interface Props {
 
 export default (props: Props) =>
     props.error
-        ? <Alert message='Произошла ошибка, попробуйте обновить страницу' type={AlertType.ERROR} />
+        ? <Alert message="Произошла ошибка, попробуйте обновить страницу" type={AlertType.ERROR} />
         : props.loading
             ? <div className={s.spinContainer}><Spin /></div>
             : props.children

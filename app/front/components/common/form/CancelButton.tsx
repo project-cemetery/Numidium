@@ -3,7 +3,6 @@ import * as React from 'react'
 import { Button } from 'antd'
 import { css } from 'emotion'
 
-
 interface Props {
     label: string
     cancel: () => void

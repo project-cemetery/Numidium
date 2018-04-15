@@ -3,15 +3,14 @@ import { connect } from 'react-redux'
 
 import VacationForm from './vacation/FormModal'
 
-import ArticleShow from './article/ShowModal'
 import ArticleForm from './article/FormModal'
+import ArticleShow from './article/ShowModal'
 
-import BookShow from './book/ShowModal'
 import BookForm from './book/FormModal'
+import BookShow from './book/ShowModal'
 
-import modalActions, { ModalActions, ModalEnum } from 'store/modal/actions'
 import { AppState } from 'reducers'
-
+import modalActions, { ModalActions, ModalEnum } from 'store/modal/actions'
 
 const MODAL_COMPONENTS = {
     [ModalEnum.VACATION_EDIT]: VacationForm,
@@ -40,14 +39,13 @@ interface Props {
 @(connect(mapStateToProps, {...modalActions}) as any)
 export default class ModalRoot extends React.Component<Props & ModalActions, {}> {
 
-    render() {
+    public render() {
         const { visible, type, id } = this.props
 
-        if (!type) return null
+        if (!type) { return null }
 
         const SpecificModal = (MODAL_COMPONENTS as any)[type]
 
         return <SpecificModal {...this.props} />
     }
 }
-

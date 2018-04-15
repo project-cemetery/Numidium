@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { Alert } from 'antd'
 
-
 interface Props {
     type: AlertType
     message: string

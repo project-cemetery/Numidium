@@ -3,18 +3,16 @@ import * as React from 'react'
 import { Modal } from 'antd'
 import { Form } from 'react-final-form'
 
-
+import Checkbox from 'components/common/form/Checkbox'
 import FormWrapper from 'components/common/form/FormWrapper'
 import ItemWrapper from 'components/common/form/ItemWrapper'
-import Checkbox from 'components/common/form/Checkbox'
-import TextInput from 'components/common/form/TextInput'
 import NumberInput from 'components/common/form/NumberInput'
 import TextArea from 'components/common/form/TextArea'
+import TextInput from 'components/common/form/TextInput'
 import Loader from 'components/common/Loader'
 import Book from 'model/Book'
 
 import Container from './FormModalConatiner'
-
 
 export interface FormFields {
     title: string
@@ -37,7 +35,7 @@ export interface Props {
 }
 
 class ModalForm extends React.PureComponent<Props, {}> {
-    render() {
+    public render() {
         const { loading, error, book, visible, hide, submit, validate } = this.props
 
         const initialValues = !!book
@@ -45,12 +43,12 @@ class ModalForm extends React.PureComponent<Props, {}> {
             : this.initialEmpty()
 
         return <Form
-            onSubmit={values => submit(values as FormFields)}
-            validate={values => validate(values as FormFields)}
+            onSubmit={(values) => submit(values as FormFields)}
+            validate={(values) => validate(values as FormFields)}
             initialValues={initialValues}
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
                 <Modal
-                    wrapClassName='vertical-center-modal'
+                    wrapClassName="vertical-center-modal"
                     title={'Книга'}
                     visible={visible}
 
@@ -66,28 +64,28 @@ class ModalForm extends React.PureComponent<Props, {}> {
                     <Loader loading={loading} error={error}>
                         <FormWrapper>
 
-                            <ItemWrapper tail label='Название'>
-                                <TextInput name='title' placeholder='Чистый код' />
+                            <ItemWrapper tail label="Название">
+                                <TextInput name="title" placeholder="Чистый код" />
                             </ItemWrapper>
 
-                            <ItemWrapper tail label='Автор'>
-                                <TextInput name='author' placeholder='Роберт Мартин' />
+                            <ItemWrapper tail label="Автор">
+                                <TextInput name="author" placeholder="Роберт Мартин" />
                             </ItemWrapper>
 
-                            <ItemWrapper tail label='Год выхода'>
-                                <NumberInput name='year' />
+                            <ItemWrapper tail label="Год выхода">
+                                <NumberInput name="year" />
                             </ItemWrapper>
 
-                            <ItemWrapper label='Описание' tail>
+                            <ItemWrapper label="Описание" tail>
                                 <TextArea
-                                    name='description'
-                                    placeholder='Даже плохой программный код может работать.'
+                                    name="description"
+                                    placeholder="Даже плохой программный код может работать."
                                     rows={5}
                                 />
                             </ItemWrapper>
 
                             <ItemWrapper>
-                                <Checkbox name='paper' label='Есть бумажный экземпляр' />
+                                <Checkbox name="paper" label="Есть бумажный экземпляр" />
                             </ItemWrapper>
 
                         </FormWrapper>
@@ -97,7 +95,7 @@ class ModalForm extends React.PureComponent<Props, {}> {
         />
     }
 
-    initialBook = (book: Book) => ({
+    public initialBook = (book: Book) => ({
         title: book.title,
         author: book.author,
         year: book.year,
@@ -105,7 +103,7 @@ class ModalForm extends React.PureComponent<Props, {}> {
         paper: book.paper,
     } as FormFields)
 
-    initialEmpty = () => ({
+    public initialEmpty = () => ({
         title: '',
         author: '',
         year: (new Date()).getFullYear(),
