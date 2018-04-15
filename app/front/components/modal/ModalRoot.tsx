@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import VacationForm from './vacation/ModalForm'
+import VacationForm from './vacation/FormModal'
 import ArticleShow from './article/ShowModal'
 import BookShow from './book/ShowModal'
 
@@ -10,8 +10,8 @@ import { AppState } from 'reducers'
 
 
 const MODAL_COMPONENTS = {
-    [ModalEnum.VACATION_FORM]: VacationForm,
-    
+    [ModalEnum.VACATION_EDIT]: VacationForm,
+
     [ModalEnum.ARTICLE_SHOW]: ArticleShow,
 
     [ModalEnum.BOOK_SHOW]: BookShow,

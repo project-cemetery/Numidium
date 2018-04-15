@@ -9,7 +9,7 @@ import RangePicker from 'components/common/form/RangePicker'
 import Loader from 'components/common/Loader'
 import Vacation from 'model/Vacation'
 
-import Container from './ModalFormConatiner'
+import Container from './FormModalConatiner'
 
 
 export interface FormFields {

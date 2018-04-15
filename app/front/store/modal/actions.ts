@@ -8,11 +8,12 @@ export const actionTypes = {
 }
 
 export enum ModalEnum {
-    VACATION_FORM = 'vacation/form',
+    VACATION_EDIT = 'vacation/edit',
 
     ARTICLE_SHOW  = 'article/show',
-    
-    BOOK_SHOW     = 'bookshow',
+
+    BOOK_SHOW     = 'book/show',
+    BOOK_EDIT     = 'book/edit',
 }
 
 export interface ModalActions {
