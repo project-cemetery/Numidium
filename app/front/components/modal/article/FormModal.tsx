@@ -33,11 +33,12 @@ export interface Props {
 
     hide: () => void
     submit: (values: FormFields) => void
+    validate: (values: FormFields) => any
 }
 
 class ModalForm extends React.PureComponent<Props, {}> {
     render() {
-        const { loading, error, article, visible, hide, submit } = this.props
+        const { loading, error, article, visible, hide, submit, validate } = this.props
 
         const initialValues = !!article
             ? this.initialArticle(article)
@@ -45,6 +46,7 @@ class ModalForm extends React.PureComponent<Props, {}> {
 
         return <Form
             onSubmit={values => submit(values as FormFields)}
+            validate={values => validate(values as FormFields)}
             initialValues={initialValues}
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
                 <Modal

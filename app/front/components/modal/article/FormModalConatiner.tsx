@@ -54,6 +54,7 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
 
                     hide={modalActions.hide}
                     submit={this.submit}
+                    validate={this.validate}
                 />
         }
 
@@ -83,6 +84,19 @@ export default function (ModalForm: React.ComponentClass<ComponentProps>) {
                         librariesActions.get(payload.id)
                     ) as any)
             }
+        }
+
+        validate = (values: FormFields) => {
+            const errors = {} as any
+
+            if (!values.title) {
+                errors.title = 'Обязательное поле'
+            }
+            if (!values.link) {
+                errors.link = 'Обязательное поле'
+            }
+
+            return errors
         }
 
         componentWillReceiveProps(nextProps: Props) {

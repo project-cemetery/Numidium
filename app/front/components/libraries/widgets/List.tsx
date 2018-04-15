@@ -19,19 +19,17 @@ export class ListComponent extends React.PureComponent<Props, {}> {
         const { libs } = this.props
 
         return (
-            <React.Fragment>
-                <Card
-                    title={'Разделы'}
-                    actions={[
-                        <Link to={'/libs/form'}>Добавить</Link>,
-                    ]}
-                >
-                    { (libs.length > 0)
-                        ? this.renderLibs(libs)
-                        : <p>В библиотеке нет разделов</p>
-                    }
-                </Card>
-            </React.Fragment>
+            <Card
+                title={'Разделы'}
+                actions={[
+                    <Link to={'/libs/form'}>Добавить</Link>,
+                ]}
+            >
+                { (libs.length > 0)
+                    ? this.renderLibs(libs)
+                    : <p>В библиотеке нет разделов</p>
+                }
+            </Card>
         )
     }
 
