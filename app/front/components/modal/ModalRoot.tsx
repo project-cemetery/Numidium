@@ -2,8 +2,11 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import VacationForm from './vacation/FormModal'
+
 import ArticleShow from './article/ShowModal'
+
 import BookShow from './book/ShowModal'
+import BookForm from './book/FormModal'
 
 import modalActions, { ModalActions, ModalEnum } from 'store/modal/actions'
 import { AppState } from 'reducers'
@@ -15,6 +18,7 @@ const MODAL_COMPONENTS = {
     [ModalEnum.ARTICLE_SHOW]: ArticleShow,
 
     [ModalEnum.BOOK_SHOW]: BookShow,
+    [ModalEnum.BOOK_EDIT]: BookForm,
 }
 
 const mapStateToProps = (state: AppState) => ({

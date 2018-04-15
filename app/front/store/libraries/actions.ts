@@ -7,7 +7,7 @@ import Library from 'model/Library'
 import { LibrariesState } from './reducers'
 
 
-const ENTITY = 'books'
+const ENTITY = 'libraries'
 
 export const commonActionTypes = createTypes(ENTITY)
 export const commonActionCreators = createActionCreators<Library>(ENTITY, (state: AppState) => state.libraries)
