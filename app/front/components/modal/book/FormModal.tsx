@@ -1,11 +1,15 @@
 import * as React from 'react'
 
 import { Modal } from 'antd'
-import * as moment from 'moment'
-import { Moment } from 'moment'
 import { Form } from 'react-final-form'
 
-import RangePicker from 'components/common/form/RangePicker'
+
+import FormWrapper from 'components/common/form/FormWrapper'
+import ItemWrapper from 'components/common/form/ItemWrapper'
+import Checkbox from 'components/common/form/Checkbox'
+import TextInput from 'components/common/form/TextInput'
+import NumberInput from 'components/common/form/NumberInput'
+import TextArea from 'components/common/form/TextArea'
 import Loader from 'components/common/Loader'
 import Book from 'model/Book'
 
@@ -44,24 +48,47 @@ class ModalForm extends React.PureComponent<Props, {}> {
             initialValues={initialValues}
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
                 <Modal
+                    wrapClassName='vertical-center-modal'
                     title={'Книга'}
                     visible={visible}
 
                     okText={'Сохранить'}
                     cancelText={'Отменить'}
 
-                    onOk={() => {
-                        handleSubmit()
-                    }}
+                    onOk={() => handleSubmit()}
                     onCancel={() => {
                         reset()
                         hide()
                     }}
-
-                    style={{ textAlign: 'center' }}
                 >
                     <Loader loading={loading} error={error}>
-                        <p>...</p>
+                        <FormWrapper>
+
+                            <ItemWrapper tail label='Название'>
+                                <TextInput name='title' placeholder='Чистый код' />
+                            </ItemWrapper>
+
+                            <ItemWrapper tail label='Автор'>
+                                <TextInput name='author' placeholder='Роберт Мартин' />
+                            </ItemWrapper>
+
+                            <ItemWrapper tail label='Год выхода'>
+                                <NumberInput name='year' />
+                            </ItemWrapper>
+
+                            <ItemWrapper label='Описание' tail>
+                                <TextArea
+                                    name='description'
+                                    placeholder='Даже плохой программный код может работать.'
+                                    rows={5}
+                                />
+                            </ItemWrapper>
+
+                            <ItemWrapper>
+                                <Checkbox name='paper' label='Есть бумажный экземпляр' />
+                            </ItemWrapper>
+
+                        </FormWrapper>
                     </Loader>
                 </Modal>
             )}

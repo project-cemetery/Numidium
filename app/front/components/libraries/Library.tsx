@@ -37,7 +37,7 @@ export class LibraryComponent extends React.PureComponent<Props, {}> {
                             title={library.title}
                             actions={[
                                 <Link to={`/libs/form/${library.id}`}>Редактировать раздел</Link>,
-                                <span>Добавить книгу</span>,
+                                <span onClick={() => this.props.editBook()}>Добавить книгу</span>,
                                 <span>Добавить статью</span>,
                             ]}
                         >

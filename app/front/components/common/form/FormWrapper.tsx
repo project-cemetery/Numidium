@@ -4,14 +4,14 @@ import { Form } from 'antd'
 
 
 interface Props {
-    handleSubmit: () => void
+    handleSubmit?: () => void
     children?: any
 }
 
 export default (props: Props) =>
     <Form onSubmit={(e: any) => {
         e.preventDefault()
-        props.handleSubmit()
+        if (props.handleSubmit) props.handleSubmit()
     }}>
         {props.children}
     </Form>
