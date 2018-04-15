@@ -66,6 +66,13 @@ class Book
      */
     private $paper = false;
 
+    /**
+     * @Groups({"lib"})
+     *
+     * @ORM\Column(type="string", length=511)
+     */
+    private $shopLink;
+
     public function __construct()
     {
         $this->libs = new ArrayCollection();
@@ -153,6 +160,18 @@ class Book
     public function setPaper(bool $paper): Book
     {
         $this->paper = $paper;
+
+        return $this;
+    }
+
+    public function getShopLink(): ?string
+    {
+        return $this->shopLink;
+    }
+
+    public function setShopLink(string $shopLink): Book
+    {
+        $this->shopLink = $shopLink;
 
         return $this;
     }

@@ -6,6 +6,7 @@ interface Book extends Entity {
     year: number
     description: string
     paper: boolean
+    shopLink: string
 
     libs: any[] // TODO: fix it!
 }

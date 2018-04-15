@@ -24,12 +24,13 @@ export class ShowModal extends React.PureComponent<Props, {}> {
                 title={`${book.title} | ${book.author} | ${book.year} год`}
                 visible={visible}
 
-                okText={'Скачать'}
+                okText={'Купить'}
                 cancelText={'Закрыть'}
 
                 onCancel={() => hide()}
                 onOk={() => {
-                    alert('Скачивание пока недоступно!')
+                    const win = window.open(book.shopLink, '_blank') as any
+                    win.focus()
                 }}
             >
                 <p>{book.description}</p>
