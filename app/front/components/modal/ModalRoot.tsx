@@ -1,26 +1,40 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import VacationForm from './vacation/ModalForm'
+import VacationForm from './vacation/FormModal'
+
+import ArticleShow from './article/ShowModal'
+import ArticleForm from './article/FormModal'
+
+import BookShow from './book/ShowModal'
+import BookForm from './book/FormModal'
 
 import modalActions, { ModalActions, ModalEnum } from 'store/modal/actions'
 import { AppState } from 'reducers'
 
 
 const MODAL_COMPONENTS = {
-    [ModalEnum.VACATION]: VacationForm,
+    [ModalEnum.VACATION_EDIT]: VacationForm,
+
+    [ModalEnum.ARTICLE_SHOW]: ArticleShow,
+    [ModalEnum.ARTICLE_EDIT]: ArticleForm,
+
+    [ModalEnum.BOOK_SHOW]: BookShow,
+    [ModalEnum.BOOK_EDIT]: BookForm,
 }
 
 const mapStateToProps = (state: AppState) => ({
     visible: state.modal.show,
     type: state.modal.type,
     id: state.modal.id,
+    payload: state.modal.payload,
 })
 
 interface Props {
     visible?: boolean,
     type?: ModalEnum,
     id?: number,
+    payload?: any
 }
 
 @(connect(mapStateToProps, {...modalActions}) as any)
@@ -33,7 +47,7 @@ export default class ModalRoot extends React.Component<Props & ModalActions, {}>
 
         const SpecificModal = (MODAL_COMPONENTS as any)[type]
 
-        return <SpecificModal visible={visible} id={id} />
+        return <SpecificModal {...this.props} />
     }
 }
 

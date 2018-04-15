@@ -9,7 +9,7 @@ import usersActions, { UsersActions } from 'store/users/actions'
 import Vacation from 'model/Vacation'
 import User, { Owner } from 'model/User'
 
-import { Props as ComponentProps, FormFields } from './ModalForm'
+import { Props as ComponentProps, FormFields } from './FormModal'
 
 
 interface Props {
