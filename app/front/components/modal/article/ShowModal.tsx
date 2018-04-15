@@ -4,7 +4,7 @@ import { Modal } from 'antd'
 
 import Article from 'model/Article'
 
-import Container from './ArticleConatiner'
+import Container from './ShowModalConatiner'
 
 
 export interface Props {
@@ -14,7 +14,7 @@ export interface Props {
     hide: () => void
 }
 
-export class ArticleComponent extends React.PureComponent<Props, {}> {
+export class ShowModal extends React.PureComponent<Props, {}> {
 
     render() {
         const { visible, article, hide } = this.props
@@ -40,4 +40,4 @@ export class ArticleComponent extends React.PureComponent<Props, {}> {
     }
 }
 
-export default Container(ArticleComponent)
+export default Container(ShowModal)

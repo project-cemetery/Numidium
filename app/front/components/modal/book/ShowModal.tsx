@@ -5,7 +5,7 @@ import { Modal } from 'antd'
 import Book from 'model/Book'
 import Alert, { AlertType } from 'components/common/Alert'
 
-import Container from './BookConatiner'
+import Container from './ShowModalConatiner'
 
 
 export interface Props {
@@ -15,7 +15,7 @@ export interface Props {
     hide: () => void
 }
 
-export class BookComponent extends React.PureComponent<Props, {}> {
+export class ShowModal extends React.PureComponent<Props, {}> {
 
     render() {
         const { visible, book, hide } = this.props
@@ -39,4 +39,4 @@ export class BookComponent extends React.PureComponent<Props, {}> {
     }
 }
 
-export default Container(BookComponent)
+export default Container(ShowModal)

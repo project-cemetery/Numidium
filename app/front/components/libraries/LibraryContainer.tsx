@@ -65,14 +65,14 @@ export default function (Component: React.ComponentClass<ComponentProps>) {
             const { modalActions } = this.props
 
             if (modalActions && modalActions.show)
-                modalActions.show(ModalEnum.ARTICLE, id)
+                modalActions.show(ModalEnum.ARTICLE_SHOW, id)
         }
 
         openBook = (id: number) => {
             const { modalActions } = this.props
 
             if (modalActions && modalActions.show)
-                modalActions.show(ModalEnum.BOOK, id)
+                modalActions.show(ModalEnum.BOOK_SHOW, id)
         }
     }
 

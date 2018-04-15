@@ -6,7 +6,7 @@ import { AppState } from 'reducers'
 import modalActions, { ModalActions } from 'store/modal/actions'
 import Article from 'model/Article'
 
-import { Props as ComponentProps } from './Article'
+import { Props as ComponentProps } from './ShowModal'
 
 
 interface Props {
