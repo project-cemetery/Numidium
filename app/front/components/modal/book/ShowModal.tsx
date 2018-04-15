@@ -33,10 +33,13 @@ export class ShowModal extends React.PureComponent<Props, {}> {
                 ]}
             >
                 {!!book.paper &&
-                    <Alert
-                        message="Доступна в бумажном варианте. Спросите у кого-ниубдь."
-                        type={AlertType.INFO}
-                    />
+                    <React.Fragment>
+                        <Alert
+                            message="Доступна в бумажном варианте. Спросите у кого-ниубдь."
+                            type={AlertType.INFO}
+                        />
+                        <br />
+                    </React.Fragment>
                 }
                 <p>{book.description}</p>
             </Modal>
