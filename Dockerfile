@@ -1,6 +1,6 @@
 FROM php:7.1.12-fpm-alpine
 
-LABEL maintainer="Igor Kamyshev <garik.novel@gmail.com>"
+LABEL maintainers="Igor Kamyshev <garik.novel@gmail.com>, Mikhail Sivolobov <astronomer@gmail.com>"
 
 ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
@@ -199,7 +199,6 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
       --with-jpeg-dir=/usr/include/ && \
     #curl iconv session
     docker-php-ext-install pdo_mysql pdo_sqlite mysqli mcrypt gd exif intl xsl json soap dom zip opcache && \
-    pecl install xdebug && \
     docker-php-source delete && \
     mkdir -p /etc/nginx && \
     mkdir -p /var/www/app && \
@@ -259,9 +258,15 @@ RUN echo "cgi.fix_pathinfo=0" > ${php_vars} &&\
 
 # Add Scripts
 ADD scripts/start.sh /start.sh
+ADD scripts/bootstrap.sh /bootstrap.sh
+ADD scripts/mysql.sh /mysql.sh
 ADD scripts/letsencrypt-setup /usr/bin/letsencrypt-setup
 ADD scripts/letsencrypt-renew /usr/bin/letsencrypt-renew
-RUN chmod 755 /usr/bin/letsencrypt-setup && chmod 755 /usr/bin/letsencrypt-renew && chmod 755 /start.sh
+RUN chmod 755 /usr/bin/letsencrypt-setup &&\
+    chmod 755 /usr/bin/letsencrypt-renew &&\
+    chmod 755 /start.sh &&\
+    chmod 755 /bootstrap.sh &&\
+    chmod 755 /mysql.sh
 
 # copy in code
 ADD app/ /var/www/html/
@@ -282,11 +287,14 @@ ENV DB_DATA_PATH="/var/lib/mysql"
 
 RUN apk add --no-cache mariadb mariadb-client
 
-RUN mysql_install_db --user=mysql --datadir=${DB_DATA_PATH}
-RUN mkdir /run/mysqld
-RUN chmod 777 /run/mysqld
+RUN mysql_install_db --user=mysql --datadir=${DB_DATA_PATH} &&\
+    mkdir /run/mysqld &&\
+    chmod 777 /run/mysqld &&\
 
-ENV DATABASE_URL=mysql://root:@127.0.0.1:3306/numudium_prod
+ENV DATABASE_URL=mysql://root:@127.0.0.1:3306/numidium_prod
+ENV APP_SECRET=b4b892a4af085c1e38792213fc1d71b3
+ENV ADMIN_USER=admin
+ENV ADMIN_PASS=admin
 
 
 EXPOSE 443 80

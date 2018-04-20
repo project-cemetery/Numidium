@@ -2,6 +2,23 @@ matrix:
   include:
     - language: php
       php: 7.1
+      before_script:
+        - cd app
+        - composer self-update
+        - composer install
+      script: composer lint
+
+    - language: node_js
+      node_js:
+        - node
+        - '9'
+      before_script:
+        - cd app
+        - npm install -g tslint typescript
+      script: yarn lint
+
+    - language: php
+      php: 7.1
       services:
         - mysql
       before_script:

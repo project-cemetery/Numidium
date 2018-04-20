@@ -1,6 +1,5 @@
 import { IconType } from 'components/common/Icon'
 
-
 export const INDEX_PAGE = 'INDEX_PAGE'
 
 export interface MenuItem {
@@ -19,5 +18,9 @@ export default [
     {
         icon: IconType.CALENDAR,
         title: 'Отпуска', key: 'vacations', path: '/vacations',
+    } as MenuItem,
+    {
+        icon: IconType.BOOK,
+        title: 'Библиотека', key: 'libs', path: '/libs',
     } as MenuItem,
 ]

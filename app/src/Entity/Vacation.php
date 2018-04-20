@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
@@ -57,7 +56,7 @@ class Vacation
     public function __construct()
     {
         $this->start = new \DateTime();
-        $this->end = new \DateTime();
+        $this->end   = new \DateTime();
     }
 
     public function getId(): ?int

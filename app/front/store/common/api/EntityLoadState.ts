@@ -1,6 +1,5 @@
 import Collection from 'model/Collection'
 
-
 export interface PartialState {
     loading: boolean
     error: boolean

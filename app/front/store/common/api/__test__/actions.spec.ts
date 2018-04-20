@@ -1,9 +1,8 @@
 import {
+    createFailureActionCreator,
     createRequestActionCreator,
     createSuccessActionCreator,
-    createFailureActionCreator,
 } from '../actions'
-
 
 test('`createRequestActionCreator` will lead to correctly action', () => {
     const action = createRequestActionCreator('TestType')()

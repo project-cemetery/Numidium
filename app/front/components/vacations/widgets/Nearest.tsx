@@ -3,11 +3,10 @@ import * as React from 'react'
 import { Card, List, Modal } from 'antd'
 import * as moment from 'moment'
 
-import Vacation from 'model/Vacation'
 import Icon, { IconType } from 'components/common/Icon'
+import Vacation from 'model/Vacation'
 
 import Container from './NearestContainer'
-
 
 export interface Props {
     vacations: Vacation[]
@@ -17,7 +16,7 @@ export interface Props {
 
 export class Nearest extends React.PureComponent<Props, {}> {
 
-    render() {
+    public render() {
         const { vacations, openModal } = this.props
 
         return (
@@ -35,7 +34,7 @@ export class Nearest extends React.PureComponent<Props, {}> {
         )
     }
 
-    renderTimeline = (vacations: Vacation[]) =>
+    public renderTimeline = (vacations: Vacation[]) =>
         <List
             size={'large'}
             dataSource={vacations}
@@ -56,7 +55,7 @@ export class Nearest extends React.PureComponent<Props, {}> {
             }
         />
 
-    getDiffMessage = (v: Vacation) => v.start.diff(moment(), 'days') > 0
+    public getDiffMessage = (v: Vacation) => v.start.diff(moment(), 'days') > 0
         ? `Через ${v.start.diff(moment(), 'days')} дн.`
         : 'Сейчас'
 }

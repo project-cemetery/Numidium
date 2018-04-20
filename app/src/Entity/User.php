@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -40,8 +39,7 @@ class User implements UserInterface, \Serializable
     public static function createUser(
         UserPasswordEncoderInterface $encoder,
         string $email, string $password
-    ): User
-    {
+    ): User {
         $user = new User();
 
         $user
@@ -175,7 +173,6 @@ class User implements UserInterface, \Serializable
 
     public function eraseCredentials(): void
     {
-
     }
 
     /** @see \Serializable::serialize() */
@@ -191,10 +188,9 @@ class User implements UserInterface, \Serializable
     /** @see \Serializable::unserialize() */
     public function unserialize($serialized): void
     {
-        list (
+        list(
             $this->id,
             $this->email,
-            $this->password,
-            ) = unserialize($serialized);
+            $this->password) = unserialize($serialized);
     }
 }

@@ -3,13 +3,12 @@ import * as renderer from 'react-test-renderer'
 
 import Loader from '../Loader'
 
-
 test('`Loader` renders correctly with loading state', () => {
     const tree = renderer
         .create(
             <Loader loading={true} error={false}>
                 <p>Content</p>
-            </Loader>
+            </Loader>,
         )
         .toJSON()
 
@@ -21,7 +20,7 @@ test('`Loader` renders correctly with error state', () => {
         .create(
             <Loader loading={false} error={true}>
                 <p>Content</p>
-            </Loader>
+            </Loader>,
         )
         .toJSON()
 
@@ -33,7 +32,7 @@ test('`Loader` renders correctly with content', () => {
         .create(
             <Loader loading={false} error={false}>
                 <p>Content</p>
-            </Loader>
+            </Loader>,
         )
         .toJSON()
 
