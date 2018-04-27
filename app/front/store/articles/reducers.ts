@@ -1,21 +1,15 @@
 import { Action, handleActions } from 'redux-actions'
+import { EntityLoadState, getInitialState } from 'rest-api-redux'
 
-import Article from 'model/Article'
-import EntityLoadState, { initialState } from 'store/common/api/EntityLoadState'
-import { createReducers } from 'store/common/api/reducers'
+import Article, { ARTICLE_ENTITY } from 'model/Article'
+import createReducers from 'store/common/rest/reducers'
 
-import actions, { commonActionTypes } from './actions'
-
-const commonReducers = createReducers<Article>(commonActionTypes)
+const restReducers = createReducers<Article>(ARTICLE_ENTITY)
 
 export interface ArticlesState extends EntityLoadState<Article> {
 }
 
 export default handleActions(
-    {
-        ...commonReducers,
-    } as any,
-    {
-        ...initialState,
-    },
+    { ...restReducers } as any,
+    { ...getInitialState<Article>() },
 )

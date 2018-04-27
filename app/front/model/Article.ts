@@ -1,4 +1,4 @@
-import Entity from './Entity'
+import { Entity } from 'rest-api-redux'
 
 interface Article extends Entity {
     title: string
@@ -11,3 +11,5 @@ interface Article extends Entity {
 }
 
 export default Article
+
+export const ARTICLE_ENTITY = 'articles'

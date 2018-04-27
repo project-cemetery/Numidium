@@ -1,19 +1,19 @@
-import { AppState } from 'reducers'
-import { ActionsCreators, createActionCreators, createTypes } from 'store/common/api/actions'
+import { Actions } from 'rest-api-redux'
 
-import Article from 'model/Article'
-import rest from 'util/api/rest'
+import Article, { ARTICLE_ENTITY } from 'model/Article'
+import { AppState } from 'reducers'
+import createActionCreators from 'store/common/rest/actions'
 
 import { ArticlesState } from './reducers'
 
-const ENTITY = 'articles'
+export const restActionCreators = createActionCreators<AppState, Article>(
+    ARTICLE_ENTITY,
+    (state: AppState) => state.articles,
+)
 
-export const commonActionTypes = createTypes(ENTITY)
-export const commonActionCreators = createActionCreators<Article>(ENTITY, (state: AppState) => state.articles)
-
-export interface ArticlesActions extends ActionsCreators<Article> {
+export interface ArticlesActions extends Actions<Article> {
 }
 
 export default {
-    ...commonActionCreators,
-}
+    ...restActionCreators,
+} as any
