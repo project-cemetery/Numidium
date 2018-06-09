@@ -1,5 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/TheNovel/Numidium.svg?branch=master)](https://travis-ci.org/TheNovel/Numidium)
+[![Build Status](https://travis-ci.org/igorkamyshev/Numidium.svg?branch=master)](https://travis-ci.org/igorkamyshev/Numidium)
 
 # Numidium
 
